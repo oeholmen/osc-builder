@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>OSC</title>
+    <style>
+        body {
+            margin: 0;
+            padding-bottom: 3rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        #form {
+            background: rgba(0, 0, 0, 0.15);
+            padding: 0.25rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            height: 3rem;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+        }
+
+        #address, #arg {
+            border: none;
+            padding: 0 1rem;
+            flex-grow: 1;
+            border-radius: 2rem;
+            margin: 0.25rem;
+        }
+
+        #address:focus, #arg:focus {
+            outline: none;
+        }
+
+        #form > button {
+            background: #333;
+            border: none;
+            padding: 0 1rem;
+            margin: 0.25rem;
+            border-radius: 3px;
+            outline: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<form id="form" action="/">
+    <input id="address" type="text" autocomplete="off" value="/uvi/Part 0/Program/EventProcessor0/Cutoff"/>
+    <input id="arg" type="number" step="0.1" min="0.0" max="1.0" autocomplete="off" value="1.0"/>
+    <button>Send</button>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const form = document.getElementById('form');
+    const address = document.getElementById('address');
+    const arg = document.getElementById('arg');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (address.value) {
+            socket.emit('message', address.value, parseFloat(arg.value));
+        }
+    });
+    socket.on('connect', function () {
+        // sends to socket.io server the host/port of oscServer and oscClient
+        socket.emit('config',
+            {
+                server: {
+                    port: 3333,
+                    host: '127.0.0.1'
+                },
+                client: {
+                    port: 3334,
+                    host: '127.0.0.1'
+                }
+            }
+        );
+    });
+</script>
+</body>
+</html>
