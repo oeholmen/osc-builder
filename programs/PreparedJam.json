@@ -1,0 +1,88 @@
+{
+  "program": {
+    "name": "Prepared Jam",
+    "description": "Multis/Piano"
+  },
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/GridSize1",
+      "name": "GridSize1",
+      "value": 12,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/GridSize2",
+      "name": "GridSize2",
+      "value": 12,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/GridOffset1",
+      "name": "GridOffset1",
+      "value": 3,
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/GridOffset2",
+      "name": "GridOffset2",
+      "value": 6,
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/TieRandomization1",
+      "name": "TieRandomization Piano",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/TieRandomization1",
+      "name": "TieRandomization Tap",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/SubdivisionRandomization2",
+      "name": "SubdivisionRandomization Piano",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/SubdivisionRandomization1",
+      "name": "SubdivisionRandomization Tap",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}

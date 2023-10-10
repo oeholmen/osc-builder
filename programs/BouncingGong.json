@@ -1,0 +1,108 @@
+{
+  "program": {
+    "name": "Bouncing Gong",
+    "description": "Demo"
+  },
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/SkipProbability",
+      "name": "SkipProbability",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/BounceProbability",
+      "name": "BounceProbability",
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote1",
+      "name": "TriggerNote1",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote2",
+      "name": "TriggerNote2",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote3",
+      "name": "TriggerNote3",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote4",
+      "name": "TriggerNote4",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote5",
+      "name": "TriggerNote5",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote6",
+      "name": "TriggerNote6",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote7",
+      "name": "TriggerNote7",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/TriggerNote8",
+      "name": "TriggerNote8",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}

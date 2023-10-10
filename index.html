@@ -115,7 +115,6 @@
 <script type="text/javascript">
     let synthParameters;
     let synthParameterIndex;
-    let selectPopulated = false;
     const socket = io();
     const form = document.getElementById('form');
     const address = document.getElementById('address');
@@ -130,7 +129,8 @@
     const setFormInputs = (parameters, parameterIndex, hideAddress) => {
         synthParameters = parameters;
         synthParameterIndex = parameterIndex;
-        if (selectPopulated === false && address.type === 'select-one') {
+        if (address.type === 'select-one') {
+            address.innerHTML = '';
             for (let i = 0; i < synthParameters.length; i++) {
                 let optionElement = document.createElement("option");
                 optionElement.textContent = synthParameters[i].name ?? synthParameters[i].address;
@@ -140,7 +140,6 @@
             if (hideAddress === true) {
                 address.classList.add('hidden');
             }
-            selectPopulated = true;
         }
         let program = synthParameters[parameterIndex];
         address.value = program.address;
