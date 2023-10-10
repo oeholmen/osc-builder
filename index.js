@@ -24,9 +24,9 @@ const readFile = (filePath) => {
 };
 
 const filePath = process.argv[2] || "programs/tweaksynth.json";
-const hideAddress = process.argv[3] === "hidden";
-const synth = readFile(filePath);
-const synthParameters = synth['parameters'];
+const program = readFile(filePath);
+const parameters = program['parameters'];
+const hideAddress = process.argv[3] === "hidden";// || program['hidden'] === true;
 
 let oscClient;
 
@@ -41,13 +41,13 @@ server.listen(3000, () => {
 io.on('connection', (socket) => {
     socket.on('config', function (obj) {
         console.log('config', obj);
-        console.log('synthParameters', synthParameters.length);
+        console.log('parameters', parameters.length);
         //oscServer = new osc.Server(obj.server.port, obj.server.host);
         oscClient = new osc.Client(obj.client.host, obj.client.port);
         oscClient.send('/status', socket.id + ' connected');
         let available = [];
-        for (let i = 0; i < synthParameters.length; i++) {
-            if (synthParameters[i].sid === null) {
+        for (let i = 0; i < parameters.length; i++) {
+            if (parameters[i].sid === null) {
                 available.push(i);
             }
         }
@@ -57,22 +57,28 @@ io.on('connection', (socket) => {
         console.log('randomIndex', randomIndex);
         let parameterIndex = available[randomIndex];
         console.log('parameterIndex', parameterIndex);
-        synthParameters[parameterIndex].sid = socket.id;
-        socket.emit('message', synthParameters, parameterIndex, hideAddress);
+        parameters[parameterIndex].sid = socket.id;
+        socket.emit('message', parameters, parameterIndex, hideAddress);
         console.log('connected', socket.id);
         /*oscServer.on('message', function(msg, rinfo) {
             socket.emit('message', msg);
             console.log('Sent OSC message to WS', msg, rinfo);
         });*/
     });
-    socket.on('message', function (address, arg) {
-        oscClient.send(address, arg);
-        console.log('Sent OSC message to', address, arg);
+    socket.on('message', function (address, value, parameterIndex) {
+        let format = parameters[parameterIndex]?.format;
+        if (format === "f") {
+            value = parseFloat(value)
+        } else if (format === "i") {
+            value = parseInt(value)
+        }
+        oscClient.send(address, value);
+        console.log('Sent OSC message to', address, value);
     });
     socket.on("disconnect", function () {
-        for (let i = 0; i < synthParameters.length; i++) {
-            if (synthParameters[i].sid === socket.id) {
-                synthParameters[i].sid = null;
+        for (let i = 0; i < parameters.length; i++) {
+            if (parameters[i].sid === socket.id) {
+                parameters[i].sid = null;
                 console.log('disconnect', socket.id);
             }
         }

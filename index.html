@@ -123,7 +123,7 @@
 
     const sendOsc = () => {
         if (address.value) {
-            socket.emit('message', address.value, parseFloat(arg.value));
+            socket.emit('message', address.value, arg.value, synthParameterIndex);
         }
     }
 
@@ -137,10 +137,10 @@
                 optionElement.value = synthParameters[i].address;
                 address.appendChild(optionElement);
             }
-            selectPopulated = true;
             if (hideAddress === true) {
                 address.classList.add('hidden');
             }
+            selectPopulated = true;
         }
         let program = synthParameters[parameterIndex];
         address.value = program.address;
@@ -148,7 +148,7 @@
         arg.max = program.max;
         arg.step = program.step;
         arg.value = program.value;
-        sendOsc();
+        //sendOsc();
     }
 
     form.addEventListener('submit', (e) => {

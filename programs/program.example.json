@@ -1,0 +1,18 @@
+{
+  "program": {
+    "name": "Example program",
+    "description": "An example program that can be used as a template for new programs"
+  },
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/path/to/parameter",
+      "name": "Parameter name",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}
