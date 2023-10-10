@@ -3,9 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>OSC</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
     <style>
         body {
             background-color: steelblue;
@@ -16,10 +13,11 @@
             flex: auto;
         }
 
-        form input {
-            margin: 0 .3rem;
+        form input, form select {
+            margin: .6rem;
             padding: .6rem;
             border: none;
+            width: 100%;
         }
 
         #address {
@@ -30,6 +28,10 @@
             cursor: pointer;
         }
 
+        .hidden {
+            display: none;
+        }
+
         /********** Range Input Styles **********/
         /*Range Reset*/
         input[type="range"] {
@@ -37,7 +39,6 @@
             appearance: none;
             background: transparent;
             cursor: pointer;
-            width: 15rem;
         }
 
         /* Removes default focus */
@@ -95,18 +96,26 @@
             outline: 3px solid #053a5f;
             outline-offset: 0.125rem;
         }
+
+        #status {
+            margin: 1.25rem;
+            color: azure;
+        }
     </style>
 </head>
 <body>
 <div class="wrapper">
     <form id="form" action="/">
-        <input id="address" type="text" size="60" autocomplete="off"
-               value="/uvi/Part 0/Program/EventProcessor0/Cutoff"/>
+        <select id="address"></select>
         <input type="range" id="arg" min="0" max="1" step="0.01"/>
     </form>
+    <div id="status"></div>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
+    let synthParameters;
+    let synthParameterIndex;
+    let selectPopulated = false;
     const socket = io();
     const form = document.getElementById('form');
     const address = document.getElementById('address');
@@ -118,26 +127,62 @@
         }
     }
 
+    const setFormInputs = (parameters, parameterIndex, hideAddress) => {
+        synthParameters = parameters;
+        synthParameterIndex = parameterIndex;
+        if (selectPopulated === false && address.type === 'select-one') {
+            for (let i = 0; i < synthParameters.length; i++) {
+                let optionElement = document.createElement("option");
+                optionElement.textContent = synthParameters[i].name ?? synthParameters[i].address;
+                optionElement.value = synthParameters[i].address;
+                address.appendChild(optionElement);
+            }
+            selectPopulated = true;
+            if (hideAddress === true) {
+                address.classList.add('hidden');
+            }
+        }
+        let program = synthParameters[parameterIndex];
+        address.value = program.address;
+        arg.min = program.min;
+        arg.max = program.max;
+        arg.step = program.step;
+        arg.value = program.value;
+        sendOsc();
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         sendOsc();
     });
 
-    arg.addEventListener('input', function () {
+    address.addEventListener('change', function (e) {
+        for (let i = 0; i < synthParameters.length; i++) {
+            if (synthParameters[i].address === e.target.value) {
+                setFormInputs(synthParameters, i);
+                break;
+            }
+        }
+    });
+
+    arg.addEventListener('input', function (e) {
+        synthParameters[synthParameterIndex].value = e.target.value;
         sendOsc();
     });
+
+    socket.on('message', setFormInputs);
 
     socket.on('connect', function () {
         // sends to socket.io server the host/port of oscServer and oscClient
         socket.emit('config',
             {
-                server: {
+                /*server: {
                     port: 3333,
-                    host: '127.0.0.1'
-                },
+                    host: 'localhost'
+                },*/
                 client: {
                     port: 3334,
-                    host: '127.0.0.1'
+                    host: 'localhost'
                 }
             }
         );
