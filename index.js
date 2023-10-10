@@ -5,7 +5,12 @@ import osc from 'node-osc';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "https://osc.test",
+        methods: ["GET", "POST"]
+    }
+});
 
 let oscServer, oscClient;
 
