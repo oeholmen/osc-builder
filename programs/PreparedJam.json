@@ -1,8 +1,6 @@
 {
-  "program": {
-    "name": "Prepared Jam",
-    "description": "Piano"
-  },
+  "name": "Prepared Jam",
+  "description": "Piano",
   "parameters": [
     {
       "sid": null,

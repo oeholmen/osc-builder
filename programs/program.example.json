@@ -1,8 +1,6 @@
 {
-  "program": {
-    "name": "Example program",
-    "description": "Program template. Format can be f (float) or i (integer)"
-  },
+  "name": "Example program",
+  "description": "Program template. Format can be f (float) or i (integer)",
   "parameters": [
     {
       "sid": null,

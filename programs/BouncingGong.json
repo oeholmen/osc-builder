@@ -1,8 +1,6 @@
 {
-  "program": {
-    "name": "Bouncing Gong",
-    "description": "Meetup"
-  },
+  "name": "Bouncing Gong",
+  "description": "Meetup",
   "parameters": [
     {
       "sid": null,

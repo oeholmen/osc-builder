@@ -6,26 +6,30 @@
     <style>
         body {
             background-color: steelblue;
+            font-family: Courier, monospace;
         }
 
-        form {
+        .wrapper {
             display: flex;
             flex: auto;
         }
 
-        form input, form select {
+        .wrapper.selected {
+            background-color: lightgreen;
+        }
+
+        .address, .arg, .name, .desc {
+            border-radius: 1rem;
             margin: .6rem;
             padding: .6rem;
             border: none;
             width: 100%;
         }
 
-        #address {
-            border-radius: 1rem;
-        }
-
-        #arg {
-            cursor: pointer;
+        .name, .desc {
+            border: 1px solid darkslategrey;
+            background-color: white;
+            color: #053a5f;
         }
 
         .hidden {
@@ -39,6 +43,11 @@
             appearance: none;
             background: transparent;
             cursor: pointer;
+        }
+
+        /* Default cursor when disabled */
+        input[type="range"]:disabled {
+            cursor: inherit;
         }
 
         /* Removes default focus */
@@ -101,96 +110,135 @@
             margin: 1.25rem;
             color: azure;
         }
+
+        #refresh {
+            margin: .25rem .75rem;
+        }
+
+        #refresh button {
+            padding: .5rem;
+            border-radius: 1rem;
+            border: none;
+            color: black;
+        }
+        #refresh button:hover {
+            background-color: lightgreen;
+            cursor: pointer;
+        }
+        #heading {
+            text-align: center;
+            color: white;
+        }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <form id="form" action="/">
-        <select id="address"></select>
-        <input type="range" id="arg" min="0" max="1" step="0.01"/>
-    </form>
+<div class="outer-wrapper">
+    <h1 id="heading"></h1>
+    <form id="form" action="/"></form>
     <div id="status" class="hidden"></div>
+    <div id="refresh" class="hidden">
+        <button onclick="location.reload()">Change Parameter</button>
+    </div>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     let synthParameters;
     let synthParameterIndex;
     const socket = io();
+    const heading = document.getElementById('heading');
     const form = document.getElementById('form');
-    const address = document.getElementById('address');
-    const arg = document.getElementById('arg');
     const status = document.getElementById('status');
+    const refresh = document.getElementById('refresh');
 
-    const sendOsc = () => {
-        if (address.value) {
-            socket.emit('message', address.value, arg.value, synthParameterIndex);
-        }
+    const getElm = (elmType, i) => {
+        return document.getElementById(elmType + '-' + i);
     }
 
-    const setFormInputs = (parameters, parameterIndex, hideAddress) => {
-        address.classList.remove('hidden');
-        arg.classList.remove('hidden');
+    const sendOsc = (i) => {
+        socket.emit('message', i, getElm('arg', i).value);
+    }
+
+    const setFormInputs = (name, parameters, parameterIndex, singleParam, singleControl, showAddress) => {
         status.classList.add('hidden');
+        heading.innerText = name;
         synthParameters = parameters;
         synthParameterIndex = parameterIndex;
-        if (address.type === 'select-one') {
-            address.innerHTML = '';
-            for (let i = 0; i < synthParameters.length; i++) {
-                let optionElement = document.createElement("option");
-                optionElement.textContent = synthParameters[i].name ?? synthParameters[i].address;
-                optionElement.value = synthParameters[i].address;
-                address.appendChild(optionElement);
+        form.innerHTML = ''; // Clear form
+        for (let i = 0; i < synthParameters.length; i++) {
+            let program = synthParameters[i];
+            let wrapper = document.createElement("div");
+            wrapper.classList.add('wrapper');
+            wrapper.setAttribute("id", "wrapper-" + i);
+            let nameElement = document.createElement("div");
+            nameElement.classList.add('name');
+            nameElement.innerText = program.name;
+            let descElement = document.createElement("div");
+            descElement.classList.add('desc');
+            if (program.description) {
+                descElement.innerText = program.description;
+            } else {
+                descElement.classList.add('hidden');
             }
-            if (hideAddress === true) {
-                address.classList.add('hidden');
+            let addressElement = document.createElement("input");
+            addressElement.classList.add('address');
+            addressElement.setAttribute("id", "address-" + i);
+            addressElement.setAttribute("readonly", "readonly");
+            addressElement.value = program.address;
+            if (showAddress === true) {
+                addressElement.setAttribute('type', 'text');
+            } else {
+                addressElement.setAttribute('type', 'hidden');
             }
+            let argElement = document.createElement("input");
+            argElement.classList.add('arg');
+            argElement.setAttribute("id", "arg-" + i);
+            argElement.setAttribute("type", "range");
+            argElement.setAttribute("min", program.min);
+            argElement.setAttribute("max", program.max);
+            argElement.setAttribute("step", program.step);
+            argElement.value = program.value;
+            argElement.addEventListener('input', function (e) {
+                synthParameters[i].value = e.target.value;
+                sendOsc(i);
+            });
+            if (singleControl === true && i !== synthParameterIndex) {
+                argElement.disabled = true;
+            }
+            wrapper.appendChild(nameElement);
+            wrapper.appendChild(addressElement);
+            wrapper.appendChild(argElement);
+            wrapper.appendChild(descElement);
+            if (singleParam === true && i !== synthParameterIndex) {
+                wrapper.classList.add('hidden');
+            }
+            if (singleControl === true && singleParam === false && i === synthParameterIndex) {
+                wrapper.classList.add('selected');
+            }
+            form.appendChild(wrapper);
         }
-        let program = synthParameters[synthParameterIndex];
-        if (program.description) {
-            status.classList.remove('hidden');
-            status.innerText = program.description;
+        if (singleControl === true || singleParam === true) {
+            refresh.classList.remove('hidden');
+        } else {
+            refresh.classList.add('hidden');
         }
-        address.value = program.address;
-        arg.min = program.min;
-        arg.max = program.max;
-        arg.step = program.step;
-        arg.value = program.value;
-        //sendOsc();
     }
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        sendOsc();
-    });
-
-    address.addEventListener('change', function (e) {
-        for (let i = 0; i < synthParameters.length; i++) {
-            if (synthParameters[i].address === e.target.value) {
-                setFormInputs(synthParameters, i);
-                break;
-            }
-        }
-    });
-
-    arg.addEventListener('input', function (e) {
-        synthParameters[synthParameterIndex].value = e.target.value;
-        sendOsc();
+        sendOsc(synthParameterIndex);
     });
 
     socket.on('message', setFormInputs);
 
     socket.on('status', function (error) {
-        address.classList.add('hidden');
-        arg.classList.add('hidden');
-        status.classList.remove('hidden');
         status.innerText = error;
+        status.classList.remove('hidden');
+        refresh.classList.remove('hidden');
     });
 
     socket.on('value', function (parameterIndex, value) {
         synthParameters[parameterIndex].value = value;
-        if (synthParameterIndex === parameterIndex) {
-            arg.value = synthParameters[synthParameterIndex].value;
-        }
+        getElm('arg', parameterIndex).value = value;
         //console.log('parameter updated', parameterIndex, value);
     });
 

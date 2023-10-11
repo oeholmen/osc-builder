@@ -26,7 +26,13 @@ const readFile = (filePath) => {
 const filePath = process.argv[2] || "programs/tweaksynth.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
-const hideAddress = process.argv[3] === "hidden";// || program['hidden'] === true;
+const singleParam = parseInt(process.argv[3]) === 1;
+const singleControl = parseInt(process.argv[4]) === 1;
+const showAddress = parseInt(process.argv[5]) === 1;
+
+//console.log('singleParam', singleParam, parseInt(process.argv[3]));
+//console.log('singleControl', singleControl, parseInt(process.argv[4]));
+//console.log('showAddress', showAddress, parseInt(process.argv[5]));
 
 let oscClient;
 
@@ -59,7 +65,7 @@ io.on('connection', (socket) => {
             let parameterIndex = available[randomIndex];
             //console.log('parameterIndex', parameterIndex);
             parameters[parameterIndex].sid = socket.id;
-            socket.emit('message', parameters, parameterIndex, hideAddress);
+            socket.emit('message', program['name'], parameters, parameterIndex, singleParam, singleControl, showAddress);
         } else {
             console.log('No available parameters left');
             socket.emit('status', 'No available parameters left. Try again in a minute.');
@@ -70,7 +76,8 @@ io.on('connection', (socket) => {
             console.log('Sent OSC message to WS', msg, rinfo);
         });*/
     });
-    socket.on('message', function (address, value, parameterIndex) {
+    socket.on('message', function (parameterIndex, value) {
+        let address = parameters[parameterIndex].address;
         let format = parameters[parameterIndex].format;
         if (format === "f") {
             value = parseFloat(value)
