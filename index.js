@@ -52,13 +52,18 @@ io.on('connection', (socket) => {
             }
         }
         console.log('available', available.length);
-        // Select random from available parameters
-        let randomIndex = Math.floor(Math.random() * available.length);
-        console.log('randomIndex', randomIndex);
-        let parameterIndex = available[randomIndex];
-        console.log('parameterIndex', parameterIndex);
-        parameters[parameterIndex].sid = socket.id;
-        socket.emit('message', parameters, parameterIndex, hideAddress);
+        if (available.length > 0) {
+            // Select random from available parameters
+            let randomIndex = Math.floor(Math.random() * available.length);
+            //console.log('randomIndex', randomIndex);
+            let parameterIndex = available[randomIndex];
+            //console.log('parameterIndex', parameterIndex);
+            parameters[parameterIndex].sid = socket.id;
+            socket.emit('message', parameters, parameterIndex, hideAddress);
+        } else {
+            console.log('No available parameters left');
+            socket.emit('status', 'No available parameters left. Try again in a minute.');
+        }
         console.log('connected', socket.id);
         /*oscServer.on('message', function(msg, rinfo) {
             socket.emit('message', msg);
@@ -66,13 +71,17 @@ io.on('connection', (socket) => {
         });*/
     });
     socket.on('message', function (address, value, parameterIndex) {
-        let format = parameters[parameterIndex]?.format;
+        let format = parameters[parameterIndex].format;
         if (format === "f") {
             value = parseFloat(value)
         } else if (format === "i") {
             value = parseInt(value)
         }
         oscClient.send(address, value);
+        // Set the value on the parameter
+        parameters[parameterIndex].value = value;
+        // Send updated parameters to all connected users
+        io.emit('value', parameterIndex, value);
         console.log('Sent OSC message to', address, value);
     });
     socket.on("disconnect", function () {

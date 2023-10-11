@@ -1,13 +1,14 @@
 {
   "program": {
     "name": "Example program",
-    "description": "An example program that can be used as a template for new programs"
+    "description": "Program template. Format can be f (float) or i (integer)"
   },
   "parameters": [
     {
       "sid": null,
       "address": "/path/to/parameter",
       "name": "Parameter name",
+      "description": "An optional description of what this parameter controls",
       "value": 1,
       "min": 0,
       "max": 1,
