@@ -32,6 +32,12 @@
             color: #053a5f;
         }
 
+        .value {
+            float: right;
+            color: grey;
+            margin-right: .5rem;
+        }
+
         .hidden {
             display: none;
         }
@@ -120,11 +126,14 @@
             border-radius: 1rem;
             border: none;
             color: black;
+            font-size: 16px;
         }
+
         #refresh button:hover {
             background-color: lightgreen;
             cursor: pointer;
         }
+
         #heading {
             text-align: center;
             color: white;
@@ -155,7 +164,9 @@
     }
 
     const sendOsc = (i) => {
-        socket.emit('message', i, getElm('arg', i).value);
+        let value = getElm('arg', i).value;
+        getElm('value', i).innerText = value;
+        socket.emit('message', i, value);
     }
 
     const setFormInputs = (name, parameters, parameterIndex, singleParam, singleControl, showAddress) => {
@@ -169,9 +180,14 @@
             let wrapper = document.createElement("div");
             wrapper.classList.add('wrapper');
             wrapper.setAttribute("id", "wrapper-" + i);
+            let valueElement = document.createElement("span");
+            valueElement.classList.add('value');
+            valueElement.innerText = program.value;
+            valueElement.setAttribute("id", "value-" + i);
             let nameElement = document.createElement("div");
             nameElement.classList.add('name');
             nameElement.innerText = program.name;
+            nameElement.appendChild(valueElement);
             let descElement = document.createElement("div");
             descElement.classList.add('desc');
             if (program.description) {

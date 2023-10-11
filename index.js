@@ -6,12 +6,7 @@ import fs from 'node:fs';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "https://osc.test",
-        methods: ["GET", "POST"]
-    }
-});
+const io = new Server(server);
 
 const readFile = (filePath) => {
     try {
@@ -26,13 +21,9 @@ const readFile = (filePath) => {
 const filePath = process.argv[2] || "programs/tweaksynth.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
-const singleParam = parseInt(process.argv[3]) === 1;
-const singleControl = parseInt(process.argv[4]) === 1;
-const showAddress = parseInt(process.argv[5]) === 1;
-
-//console.log('singleParam', singleParam, parseInt(process.argv[3]));
-//console.log('singleControl', singleControl, parseInt(process.argv[4]));
-//console.log('showAddress', showAddress, parseInt(process.argv[5]));
+const singleParam = parseInt(process.argv[3]) === 1; // Show only a single parameter
+const singleControl = parseInt(process.argv[4]) === 1; // Allow only control of the assigned parameter
+const showAddress = parseInt(process.argv[5]) === 1; // Show the osc address
 
 let oscClient;
 
