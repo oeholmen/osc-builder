@@ -1,0 +1,166 @@
+{
+  "name": "Tweak Synth Wavetable",
+  "description": "Wavetable synth programmed in UVI Falcon",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Cutoff",
+      "name": "Filter Cutoff",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Resonance",
+      "name": "Resonance",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Attack",
+      "name": "Amp Env Attack",
+      "value": 0.01,
+      "min": 0,
+      "max": 2,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Decay",
+      "name": "Amp Env Decay",
+      "value": 0.01,
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Sustain",
+      "name": "Amp Env Sustain",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Release",
+      "name": "Amp Env Release",
+      "value": 0.01,
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/EnvelopeAmt",
+      "name": "Filter Envelope Amount",
+      "value": 0,
+      "min": -1,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/FAttack",
+      "name": "Filter Env Attack",
+      "value": 0.01,
+      "min": 0,
+      "max": 2,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/FDecay",
+      "name": "Filter Env Decay",
+      "value": 0.01,
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/FSustain",
+      "name": "Filter Env Sustain",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/FRelease",
+      "name": "Filter Env Release",
+      "value": 0.01,
+      "min": 0,
+      "max": 3,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc1Wave",
+      "name": "Wave Osc 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc2Wave",
+      "name": "Wave Osc 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc1Mix",
+      "name": "Osc 1 Level",
+      "value": 0.7,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc2Mix",
+      "name": "Osc 2 Level",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/NoiseMix",
+      "name": "Noise Level",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}

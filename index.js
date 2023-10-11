@@ -18,7 +18,7 @@ const readFile = (filePath) => {
     }
 };
 
-const filePath = process.argv[2] || "programs/tweaksynth.json";
+const filePath = process.argv[2] || "programs/tweaksynthAnalog.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
 const singleParam = parseInt(process.argv[3]) === 1; // Show only a single parameter
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 server.listen(3000, () => {
-    console.log('server running at http://localhost:3000');
+    console.log(program.name + ' running at http://localhost:3000');
 });
 
 io.on('connection', (socket) => {
