@@ -18,7 +18,7 @@
             background-color: lightgreen;
         }
 
-        .address, .arg, .name, .desc {
+        .arg, .name, .desc {
             border-radius: 1rem;
             margin: .6rem;
             padding: .6rem;
@@ -169,7 +169,7 @@
         socket.emit('message', i, value);
     }
 
-    const setFormInputs = (name, parameters, parameterIndex, singleParam, singleControl, showAddress) => {
+    const setFormInputs = (name, parameters, parameterIndex, singleControl, singleParam) => {
         status.classList.add('hidden');
         heading.innerText = name;
         synthParameters = parameters;
@@ -195,16 +195,6 @@
             } else {
                 descElement.classList.add('hidden');
             }
-            let addressElement = document.createElement("input");
-            addressElement.classList.add('address');
-            addressElement.setAttribute("id", "address-" + i);
-            addressElement.setAttribute("readonly", "readonly");
-            addressElement.value = program.address;
-            if (showAddress === true) {
-                addressElement.setAttribute('type', 'text');
-            } else {
-                addressElement.setAttribute('type', 'hidden');
-            }
             let argElement = document.createElement("input");
             argElement.classList.add('arg');
             argElement.setAttribute("id", "arg-" + i);
@@ -221,7 +211,6 @@
                 argElement.disabled = true;
             }
             wrapper.appendChild(nameElement);
-            wrapper.appendChild(addressElement);
             wrapper.appendChild(argElement);
             wrapper.appendChild(descElement);
             if (singleParam === true && i !== synthParameterIndex) {

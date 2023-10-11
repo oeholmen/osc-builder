@@ -1,10 +1,10 @@
 {
   "name": "Example program",
-  "description": "Program template. Format can be f (float) or i (integer)",
+  "description": "Program template. Format can be f (float) or i (integer). Address can be string or array.",
   "parameters": [
     {
       "sid": null,
-      "address": "/path/to/parameter",
+      "address": ["/path/to/parameter1", "/path/to/parameter2"],
       "name": "Parameter name",
       "description": "An optional description of what this parameter controls",
       "value": 1,

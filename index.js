@@ -21,9 +21,8 @@ const readFile = (filePath) => {
 const filePath = process.argv[2] || "programs/tweaksynthAnalog.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
-const singleParam = parseInt(process.argv[3]) === 1; // Show only a single parameter
-const singleControl = parseInt(process.argv[4]) === 1; // Allow only control of the assigned parameter
-const showAddress = parseInt(process.argv[5]) === 1; // Show the osc address
+const singleControl = parseInt(process.argv[3]) === 1; // Show only a single parameter
+const singleParam = parseInt(process.argv[4]) === 1; // Allow only control of the assigned parameter
 
 let oscClient;
 
@@ -56,7 +55,7 @@ io.on('connection', (socket) => {
             let parameterIndex = available[randomIndex];
             //console.log('parameterIndex', parameterIndex);
             parameters[parameterIndex].sid = socket.id;
-            socket.emit('message', program['name'], parameters, parameterIndex, singleParam, singleControl, showAddress);
+            socket.emit('message', program['name'], parameters, parameterIndex, singleControl, singleParam);
         } else {
             console.log('No available parameters left');
             socket.emit('status', 'No available parameters left. Try again in a minute.');
@@ -75,7 +74,12 @@ io.on('connection', (socket) => {
         } else if (format === "i") {
             value = parseInt(value)
         }
-        oscClient.send(address, value);
+        if (typeof address === 'string') {
+            address = [address];
+        }
+        for (let i = 0; i < address.length; i++) {
+            oscClient.send(address[i], value);
+        }
         // Set the value on the parameter
         parameters[parameterIndex].value = value;
         // Send updated parameters to all connected users
