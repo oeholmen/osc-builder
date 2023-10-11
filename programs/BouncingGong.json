@@ -27,8 +27,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote1",
       "name": "Note 1",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -37,8 +37,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote2",
       "name": "Note 2",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -47,8 +47,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote3",
       "name": "Note 3",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -57,8 +57,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote4",
       "name": "Note 4",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -67,8 +67,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote5",
       "name": "Note 5",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -77,8 +77,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote6",
       "name": "Note 6",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -87,8 +87,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote7",
       "name": "Note 7",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     },
@@ -97,8 +97,8 @@
       "address": "/uvi/Part 0/EventProcessor2/TriggerNote8",
       "name": "Note 8",
       "value": 60,
-      "min": 21,
-      "max": 108,
+      "min": 24,
+      "max": 76,
       "step": 1,
       "format": "i"
     }
