@@ -79,12 +79,12 @@ io.on('connection', (socket) => {
         }
         for (let i = 0; i < address.length; i++) {
             oscClient.send(address[i], value);
+            console.log('Sent OSC message to', address[i], value);
         }
         // Set the value on the parameter
         parameters[parameterIndex].value = value;
         // Send updated parameters to all connected users
         io.emit('value', parameterIndex, value);
-        console.log('Sent OSC message to', address, value);
     });
     socket.on("disconnect", function () {
         for (let i = 0; i < parameters.length; i++) {
