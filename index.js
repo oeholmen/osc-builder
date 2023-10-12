@@ -21,8 +21,10 @@ const readFile = (filePath) => {
 const filePath = process.argv[2] || "programs/tweaksynthAnalog.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
-const singleControl = parseInt(process.argv[3]) === 1; // Show only a single parameter
-const singleParam = parseInt(process.argv[4]) === 1; // Allow only control of the assigned parameter
+const level = parseInt(process.argv[3]) || 0;
+const singleControl = level > 0; // Allow only control of the assigned parameter
+const singleParam = level > 1; // Show only a single parameter
+const hideLabel = level > 2; // Show only slider
 
 let oscClient;
 
@@ -55,7 +57,7 @@ io.on('connection', (socket) => {
             let parameterIndex = available[randomIndex];
             //console.log('parameterIndex', parameterIndex);
             parameters[parameterIndex].sid = socket.id;
-            socket.emit('message', program['name'], parameters, parameterIndex, singleControl, singleParam);
+            socket.emit('message', program['name'], parameters, parameterIndex, singleControl, singleParam, hideLabel);
         } else {
             console.log('No available parameters left');
             socket.emit('status', 'No available parameters left. Try again in a minute.');

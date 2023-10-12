@@ -163,13 +163,21 @@
         return document.getElementById(elmType + '-' + i);
     }
 
+    const getDisplayValue = (value, i) => {
+        if (isNaN(value) || typeof synthParameters[i].valueMap !== "object") {
+            return value;
+        }
+        let index = parseInt(value) - parseInt(synthParameters[i].min);
+        return synthParameters[i].valueMap[index] || value;
+    }
+
     const sendOsc = (i) => {
         let value = getElm('arg', i).value;
         getElm('value', i).innerText = value;
         socket.emit('message', i, value);
     }
 
-    const setFormInputs = (name, parameters, parameterIndex, singleControl, singleParam) => {
+    const setFormInputs = (name, parameters, parameterIndex, singleControl, singleParam, hideLabel) => {
         status.classList.add('hidden');
         heading.innerText = name;
         synthParameters = parameters;
@@ -188,6 +196,9 @@
             nameElement.classList.add('name');
             nameElement.innerText = program.name;
             nameElement.appendChild(valueElement);
+            if (hideLabel) {
+                nameElement.classList.add('hidden');
+            }
             let descElement = document.createElement("div");
             descElement.classList.add('desc');
             if (program.description) {
@@ -195,18 +206,35 @@
             } else {
                 descElement.classList.add('hidden');
             }
-            let argElement = document.createElement("input");
+            let argElement;
+            if (typeof program.valueMap === "object") {
+                argElement = document.createElement("select");
+                for (let j = program.min; j < program.valueMap.length + program.min; j++) {
+                    let optionElement = document.createElement("option");
+                    optionElement.textContent = getDisplayValue(j, i);
+                    optionElement.value = j;
+                    optionElement.selected = parseInt(program.value) === j;
+                    argElement.appendChild(optionElement);
+                }
+                argElement.addEventListener('change', function (e) {
+                    program.value = e.target.value;
+                    sendOsc(i);
+                });
+
+            } else {
+                argElement = document.createElement("input");
+                argElement.setAttribute("type", "range");
+                argElement.setAttribute("min", program.min);
+                argElement.setAttribute("max", program.max);
+                argElement.setAttribute("step", program.step);
+                argElement.value = program.value;
+                argElement.addEventListener('input', function (e) {
+                    program.value = e.target.value;
+                    sendOsc(i);
+                });
+            }
             argElement.classList.add('arg');
             argElement.setAttribute("id", "arg-" + i);
-            argElement.setAttribute("type", "range");
-            argElement.setAttribute("min", program.min);
-            argElement.setAttribute("max", program.max);
-            argElement.setAttribute("step", program.step);
-            argElement.value = program.value;
-            argElement.addEventListener('input', function (e) {
-                synthParameters[i].value = e.target.value;
-                sendOsc(i);
-            });
             if (singleControl === true && i !== synthParameterIndex) {
                 argElement.disabled = true;
             }

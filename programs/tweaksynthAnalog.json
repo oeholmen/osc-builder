@@ -117,6 +117,14 @@
       "address": "/uvi/Part 0/Program/EventProcessor0/Osc1Wave",
       "name": "Wave Osc 1",
       "value": 1,
+      "valueMap": [
+        "Saw",
+        "Square",
+        "Triangle",
+        "Sine",
+        "Noise",
+        "Pulse"
+      ],
       "min": 1,
       "max": 6,
       "step": 1,
@@ -127,6 +135,14 @@
       "address": "/uvi/Part 0/Program/EventProcessor0/Osc2Wave",
       "name": "Wave Osc 2",
       "value": 1,
+      "valueMap": [
+        "Saw",
+        "Square",
+        "Triangle",
+        "Sine",
+        "Noise",
+        "Pulse"
+      ],
       "min": 1,
       "max": 6,
       "step": 1,
@@ -159,6 +175,87 @@
       "value": 0,
       "min": 0,
       "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoFreq",
+      "name": "Modulation Speed",
+      "value": 0.5,
+      "min": 0.1,
+      "max": 20,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/WaveFormTypeMenu",
+      "name": "Modulation Waveform",
+      "valueMap": [
+        "Sinus",
+        "Square",
+        "Triangle",
+        "Ramp Up",
+        "Ramp Down",
+        "Analog Square",
+        "S&H",
+        "Chaos Lorenz",
+        "Chaos Rossler"
+      ],
+      "value": 6,
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoToCutoff",
+      "name": "Filter Modulation",
+      "value": 0.18,
+      "min": -0.5,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoToHardsync1",
+      "name": "Hardsync 1 Modulation",
+      "value": 0,
+      "min": 0,
+      "max": 1.0,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoToHardsync2",
+      "name": "Hardsync 2 Modulation",
+      "value": 0,
+      "min": 0,
+      "max": 1.0,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoToPitchOsc1",
+      "name": "Pitch 1 Modulation",
+      "value": 0,
+      "min": 0,
+      "max": 48,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/LfoToPitchOsc2",
+      "name": "Pitch 2 Modulation",
+      "value": 0,
+      "min": 0,
+      "max": 48,
       "step": 0.01,
       "format": "f"
     }
