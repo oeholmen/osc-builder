@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
         let format = parameters[parameterIndex].format;
         if (format === "f") {
             value = parseFloat(value)
-        } else if (format === "i") {
+        } else if (format === "i" || format === "b") {
             value = parseInt(value)
         }
         if (typeof address === 'string') {

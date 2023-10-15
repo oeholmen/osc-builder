@@ -26,6 +26,15 @@
             width: 100%;
         }
 
+        .arg.on-off-button {
+            cursor: pointer;
+        }
+
+        .arg.on-off-button.active {
+            background-color: green;
+            color: white;
+        }
+
         .name, .desc {
             border: 1px solid darkslategrey;
             background-color: white;
@@ -118,15 +127,16 @@
         }
 
         #refresh {
-            margin: .25rem .75rem;
+            margin: 1.25rem .75rem;
         }
 
         #refresh button {
-            padding: .5rem;
+            padding: 1rem;
             border-radius: 1rem;
             border: none;
             color: black;
-            font-size: 16px;
+            font-size: 1rem;
+            width: 100%;
         }
 
         #refresh button:hover {
@@ -171,10 +181,20 @@
         return synthParameters[i].valueMap[index] || value;
     }
 
-    const sendOsc = (i) => {
-        let value = getElm('arg', i).value;
+    const setAndSendValue = (value, i) => {
+        synthParameters[i].value = value;
         getElm('value', i).innerText = value;
         socket.emit('message', i, value);
+    }
+
+    const updateButtonToReflectValue = (elm, program, value) => {
+        if (value === program.max) {
+            elm.innerText = "On";
+            elm.classList.add('active');
+        } else {
+            elm.innerText = "Off";
+            elm.classList.remove('active');
+        }
     }
 
     const setFormInputs = (name, parameters, parameterIndex, singleControl, singleParam, hideLabel) => {
@@ -199,12 +219,8 @@
             if (hideLabel) {
                 nameElement.classList.add('hidden');
             }
-            let descElement = document.createElement("div");
-            descElement.classList.add('desc');
             if (program.description) {
-                descElement.innerText = program.description;
-            } else {
-                descElement.classList.add('hidden');
+                wrapper.title = program.description;
             }
             let argElement;
             if (typeof program.valueMap === "object") {
@@ -217,10 +233,23 @@
                     argElement.appendChild(optionElement);
                 }
                 argElement.addEventListener('change', function (e) {
-                    program.value = e.target.value;
-                    sendOsc(i);
+                    setAndSendValue(e.target.value, i);
                 });
-
+            } else if (program.format === "b") {
+                argElement = document.createElement("button");
+                argElement.innerText = program.value === program.max ? "On" : "Off";
+                argElement.value = program.value;
+                if (program.value === program.max) {
+                    argElement.classList.add('active');
+                }
+                argElement.classList.add('on-off-button');
+                argElement.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    let value = parseInt(e.target.value) === program.max ? program.min : program.max;
+                    updateButtonToReflectValue(e.target, program, value);
+                    setAndSendValue(value, i);
+                });
             } else {
                 argElement = document.createElement("input");
                 argElement.setAttribute("type", "range");
@@ -229,8 +258,7 @@
                 argElement.setAttribute("step", program.step);
                 argElement.value = program.value;
                 argElement.addEventListener('input', function (e) {
-                    program.value = e.target.value;
-                    sendOsc(i);
+                    setAndSendValue(e.target.value, i);
                 });
             }
             argElement.classList.add('arg');
@@ -240,7 +268,6 @@
             }
             wrapper.appendChild(nameElement);
             wrapper.appendChild(argElement);
-            wrapper.appendChild(descElement);
             if (singleParam === true && i !== synthParameterIndex) {
                 wrapper.classList.add('hidden');
             }
@@ -256,11 +283,6 @@
         }
     }
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        sendOsc(synthParameterIndex);
-    });
-
     socket.on('message', setFormInputs);
 
     socket.on('status', function (error) {
@@ -271,8 +293,12 @@
 
     socket.on('value', function (parameterIndex, value) {
         synthParameters[parameterIndex].value = value;
-        getElm('arg', parameterIndex).value = value;
-        //console.log('parameter updated', parameterIndex, value);
+        const arg = getElm('arg', parameterIndex);
+        arg.value = value;
+        if (arg.classList.contains("on-off-button")) {
+            updateButtonToReflectValue(arg, synthParameters[parameterIndex], value);
+        }
+        getElm('value', parameterIndex).innerText = value;
     });
 
     socket.on('connect', function () {
