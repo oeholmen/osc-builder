@@ -153,21 +153,26 @@
 <body>
 <div class="outer-wrapper">
     <h1 id="heading"></h1>
-    <form id="form" action="/"></form>
     <div id="status" class="hidden"></div>
+    <form id="form" action="/"></form>
     <div id="refresh" class="hidden">
-        <button onclick="location.reload()">Change Parameter</button>
+        <button onclick="location.reload()">Switch parameters</button>
     </div>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
     let synthParameters;
     let synthParameterIndex;
+    let socketId;
     const socket = io();
     const heading = document.getElementById('heading');
     const form = document.getElementById('form');
     const status = document.getElementById('status');
     const refresh = document.getElementById('refresh');
+
+    const requestUpdate = () => {
+        return socket.emit('requestUpdate', socketId);
+    }
 
     const getElm = (elmType, i) => {
         return document.getElementById(elmType + '-' + i);
@@ -197,11 +202,20 @@
         }
     }
 
-    const setFormInputs = (name, parameters, parameterIndex, singleControl, singleParam, hideLabel) => {
-        status.classList.add('hidden');
+    const setFormInputs = (name, parameters, assignedControls, assignedParams, hideLabel) => {
         heading.innerText = name;
         synthParameters = parameters;
-        synthParameterIndex = parameterIndex;
+        synthParameterIndex = [];
+        for (let i = 0; i < synthParameters.length; i++) {
+            if (synthParameters[i].sid === socketId) {
+                synthParameterIndex.push(i);
+            }
+        }
+
+        if (synthParameterIndex.length > 0 || assignedControls === false) {
+            status.classList.add('hidden');
+        }
+
         form.innerHTML = ''; // Clear form
         for (let i = 0; i < synthParameters.length; i++) {
             let program = synthParameters[i];
@@ -263,27 +277,31 @@
             }
             argElement.classList.add('arg');
             argElement.setAttribute("id", "arg-" + i);
-            if (singleControl === true && i !== synthParameterIndex) {
+            if (assignedControls === true && !synthParameterIndex.includes(i)) {
                 argElement.disabled = true;
             }
             wrapper.appendChild(nameElement);
             wrapper.appendChild(argElement);
-            if (singleParam === true && i !== synthParameterIndex) {
+            if (assignedParams === true && !synthParameterIndex.includes(i)) {
                 wrapper.classList.add('hidden');
             }
-            if (singleControl === true && singleParam === false && i === synthParameterIndex) {
+            if (assignedControls === true && assignedParams === false && synthParameterIndex.includes(i)) {
                 wrapper.classList.add('selected');
             }
             form.appendChild(wrapper);
         }
-        if (singleControl === true || singleParam === true) {
+        if (assignedControls === true || assignedParams === true) {
             refresh.classList.remove('hidden');
         } else {
             refresh.classList.add('hidden');
         }
     }
 
-    socket.on('message', setFormInputs);
+    socket.on('setParameters', setFormInputs);
+
+    socket.on('socketId', function (sid) {
+        socketId = sid;
+    });
 
     socket.on('status', function (error) {
         status.innerText = error;
@@ -305,10 +323,6 @@
         // sends to socket.io server the host/port of oscServer and oscClient
         socket.emit('config',
             {
-                /*server: {
-                    port: 3333,
-                    host: 'localhost'
-                },*/
                 client: {
                     port: 3334,
                     host: 'localhost'
