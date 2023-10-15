@@ -258,6 +258,15 @@
       "max": 48,
       "step": 0.01,
       "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Arp",
+      "name": "Arpeggiator",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
     }
   ]
 }
