@@ -333,15 +333,7 @@
     });
 
     socket.on('connect', function () {
-        // sends to socket.io server the host/port of oscServer and oscClient
-        socket.emit('config',
-            {
-                client: {
-                    port: 3334,
-                    host: 'localhost'
-                }
-            }
-        );
+        socket.emit('ready');
     });
 </script>
 </body>

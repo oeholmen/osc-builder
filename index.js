@@ -3,6 +3,7 @@ import {createServer} from 'node:http';
 import {Server} from 'socket.io';
 import osc from 'node-osc';
 import fs from 'node:fs';
+import os from "os";
 
 const readFile = (filePath) => {
     try {
@@ -21,12 +22,23 @@ const filePath = process.argv[2] || "programs/tweaksynthAnalog.json";
 const program = readFile(filePath);
 const parameters = program['parameters'];
 const level = parseInt(process.argv[3]) || 0;
+const minParams = parseInt(process.argv[4]) || 1;
+const serverHost = process.argv[5] || 'localhost';
+const serverPort = parseInt(process.argv[6]) || 3334;
 const assignedControls = level > 0; // Allow only control of the assigned parameters (but see all params)
 const assignedParams = level > 1; // Show only assigned parameters
 const hideLabel = level > 2; // Show only slider
-const minParams = 2; // TODO Parameter?
 const socketIds = []; // Holds all connected sockets
 let oscClient;
+
+const getLocalIpAddress = () => {
+    const networkInterfaces = os.networkInterfaces();
+    const interfaces = Object.values(networkInterfaces);
+    const ipv4Addresses = interfaces
+        .flatMap((iface) => iface.filter((addr) => addr.family === 'IPv4'))
+        .map((addr) => addr.address);
+    return ipv4Addresses.find((addr) => addr !== '127.0.0.1');
+};
 
 const getAssignedSocketIds = () => {
     const assignedSocketIds = [];
@@ -107,16 +119,17 @@ app.get('/', (req, res) => {
 });
 
 server.listen(3000, () => {
-    console.log(program['name'] + ' running at http://localhost:3000');
+    const localIpAddress = getLocalIpAddress();
+    console.log(program['name'] + ' running at http://' + localIpAddress + ':3000');
 });
 
 io.on('connection', (socket) => {
-    socket.on('config', function (obj) {
-        console.log('config', obj);
+    socket.on('ready', function () {
+        console.log('config', {'host': serverHost, 'port': serverPort});
         console.log('parameters', parameters.length);
         socketIds.push(socket.id); // Add to all active sockets
         socket.emit('socketId', socket.id); // Register the socket id with the client
-        oscClient = new osc.Client(obj.client.host, obj.client.port);
+        oscClient = new osc.Client(serverHost, serverPort);
         oscClient.send('/status', socket.id + ' connected');
         let assignedSocketIds = requestAccess(socket.id);
         if (assignedSocketIds.includes(socket.id) === true) {
