@@ -25,7 +25,7 @@ const assignedControls = level > 0; // Allow only control of the assigned parame
 const assignedParams = level > 1; // Show only assigned parameters
 const hideLabel = level > 2; // Show only slider
 const minParams = 2; // TODO Parameter?
-let socketIds = []; // Holds all connected sockets
+const socketIds = []; // Holds all connected sockets
 let oscClient;
 
 const getAssignedSocketIds = () => {
@@ -57,21 +57,20 @@ const requestAccess = (socketId) => {
     return assignedSocketIds;
 };
 
-const requestUpdate = (socketId) => {
-    let assignedSocketIds = requestAccess(socketId);
-    if (assignedSocketIds.includes(socketId) === true) {
-        distributeParametersBetweenSockets(assignedSocketIds);
+const removeSocket = (socketId) => {
+    // First remove from assigned parameters
+    for (let i = 0; i < parameters.length; i++) {
+        if (parameters[i].sid === socketId) {
+            parameters[i].sid = null;
+        }
     }
-}
 
-const removeElementFromArray = (array, value) => {
-    const index = array.indexOf(value);
+    // Then remove from connected sockets
+    const index = socketIds.indexOf(socketId);
 
     if (index > -1) {
-        array.splice(index, 1);
+        socketIds.splice(index, 1);
     }
-
-    return array;
 }
 
 const randomizeArrayOrder = (array) => {
@@ -132,7 +131,12 @@ io.on('connection', (socket) => {
         console.log("total assigned clients", assignedSocketIds.length);
         console.log('connected', socket.id);
     });
-    socket.on('requestUpdate', requestUpdate);
+    socket.on('requestUpdate', function (socketId) {
+        let assignedSocketIds = requestAccess(socketId);
+        if (assignedSocketIds.includes(socketId) === true) {
+            distributeParametersBetweenSockets(assignedSocketIds);
+        }
+    });
     socket.on('message', function (parameterIndex, value) {
         let address = parameters[parameterIndex].address;
         let format = parameters[parameterIndex].format;
@@ -155,20 +159,20 @@ io.on('connection', (socket) => {
     });
     socket.on("disconnect", function () {
         console.log('disconnect', socket.id);
-        for (let i = 0; i < parameters.length; i++) {
-            if (parameters[i].sid === socket.id) {
-                parameters[i].sid = null;
-            }
-        }
-        socketIds = removeElementFromArray(socketIds, socket.id);
-        console.log('socketIds', socketIds);
+        removeSocket(socket.id);
+        console.log('socketIds after disconnect', socketIds);
         const assignedSocketIds = getAssignedSocketIds();
+        let assigned = 0;
+        // Go through all sockets to see if there are unassigned sockets that can be assigned
         for (let i = 0; i < socketIds.length; i++) {
             if (!assignedSocketIds.includes(socketIds[i]) && requestAccess(socketIds[i]).includes(socketIds[i]) === true) {
                 assignedSocketIds.push(socketIds[i]);
+                assigned++;
             }
         }
-        distributeParametersBetweenSockets(assignedSocketIds);
-        //io.emit('setParameters', program['name'], parameters, assignedControls, assignedParams, hideLabel);
+        // If any new sockets were assigned, we distribute the parameters between the assigned sockets
+        if (assigned > 0) {
+            distributeParametersBetweenSockets(assignedSocketIds);
+        }
     });
 });
