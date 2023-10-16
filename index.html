@@ -192,7 +192,7 @@
         socket.emit('message', i, value);
     }
 
-    const updateButtonToReflectValue = (elm, program, value) => {
+    const updateButtonToReflectState = (elm, program, value) => {
         if (value === program.max) {
             elm.innerText = "On";
             elm.classList.add('active');
@@ -261,7 +261,7 @@
                     e.preventDefault();
                     e.stopPropagation();
                     let value = parseInt(e.target.value) === program.max ? program.min : program.max;
-                    updateButtonToReflectValue(e.target, program, value);
+                    updateButtonToReflectState(e.target, program, value);
                     setAndSendValue(value, i);
                 });
             } else {
@@ -314,7 +314,7 @@
         const arg = getElm('arg', parameterIndex);
         arg.value = value;
         if (arg.classList.contains("on-off-button")) {
-            updateButtonToReflectValue(arg, synthParameters[parameterIndex], value);
+            updateButtonToReflectState(arg, synthParameters[parameterIndex], value);
         }
         getElm('value', parameterIndex).innerText = value;
     });
