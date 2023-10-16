@@ -122,9 +122,6 @@ io.on('connection', (socket) => {
         if (assignedSocketIds.includes(socket.id) === true) {
             distributeParametersBetweenSockets(assignedSocketIds);
         } else {
-            // Not enough parameters left
-            console.log('No available parameters left');
-            socket.emit('status', 'No available parameters left. Try again in a minute.');
             socket.emit('setParameters', program['name'], parameters, assignedControls, assignedParams, hideLabel);
         }
         console.log("total connected clients", socketIds.length);
