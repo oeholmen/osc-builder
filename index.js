@@ -61,7 +61,6 @@ const requestAccess = (socketId) => {
         if (assignedSocketIds.length >= Math.ceil(parameters.length / minParams)) {
             // Not enough parameters left
             console.log('No available parameters left');
-            socket.emit('status', 'No available parameters left. Try again in a minute.');
         } else {
             assignedSocketIds.push(socketId);
         }
@@ -136,15 +135,18 @@ io.on('connection', (socket) => {
             distributeParametersBetweenSockets(assignedSocketIds);
         } else {
             socket.emit('setParameters', program['name'], parameters, assignedControls, assignedParams, hideLabel);
+            socket.emit('status', 'No available parameters left. Try again in a minute.');
         }
         console.log("total connected clients", socketIds.length);
         console.log("total assigned clients", assignedSocketIds.length);
         console.log('connected', socket.id);
     });
     socket.on('requestUpdate', function (socketId) {
-        let assignedSocketIds = requestAccess(socketId);
+        let assignedSocketIds = requestAccess(socketId, socket);
         if (assignedSocketIds.includes(socketId) === true) {
             distributeParametersBetweenSockets(assignedSocketIds);
+        } else {
+            socket.emit('status', 'No available parameters left. Try again in a minute.');
         }
     });
     socket.on('message', function (parameterIndex, value) {
