@@ -175,7 +175,7 @@
     }
 
     const createSliderWidget = (program, i) => {
-        let inputElement = document.createElement("input");
+        const inputElement = document.createElement("input");
         inputElement.setAttribute("type", "range");
         inputElement.setAttribute("min", program.min);
         inputElement.setAttribute("max", program.max);
@@ -188,7 +188,7 @@
     }
 
     const createButtonWidget = (program, i) => {
-        let buttonElement = document.createElement("button");
+        const buttonElement = document.createElement("button");
         buttonElement.innerText = program.value === program.max ? "On" : "Off";
         buttonElement.value = program.value;
         if (program.value === program.max) {
@@ -198,16 +198,16 @@
         buttonElement.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            let value = parseInt(e.target.value) === program.max ? program.min : program.max;
+            const value = parseInt(e.target.value) === program.max ? program.min : program.max;
             updateButtonToReflectState(e.target, program, value);
             setAndSendValue(value, i);
         });
         return buttonElement;
     }
     const createSelectWidget = (program, i) => {
-        let selectElement = document.createElement("select");
+        const selectElement = document.createElement("select");
         for (let j = program.min; j < program.valueMap.length + program.min; j++) {
-            let optionElement = document.createElement("option");
+            const optionElement = document.createElement("option");
             optionElement.textContent = getDisplayValue(j, i);
             optionElement.value = j;
             optionElement.selected = parseInt(program.value) === j;
@@ -262,15 +262,15 @@
             status.classList.add('hidden');
         }
         for (let i = 0; i < synthParameters.length; i++) {
-            let program = synthParameters[i];
-            let wrapper = document.createElement("div");
+            const program = synthParameters[i];
+            const wrapper = document.createElement("div");
             wrapper.classList.add('wrapper');
             wrapper.setAttribute("id", "wrapper-" + i);
-            let valueElement = document.createElement("span");
+            const valueElement = document.createElement("span");
             valueElement.classList.add('value');
             valueElement.innerText = program.value;
             valueElement.setAttribute("id", "value-" + i);
-            let nameElement = document.createElement("div");
+            const nameElement = document.createElement("div");
             nameElement.classList.add('name');
             nameElement.innerText = program.name;
             nameElement.appendChild(valueElement);
