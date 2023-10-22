@@ -6,6 +6,9 @@
     <style>
         body {
             background-color: steelblue;
+        }
+
+        * {
             font-family: Courier, monospace;
         }
 
@@ -24,6 +27,10 @@
             padding: .6rem;
             border: none;
             width: 100%;
+        }
+
+        #prompt, #promptSubmit {
+            font-size: 1rem;
         }
 
         #promptSubmit {
@@ -126,8 +133,13 @@
             outline-offset: 0.125rem;
         }
 
-        #status {
+        #status, #patchStatus {
             margin: 1.25rem;
+            color: azure;
+        }
+
+        #patchStatus {
+            margin-bottom: .25rem;
             color: azure;
         }
 
@@ -164,9 +176,10 @@
         <button onclick="requestUpdate()">Switch parameters</button>
     </div>
     <hr>
-    <form id="patch" action="/api">
+    <div id="patchStatus"></div>
+    <form id="patch" action="/">
         <textarea id="prompt" placeholder="Prompt for a new patch"></textarea>
-        <input type="submit" id="promptSubmit" value="Send">
+        <input type="submit" id="promptSubmit" value="Create">
     </form>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -186,6 +199,15 @@
         e.stopPropagation();
         const prompt = document.getElementById('prompt');
         createPatch(prompt.value);
+    });
+
+    socket.on('startCreating', function (prompt) {
+        const patchStatus = document.getElementById('patchStatus');
+        patchStatus.innerText = "Please wait, creating patch. Prompt given: " + prompt;
+    });
+
+    socket.on('patchCreated', function () {
+        patchStatus.innerText = "Patch completed!"
     });
 
     const requestUpdate = () => {

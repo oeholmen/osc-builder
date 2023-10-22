@@ -72,9 +72,10 @@ const handleMessage = (parameterIndex, value) => {
     io.emit('value', parameterIndex, value);
 }
 
-const createPatch = async (prompt) => {;
+const createPatch = async (prompt) => {
     const instructions = readFile("openai/instructions.txt", false);
     prompt = prompt || readFile("openai/defaultPrompt.txt", false);
+    io.emit('startCreating', prompt);
     console.log(prompt);
     prompt += "\n" + JSON.stringify(program);
     const request = {
@@ -97,6 +98,7 @@ const createPatch = async (prompt) => {;
         for (let i = 0; i < patchData.parameters.length; i++) {
             handleMessage(i, patchData.parameters[i].value);
         }
+        io.emit('patchCreated');
     } catch (error) {
         console.error('Error reading JSON file:', error);
     }
