@@ -9,7 +9,7 @@
             font-family: Courier, monospace;
         }
 
-        .wrapper {
+        .wrapper, #patch {
             display: flex;
             flex: auto;
         }
@@ -18,12 +18,16 @@
             background-color: lightgreen;
         }
 
-        .arg, .name, .desc {
+        .arg, .name, .desc, #patch > input {
             border-radius: 1rem;
             margin: .6rem;
             padding: .6rem;
             border: none;
             width: 100%;
+        }
+
+        #promptSubmit {
+            cursor: pointer;
         }
 
         .arg.on-off-button {
@@ -156,8 +160,13 @@
     <div id="status" class="hidden"></div>
     <form id="form" action="/"></form>
     <div id="refresh" class="hidden">
-        <button onclick="location.reload()">Switch parameters</button>
+        <button onclick="requestUpdate()">Switch parameters</button>
     </div>
+    <hr>
+    <form id="patch" action="/api">
+        <input type="text" id="prompt" placeholder="Prompt for a new patch">
+        <input type="submit" id="promptSubmit" value="Send">
+    </form>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
@@ -167,11 +176,23 @@
     const socket = io();
     const heading = document.getElementById('heading');
     const form = document.getElementById('form');
+    const patchForm = document.getElementById('patch');
     const status = document.getElementById('status');
     const refresh = document.getElementById('refresh');
 
+    patchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const prompt = document.getElementById('prompt');
+        createPatch(prompt.value);
+    });
+
     const requestUpdate = () => {
         return socket.emit('requestUpdate', socketId);
+    }
+
+    const createPatch = (prompt) => {
+        return socket.emit('createPatch', prompt);
     }
 
     const createSliderWidget = (program, i) => {

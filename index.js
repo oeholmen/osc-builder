@@ -3,12 +3,20 @@ import { createServer } from 'node:http';
 import { Server } from 'socket.io';
 import osc from 'node-osc';
 import { readFileSync } from 'node:fs';
+import dotenv from 'dotenv';
 import os from "os";
+import OpenAI from "openai";
 
-const readFile = (filePath) => {
+dotenv.config();
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+const readFile = (filePath, parseJson = true) => {
     try {
         const fileData = readFileSync(filePath, 'utf8');
-        return JSON.parse(fileData);
+        return parseJson ? JSON.parse(fileData) : fileData;
     } catch (error) {
         console.error('Error reading JSON file:', error);
         return {};
@@ -18,8 +26,12 @@ const readFile = (filePath) => {
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const filePath = process.argv[2] || "programs/tweaksynthAnalog.json";
-const { parameters, name } = readFile(filePath);
+const programPath = process.argv[2] || "programs/tweaksynthAnalog.json";
+//const { parameters, name } = readFile(programPath);
+const program = readFile(programPath);
+const name = program.name;
+const parameters = program.parameters;
+
 let socketIds = [];
 let oscClient;
 
@@ -31,7 +43,7 @@ const getLocalIpAddress = () => {
         .flat()
         .map((addr) => addr.address);
     return ipv4Addresses.find((addr) => addr !== '127.0.0.1');
-};
+}
 
 const localIpAddress = getLocalIpAddress();
 const level = parseInt(process.argv[3]) || 0;
@@ -41,6 +53,66 @@ const serverPort = parseInt(process.argv[6]) || 3334;
 const assignedControls = level > 0;
 const assignedParams = level > 1;
 const hideLabel = level > 2;
+
+const handleMessage = (parameterIndex, value) => {
+    let address = parameters[parameterIndex].address;
+    let format = parameters[parameterIndex].format;
+    if (format === "f") {
+        value = parseFloat(value)
+    } else if (format === "i" || format === "b") {
+        value = parseInt(value)
+    }
+    if (typeof address === 'string') {
+        address = [address];
+    }
+    address.forEach((addr) => {
+        oscClient.send(addr, value);
+        console.log('Sent OSC message to', addr, value);
+    });
+    parameters[parameterIndex].value = value;
+    io.emit('value', parameterIndex, value);
+}
+
+const createPatch = async (prompt) => {;
+    console.log('createPatch from prompt', prompt);
+    const instructions = readFile("openai/instructions.txt", false);
+    //console.log('instructions', instructions);
+    prompt = prompt || readFile("openai/defaultPrompt.txt", false);
+    prompt += "\n" + JSON.stringify(program);
+    //console.log('prompt', prompt);
+    const request = {
+        model: "gpt-3.5-turbo",
+        messages: [
+            {
+            "role": "system",
+            "content": instructions
+            },
+            {
+            "role": "user",
+            "content": prompt
+            }
+        ],
+        temperature: 0.9,
+        //max_tokens: 256,
+        //top_p: 1,
+        //frequency_penalty: 0,
+        //presence_penalty: 0,
+    };
+    //console.log('request', request);
+    const response = await openai.chat.completions.create(request);
+    try {
+        //console.log('response', response.choices[0].message);
+        const patchData = JSON.parse(response.choices[0].message.content);
+        //console.log('patchData', typeof patchData);
+        //console.log('patchData.parameters', patchData.parameters);
+        for (let i = 0; i < patchData.parameters.length; i++) {
+            //console.log("Setting", patchData.parameters[i].name, patchData.parameters[i].value);
+            handleMessage(i, patchData.parameters[i].value);
+        }
+    } catch (error) {
+        console.error('Error reading JSON file:', error);
+    }
+}
 
 const getAssignedSocketIds = () => {
     const assignedSocketIds = parameters
@@ -60,7 +132,7 @@ const requestAccess = (socketId) => {
         }
     }
     return assignedSocketIds;
-};
+}
 
 const removeSocket = (socketId) => {
     parameters.forEach((param) => {
@@ -82,7 +154,7 @@ const distributeParametersBetweenSockets = (assignedSocketIds) => {
     const parametersPerSocket = Math.floor(numParameters / numSockets);
     const remainingParameters = numParameters % numSockets;
 
-    let currentIndex = assignedSocketIds.reduce((index, socketId, i) => {
+    assignedSocketIds.reduce((index, socketId, i) => {
         const numParametersForSocket = parametersPerSocket + (i < remainingParameters ? 1 : 0);
         for (let j = 0; j < numParametersForSocket; j++) {
             parameters[index].sid = socketId;
@@ -96,6 +168,25 @@ const distributeParametersBetweenSockets = (assignedSocketIds) => {
 
 app.get('/', (req, res) => {
     res.sendFile(new URL('./index.html', import.meta.url).pathname);
+});
+
+app.post('/api', (req, res) => {
+    const receivedData = req.body;
+    console.log('Received JSON data:', receivedData);
+
+    // Process the received data or send an appropriate response
+    try {
+        const patchData = JSON.parse(receivedData);
+        console.log('patchData', patchData);
+        for (let i = 0; i < parameters.length; i++) {
+            handleMessage(i, patchData.parameters[i].value);
+        }
+    } catch (error) {
+        console.error('Error reading JSON file:', error);
+    }
+
+    // Send a response back to the client
+    res.json({ message: 'JSON received successfully!' });
 });
 
 server.listen(3000, () => {
@@ -129,24 +220,8 @@ io.on('connection', (socket) => {
             socket.emit('status', 'No available parameters left. Try again in a minute.');
         }
     });
-    socket.on('message', (parameterIndex, value) => {
-        let address = parameters[parameterIndex].address;
-        let format = parameters[parameterIndex].format;
-        if (format === "f") {
-            value = parseFloat(value)
-        } else if (format === "i" || format === "b") {
-            value = parseInt(value)
-        }
-        if (typeof address === 'string') {
-            address = [address];
-        }
-        address.forEach((addr) => {
-            oscClient.send(addr, value);
-            console.log('Sent OSC message to', addr, value);
-        });
-        parameters[parameterIndex].value = value;
-        io.emit('value', parameterIndex, value);
-    });
+    socket.on('createPatch', createPatch);
+    socket.on('message', handleMessage);
     socket.on("disconnect", () => {
         console.log('disconnect', socket.id);
         removeSocket(socket.id);
