@@ -18,7 +18,7 @@
             background-color: lightgreen;
         }
 
-        .arg, .name, .desc, #patch > input {
+        .arg, .name, .desc, #prompt, #promptSubmit {
             border-radius: 1rem;
             margin: .6rem;
             padding: .6rem;
@@ -27,6 +27,7 @@
         }
 
         #promptSubmit {
+            width: 10%;
             cursor: pointer;
         }
 
@@ -164,7 +165,7 @@
     </div>
     <hr>
     <form id="patch" action="/api">
-        <input type="text" id="prompt" placeholder="Prompt for a new patch">
+        <textarea id="prompt" placeholder="Prompt for a new patch"></textarea>
         <input type="submit" id="promptSubmit" value="Send">
     </form>
 </div>

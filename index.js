@@ -27,7 +27,6 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 const programPath = process.argv[2] || "programs/tweaksynthAnalog.json";
-//const { parameters, name } = readFile(programPath);
 const program = readFile(programPath);
 const name = program.name;
 const parameters = program.parameters;
@@ -74,12 +73,10 @@ const handleMessage = (parameterIndex, value) => {
 }
 
 const createPatch = async (prompt) => {;
-    console.log('createPatch from prompt', prompt);
     const instructions = readFile("openai/instructions.txt", false);
-    //console.log('instructions', instructions);
     prompt = prompt || readFile("openai/defaultPrompt.txt", false);
+    console.log(prompt);
     prompt += "\n" + JSON.stringify(program);
-    //console.log('prompt', prompt);
     const request = {
         model: "gpt-3.5-turbo",
         messages: [
@@ -93,20 +90,11 @@ const createPatch = async (prompt) => {;
             }
         ],
         temperature: 0.9,
-        //max_tokens: 256,
-        //top_p: 1,
-        //frequency_penalty: 0,
-        //presence_penalty: 0,
     };
-    //console.log('request', request);
     const response = await openai.chat.completions.create(request);
     try {
-        //console.log('response', response.choices[0].message);
         const patchData = JSON.parse(response.choices[0].message.content);
-        //console.log('patchData', typeof patchData);
-        //console.log('patchData.parameters', patchData.parameters);
         for (let i = 0; i < patchData.parameters.length; i++) {
-            //console.log("Setting", patchData.parameters[i].name, patchData.parameters[i].value);
             handleMessage(i, patchData.parameters[i].value);
         }
     } catch (error) {
