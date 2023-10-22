@@ -206,8 +206,8 @@
         patchStatus.innerText = "Please wait, creating patch. Prompt given: " + prompt;
     });
 
-    socket.on('patchCreated', function () {
-        patchStatus.innerText = "Patch completed!"
+    socket.on('patchCreated', function (message) {
+        patchStatus.innerText = message;
     });
 
     const requestUpdate = () => {

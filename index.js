@@ -77,30 +77,42 @@ const createPatch = async (prompt) => {
     prompt = prompt || readFile("openai/defaultPrompt.txt", false);
     io.emit('startCreating', prompt);
     console.log(prompt);
-    prompt += "\n" + JSON.stringify(program);
+    prompt += "\n" + JSON.stringify(program.parameters.map(p => {
+        return {
+            "name": p.name,
+            "description": p.description,
+            "value": p.value,
+            "valueMap": p.valueMap || null,
+            "min": p.min,
+            "max": p.max || p.valueMap.length,
+            "f": p.f
+        };
+    }));
     const request = {
         model: "gpt-3.5-turbo",
         messages: [
             {
-            "role": "system",
-            "content": instructions
+                "role": "system",
+                "content": instructions
             },
             {
-            "role": "user",
-            "content": prompt
+                "role": "user",
+                "content": prompt
             }
         ],
         temperature: 0.9,
     };
-    const response = await openai.chat.completions.create(request);
     try {
+        const response = await openai.chat.completions.create(request);
         const patchData = JSON.parse(response.choices[0].message.content);
+        console.log(patchData)
         for (let i = 0; i < patchData.parameters.length; i++) {
             handleMessage(i, patchData.parameters[i].value);
         }
-        io.emit('patchCreated');
+        io.emit('patchCreated', "Patch completed!");
     } catch (error) {
-        console.error('Error reading JSON file:', error);
+        console.error('Error occurred:', error);
+        io.emit('patchCreated', "An error occurred. Please try again.");
     }
 }
 
