@@ -158,7 +158,7 @@ app.get('/', (req, res) => {
     res.sendFile(new URL('./index.html', import.meta.url).pathname);
 });
 
-app.post('/api', (req, res) => {
+/* app.post('/api', (req, res) => {
     const receivedData = req.body;
     console.log('Received JSON data:', receivedData);
 
@@ -175,7 +175,7 @@ app.post('/api', (req, res) => {
 
     // Send a response back to the client
     res.json({ message: 'JSON received successfully!' });
-});
+}); */
 
 server.listen(3000, () => {
     console.log(`${name} running at http://${localIpAddress}:3000`);
