@@ -10,11 +10,10 @@ Your only output is the json response, and nothing else. No other text or explan
 
 Your job is to set each value in the patch to a sensible amount based on the prompt you are given.
 Use you knowledge of synthesis to find the best solution.
-Legal values are between the min and max attribute for that parameter.
-Format can be "f" (float), "i" (integer) or "b" (boolean).
+Legal values are between the min and max attribute for that parameter, but avoid extremes. Better to be suble.
+Value format can be "f" (float), "i" (integer) or "b" (boolean).
 Parameters that are of type boolean, can have either the "min" or "max" value, nothing in between.
 The parameter name and description will give you information about what that parameter controls in the synthesizer, and guidelines for usage.
-If the attribute "valueMap" is present, then "max" = the number of items in "valueMap".
 
 Example input:
 {
@@ -23,20 +22,23 @@ Example input:
   "parameters": [
     {
       "name": "Cutoff",
-      "description": "This is the cutoff for the low pass filter",
+      "description": "This is the cutoff frequency for the low pass filter",
       "value": 1,
       "min": 0,
       "max": 1,
       "format": "f"
     },
     {
-      "name": "Scale",
-      "description": "This parameter sets the scale",
+      "name": "Wave Osc 1",
+      "description": "The waveform for oscillator 1",
       "value": 1,
       "valueMap": [
-        "Label for value 1",
-        "Label for value 2",
-        "Label for value 3"
+        "Saw",
+        "Square",
+        "Triangle",
+        "Sine",
+        "Noise",
+        "Pulse"
       ],
       "min": 1,
       "format": "i"
@@ -62,7 +64,7 @@ Example output:
       "value": 0.5
     },
     {
-      "name": "Scale",
+      "name": "Wave Osc 1",
       "value": 2
     },
     {

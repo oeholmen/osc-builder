@@ -163,6 +163,37 @@
     },
     {
       "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc1Pitch",
+      "name": "Octave Osc 1",
+      "description": "The octave offset for oscillator 1",
+      "value": 0,
+      "min": -2,
+      "max": 2,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc2Pitch",
+      "name": "Pitch Osc 2",
+      "description": "The pitch offset for oscillator 2 in semitones.",
+      "value": 0,
+      "min": -24,
+      "max": 24,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor0/Osc2FinePitch",
+      "name": "Fine Pitch Osc 2",
+      "description": "The fine pitch for oscillator 2 in cents.",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
       "address": "/uvi/Part 0/Program/EventProcessor0/HardsyncOsc1",
       "name": "Hardsync Osc 1",
       "description": "Amount of hardsync applied to oscillator 1, given in semitones.",
@@ -254,6 +285,7 @@
       "address": "/uvi/Part 0/Program/EventProcessor0/WaveFormTypeMenu",
       "name": "Modulation Waveform.",
       "description": "The waveform of the low frequency oscillator.",
+      "value": 1,
       "valueMap": [
         "Sinus",
         "Square",
@@ -265,10 +297,8 @@
         "Chaos Lorenz",
         "Chaos Rossler"
       ],
-      "value": 1,
       "min": 1,
       "max": 9,
-      "step": 1,
       "format": "i"
     },
     {

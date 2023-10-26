@@ -61,6 +61,14 @@ const handleMessage = (parameterIndex, value) => {
     } else if (format === "i" || format === "b") {
         value = parseInt(value)
     }
+    const min = parameters[parameterIndex].min;
+    const max = parameters[parameterIndex].max || parameters[parameterIndex].valueMap.length;
+    if (value < min) {
+        value = min;
+    }
+    if (value > max) {
+        value = max;
+    }
     if (typeof address === 'string') {
         address = [address];
     }
@@ -89,7 +97,7 @@ const createPatch = async (prompt) => {
         };
     }));
     const request = {
-        model: "gpt-3.5-turbo",
+        model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
         messages: [
             {
                 "role": "system",
@@ -109,7 +117,7 @@ const createPatch = async (prompt) => {
         for (let i = 0; i < patchData.parameters.length; i++) {
             handleMessage(i, patchData.parameters[i].value);
         }
-        io.emit('patchCreated', "Patch completed!");
+        io.emit('patchCreated', `Patch created! ${patchData.name}: ${patchData.description}`);
     } catch (error) {
         console.error('Error occurred:', error);
         io.emit('patchCreated', "An error occurred. Please try again.");
