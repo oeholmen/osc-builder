@@ -175,12 +175,14 @@
     <div id="refresh" class="hidden">
         <button onclick="requestUpdate()">Switch parameters</button>
     </div>
-    <hr>
     <div id="patchStatus"></div>
-    <form id="patch" action="/">
-        <textarea id="prompt" placeholder="Prompt for a new patch"></textarea>
-        <input type="submit" id="promptSubmit" value="Create">
-    </form>
+    <div id="patchWrapper" class="hidden">
+        <hr>
+        <form id="patch" action="/">
+            <textarea id="prompt" placeholder="Prompt for a new patch"></textarea>
+            <input type="submit" id="promptSubmit" value="Create">
+        </form>
+    </div>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
@@ -190,6 +192,7 @@
     const socket = io();
     const heading = document.getElementById('heading');
     const form = document.getElementById('form');
+    const patchWrapper = document.getElementById('patchWrapper');
     const patchForm = document.getElementById('patch');
     const status = document.getElementById('status');
     const refresh = document.getElementById('refresh');
@@ -351,6 +354,11 @@
             refresh.classList.remove('hidden');
         } else {
             refresh.classList.add('hidden');
+        }
+        if (assignedControls === true) {
+            patchWrapper.classList.add('hidden');
+        } else {
+            patchWrapper.classList.remove('hidden');
         }
     }
 
