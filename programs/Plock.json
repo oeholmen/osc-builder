@@ -1,0 +1,237 @@
+{
+  "name": "Plock",
+  "description": "Meetup",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/Probability",
+      "name": "Melody probability",
+      "value": 3,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor1/Probability",
+      "name": "Probability seq 1",
+      "value": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 12/Value",
+      "name": "Half speed seq 1",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 1/Value",
+      "name": "Colorea seq 1",
+      "value": 0.6,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 13/Value",
+      "name": "Emptify seq 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 2/Value",
+      "name": "Coleroe seq 1",
+      "value": 0.36,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 3/Value",
+      "name": "Variation seq 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 5/Value",
+      "name": "Distorta seq 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 6/Value",
+      "name": "Lpf Cut seq 1",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor1/Probability",
+      "name": "Probability seq 2",
+      "value": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 1/Value",
+      "name": "Loosen seq 2",
+      "value": 0.4,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 2/Value",
+      "name": "Energize seq 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 3/Value",
+      "name": "Pattern seq 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 11/Value",
+      "name": "Subpattern seq 2",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 4/Value",
+      "name": "Distora seq 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 5/Value",
+      "name": "Lpf Cut seq 2",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 4/Program/EventProcessor0/Osc1PitchModAmount", "/uvi/Part 4/Program/EventProcessor0/Osc2PitchModAmount"],
+      "name": "Mod depth melody 2",
+      "value": 0,
+      "min": 0,
+      "max": 24,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 4/Program/EventProcessor0/Osc1Distortion", "/uvi/Part 4/Program/EventProcessor0/Osc2Distortion"],
+      "name": "Distortion melody 2",
+      "value": 0.15,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 4/Program/EventProcessor0/Osc1Wave", "/uvi/Part 4/Program/EventProcessor0/Osc2Wave"],
+      "name": "Waveform melody 2",
+      "value": 1,
+      "valueMap": [
+        "Sine",
+        "Triangle",
+        "Saw",
+        "Pulse"
+      ],
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/EventProcessor0/LoadFragmentMenu",
+      "name": "Drum pattern",
+      "value": 10,
+      "min": 2,
+      "max": 11,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 5/EventProcessor2/PlayMode",
+      "name": "Play direction melody 3",
+      "value": 1,
+      "valueMap": [
+        "Right",
+        "Left",
+        "Drunk",
+        "Random"
+      ],
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 5/EventProcessor3/value1",
+      "name": "LPF Cutoff melody 3",
+      "value": 100,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}
