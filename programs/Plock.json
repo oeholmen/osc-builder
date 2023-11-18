@@ -5,12 +5,52 @@
     {
       "sid": null,
       "address": "/uvi/Part 0/EventProcessor2/Probability",
-      "name": "Melody probability",
+      "name": "Probability melody 1",
       "value": 3,
       "min": 0,
       "max": 100,
       "step": 1,
       "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 10/Value",
+      "name": "Filter melody 1",
+      "value": 0.75,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 7/Value",
+      "name": "Colocra melody 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 5/Value",
+      "name": "Pick melody 1",
+      "value": 0.6,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 6/Value",
+      "name": "Damp melody 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
     },
     {
       "sid": null,
@@ -163,6 +203,16 @@
     },
     {
       "sid": null,
+      "address": "/uvi/Part 4/EventProcessor0/Probability",
+      "name": "Probability melody 2",
+      "value": 90,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
       "address": ["/uvi/Part 4/Program/EventProcessor0/Osc1PitchModAmount", "/uvi/Part 4/Program/EventProcessor0/Osc2PitchModAmount"],
       "name": "Mod depth melody 2",
       "value": 0,
@@ -200,7 +250,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 4/Program/EventProcessor0/Cutoff",
-      "name": "Filter Cutoff mel 2",
+      "name": "Filter Cutoff melody 2",
       "value": 0,
       "min": 0,
       "max": 1,
@@ -210,7 +260,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 5/EventProcessor5/Probability",
-      "name": "Melody 3 probability",
+      "name": "Probability melody 3",
       "value": 100,
       "min": 0,
       "max": 100,
@@ -248,6 +298,18 @@
       "address": "/uvi/Part 3/EventProcessor0/LoadFragmentMenu",
       "name": "Drum pattern",
       "value": 10,
+      "valueMap": [
+        "Pattern 1",
+        "Pattern 2",
+        "Pattern 3",
+        "Pattern 4",
+        "Pattern 5",
+        "Pattern 6",
+        "Pattern 7",
+        "Pattern 8",
+        "Pattern 9 (off)",
+        "Pattern 10"
+      ],
       "min": 2,
       "max": 11,
       "step": 1,
