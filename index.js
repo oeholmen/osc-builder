@@ -49,9 +49,9 @@ const level = parseInt(process.argv[3]) || 0;
 const minParams = parseInt(process.argv[4]) || 1;
 const serverHost = process.argv[5] || localIpAddress;
 const serverPort = parseInt(process.argv[6]) || 3334;
-const assignedControls = level > 0;
-const assignedParams = level > 1;
-const hideLabel = level > 2;
+const assignedControls = level > 0; // Client gets assigned controls
+const assignedParams = level > 1; // Client only sees assigned controls
+const hideLabel = level > 2; // Client does not see control labels
 
 const handleMessage = (parameterIndex, value) => {
     let address = parameters[parameterIndex].address;
@@ -202,6 +202,14 @@ app.get('/', (req, res) => {
 server.listen(3000, () => {
     console.log(`${name} running at http://${localIpAddress}:3000`);
     console.log('Server', {'host': serverHost, 'port': serverPort});
+    console.log('Settings', {
+        'level': level,
+        'minParamsPerClient': minParams,
+        'maxClients': Math.ceil(parameters.length / minParams),
+        'assignedControls': assignedControls,
+        'showAssignedParamsOnly': assignedParams,
+        'hideLabel': hideLabel,
+    });
 });
 
 io.on('connection', (socket) => {
@@ -238,8 +246,9 @@ io.on('connection', (socket) => {
         console.log('socketIds after disconnect', socketIds);
         const assignedSocketIds = getAssignedSocketIds();
         let assigned = 0;
-        if (socketIds.some((id) => !assignedSocketIds.includes(id) && requestAccess(id).includes(id))) {
-            assignedSocketIds.push(socketIds[i]);
+        const index = socketIds.findIndex(id => !assignedSocketIds.includes(id) && requestAccess(id).includes(id));
+        if (index) {
+            assignedSocketIds.push(socketIds[index]);
             assigned++;
         }
         if (assigned > 0) {

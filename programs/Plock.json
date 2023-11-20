@@ -299,19 +299,15 @@
       "name": "Drum pattern",
       "value": 10,
       "valueMap": [
+        "Off",
         "Pattern 1",
         "Pattern 2",
         "Pattern 3",
         "Pattern 4",
-        "Pattern 5",
-        "Pattern 6",
-        "Pattern 7",
-        "Pattern 8",
-        "Pattern 9 (off)",
-        "Pattern 10"
+        "Pattern 5"
       ],
-      "min": 2,
-      "max": 11,
+      "min": 10,
+      "max": 15,
       "step": 1,
       "format": "i"
     },
