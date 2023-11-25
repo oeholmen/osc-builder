@@ -256,12 +256,22 @@
 
     const createSelectWidget = (program, i) => {
         const selectElement = document.createElement("select");
-        for (let j = program.min; j < program.valueMap.length + program.min; j++) {
-            const optionElement = document.createElement("option");
-            optionElement.textContent = getDisplayValue(j, i);
-            optionElement.value = j;
-            optionElement.selected = parseInt(program.value) === j;
-            selectElement.appendChild(optionElement);
+        if (Array.isArray(program.valueMap)) {
+            for (let j = program.min; j < program.valueMap.length + program.min; j++) {
+                const optionElement = document.createElement("option");
+                optionElement.textContent = getDisplayValue(j, i);
+                optionElement.value = j;
+                optionElement.selected = parseInt(program.value) === j;
+                selectElement.appendChild(optionElement);
+            }
+        } else {
+            for (const key in program.valueMap) {
+                const optionElement = document.createElement("option");
+                optionElement.textContent = program.valueMap[key];
+                optionElement.value = key;
+                optionElement.selected = program.value === key || parseInt(program.value) === parseInt(key);
+                selectElement.appendChild(optionElement);
+            }
         }
         selectElement.addEventListener('change', function (e) {
             setAndSendValue(e.target.value, i);

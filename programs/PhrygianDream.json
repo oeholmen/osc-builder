@@ -1,0 +1,286 @@
+{
+  "name": "Phrygian Dream",
+  "description": "Meetup (Up to 9 clients) (node index.js programs/PhrygianDream.json 1 3)",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Note",
+      "name": "Melody",
+      "value": 60,
+      "min": 24,
+      "max": 84,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Duration",
+      "name": "Melody note duration",
+      "value": 9,
+      "valueMap": {
+        "7": "4x",
+        "8": "3x",
+        "9": "2x",
+        "10": "1/1 dot",
+        "11": "1/1",
+        "12": "1/2 dot",
+        "13": "1/1 tri",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "16": "1/2 tri",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "19": "1/4 tri",
+        "20": "1/8",
+        "21": "1/16 dot",
+        "22": "1/8 tri",
+        "23": "1/16",
+        "24": "1/32 dot",
+        "25": "1/16 tri",
+        "26": "1/32",
+        "33": "Hold"
+      },
+      "min": 7,
+      "max": 33,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Retrigger",
+      "name": "Melody retrigger On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Layer 0/Keygroup 0/InsertFX0/Freq",
+      "name": "Melody brightness",
+      "value": 500,
+      "min": 75,
+      "max": 900,
+      "step": 0.1,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/InsertFX0/Mix",
+      "name": "Melody delay mix",
+      "value": 0.6,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Trigger",
+      "name": "Perc 1 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/Parametric LFO 1/Shape",
+      "name": "Drone motion amount",
+      "value": -0.99,
+      "min": -0.99,
+      "max": -0.01,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor1/Trigger",
+      "name": "Perc 2 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/LFO 1/Freq",
+      "name": "Drone LFO frequency",
+      "value": 0.12,
+      "min": 0,
+      "max": 20,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/InsertFX0/Drive",
+      "name": "Drone saturation amount",
+      "value": 6,
+      "min": 0,
+      "max": 20,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor2/Trigger",
+      "name": "Perc 3 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/EventProcessor1/Play",
+      "name": "Wobble Bass On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/Macro 2/Value",
+      "name": "Wobble Bass Filter Cutoff",
+      "value": 0.15,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor3/Trigger",
+      "name": "Perc 4 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/Macro 5/Value",
+      "name": "Wobble Bass Redux",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/Macro 4/Value",
+      "name": "Wobble Bass Drive",
+      "value": 0.6,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 4/EventProcessor0/Play",
+      "name": "Bass Seq On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 4/Program/EventProcessor99/Macro4",
+      "name": "Sub Kick Level",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 4/Program/EventProcessor99/Macro1",
+      "name": "Bass Seq Cutoff",
+      "value": 0,
+      "min": 0,
+      "max": 0.25,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor4/Trigger",
+      "name": "Perc 5 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor6/Trigger",
+      "name": "Perc 6 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 4/Program/EventProcessor99/Macro2",
+      "name": "Bass Seq Env Amount",
+      "value": 1,
+      "min": 0.75,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 4/Program/EventProcessor99/Macro3",
+      "name": "Bass Seq Decay",
+      "value": 0,
+      "min": 0,
+      "max": 0.25,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor5/Trigger",
+      "name": "Perc 7 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 5/EventProcessor0/Play", "/uvi/Part 5/EventProcessor1/Play"],
+      "name": "Arp A On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 5/EventProcessor2/Play", "/uvi/Part 5/EventProcessor3/Play"],
+      "name": "Arp B On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 5/Program/EventProcessor1/Macro2",
+      "name": "Arp Degrade",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}

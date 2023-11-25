@@ -62,7 +62,7 @@ const handleMessage = (parameterIndex, value) => {
         value = parseInt(value)
     }
     const min = parameters[parameterIndex].min;
-    const max = parameters[parameterIndex].max || parameters[parameterIndex].valueMap.length;
+    const max = parameters[parameterIndex].max ?? parameters[parameterIndex].valueMap.length;
     if (value < min) {
         value = min;
     }
@@ -204,6 +204,7 @@ server.listen(3000, () => {
     console.log('Server', {'host': serverHost, 'port': serverPort});
     console.log('Settings', {
         'level': level,
+        'numParameters': parameters.length,
         'minParamsPerClient': minParams,
         'maxClients': Math.ceil(parameters.length / minParams),
         'assignedControls': assignedControls,
@@ -214,7 +215,6 @@ server.listen(3000, () => {
 
 io.on('connection', (socket) => {
     socket.on('ready', () => {
-        console.log('parameters', parameters.length);
         socketIds.push(socket.id);
         socket.emit('socketId', socket.id);
         oscClient = new osc.Client(serverHost, serverPort);
