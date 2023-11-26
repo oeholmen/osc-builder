@@ -1,0 +1,35 @@
+{
+  "name": "Keyboard",
+  "description": "A basic program to trigger notes",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Note",
+      "name": "Note",
+      "value": 48,
+      "min": 48,
+      "max": 72,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Play",
+      "name": "Key On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/Velocity",
+      "name": "Velocity",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}

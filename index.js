@@ -180,6 +180,10 @@ app.get('/', (req, res) => {
     res.sendFile(new URL('./index.html', import.meta.url).pathname);
 });
 
+app.get('/keyboard', (req, res) => {
+    res.sendFile(new URL('./keyboard.html', import.meta.url).pathname);
+});
+
 /* app.post('/api', (req, res) => {
     const receivedData = req.body;
     console.log('Received JSON data:', receivedData);

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Ideas from https://css-tricks.com/how-to-code-a-playable-synth-keyboard/ -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Keyboard</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        :root {
+            --keyboard: hsl(300, 100%, 16%);
+            --keyboard-shadow: hsla(19, 50%, 66%, 0.2);
+            --keyboard-border: hsl(20, 91%, 5%);
+            --black-10: hsla(0, 0%, 0%, 0.1);
+            --black-20: hsla(0, 0%, 0%, 0.2);
+            --black-30: hsla(0, 0%, 0%, 0.3);
+            --black-50: hsla(0, 0%, 0%, 0.5);
+            --black-60: hsla(0, 0%, 0%, 0.6);
+            --white-20: hsla(0, 0%, 100%, 0.2);
+            --white-50: hsla(0, 0%, 100%, 0.5);
+            --white-80: hsla(0, 0%, 100%, 0.8);
+        }
+
+        .white,
+        .black {
+            position: relative;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 0.5rem 0;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        #keyboard li:first-child {
+            border-radius: 5px 0 5px 5px;
+        }
+
+        #keyboard li:last-child {
+            border-radius: 0 5px 5px 5px;
+        }
+
+        .white {
+            height: 12.5rem;
+            width: 3.5rem;
+            z-index: 1;
+            border-left: 1px solid hsl(0, 0%, 73%);
+            border-bottom: 1px solid hsl(0, 0%, 73%);
+            border-radius: 0 0 5px 5px;
+            box-shadow: -1px 0 0 var(--white-80) inset, 0 0 5px hsl(0, 0%, 80%) inset,
+                0 0 3px var(--black-20);
+            background: linear-gradient(to bottom, hsl(0, 0%, 93%) 0%, white 100%);
+            color: var(--black-30);
+        }
+
+        .black {
+            height: 8rem;
+            width: 2rem;
+            margin: 0 0 0 -1rem;
+            z-index: 2;
+            border: 1px solid black;
+            border-radius: 0 0 3px 3px;
+            box-shadow: -1px -1px 2px var(--white-20) inset,
+                0 -5px 2px 3px var(--black-60) inset, 0 2px 4px var(--black-50);
+            background: linear-gradient(45deg, hsl(0, 0%, 13%) 0%, hsl(0, 0%, 33%) 100%);
+            color: var(--white-50);
+        }
+
+        .white.pressed {
+            border-top: 1px solid hsl(0, 0%, 47%);
+            border-left: 1px solid hsl(0, 0%, 60%);
+            border-bottom: 1px solid hsl(0, 0%, 60%);
+            box-shadow: 2px 0 3px var(--black-10) inset,
+                -5px 5px 20px var(--black-20) inset, 0 0 3px var(--black-20);
+            background: linear-gradient(to bottom, white 0%, hsl(0, 0%, 91%) 100%);
+            outline: none;
+        }
+
+        .black.pressed {
+            box-shadow: -1px -1px 2px var(--white-20) inset,
+                0 -2px 2px 3px var(--black-60) inset, 0 1px 2px var(--black-50);
+            background: linear-gradient(to right,
+                    hsl(0, 0%, 27%) 0%,
+                    hsl(0, 0%, 13%) 100%);
+            outline: none;
+        }
+
+        .offset {
+            margin: 0 0 0 -1rem;
+        }
+
+        #keyboard {
+            height: 15.25rem;
+            width: 59rem;
+            margin: 0.5rem auto;
+            padding: 3rem 0 0 3rem;
+            position: relative;
+            border: 1px solid var(--keyboard-border);
+            border-radius: 1rem;
+            background-color: var(--keyboard);
+            box-shadow: 0 0 50px var(--black-50) inset, 0 1px var(--keyboard-shadow) inset,
+                0 5px 15px var(--black-50);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer-wrapper">
+        <ul id="keyboard">
+            <li note="C2" class="white">C2</li>
+            <li note="C#2" class="black"></li>
+            <li note="D2" class="white offset"></li>
+            <li note="D#2" class="black"></li>
+            <li note="E2" class="white offset"></li>
+            <li note="F2" class="white"></li>
+            <li note="F#2" class="black"></li>
+            <li note="G2" class="white offset"></li>
+            <li note="G#2" class="black"></li>
+            <li note="A2" class="white offset"></li>
+            <li note="A#2" class="black"></li>
+            <li note="B2" class="white offset"></li>
+            <li note="C3" class="white">C3</li>
+            <li note="C#3" class="black"></li>
+            <li note="D3" class="white offset"></li>
+            <li note="D#3" class="black"></li>
+            <li note="E3" class="white offset"></li>
+            <li note="F3" class="white"></li>
+            <li note="F#3" class="black"></li>
+            <li note="G3" class="white offset"></li>
+            <li note="G#3" class="black"></li>
+            <li note="A3" class="white offset"></li>
+            <li note="A#3" class="black"></li>
+            <li note="B3" class="white offset"></li>
+            <li note="C4" class="white">C4</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        let synthParameters;
+        let noteParameter = 0;
+        let playParameter = 1;
+        let velocityParameter = 2;
+        let socketId;
+
+        const socket = io();
+
+        const getElementByNote = (note) => note && document.querySelector(`[note="${note}"]`);
+
+        const keys = {
+            48: { element: getElementByNote("C2"), note: "C", octaveOffset: 0 },
+            49: { element: getElementByNote("C#2"), note: "C#", octaveOffset: 0 },
+            50: { element: getElementByNote("D2"), note: "D", octaveOffset: 0 },
+            51: { element: getElementByNote("D#2"), note: "D#", octaveOffset: 0 },
+            52: { element: getElementByNote("E2"), note: "E", octaveOffset: 0 },
+            53: { element: getElementByNote("F2"), note: "F", octaveOffset: 0 },
+            54: { element: getElementByNote("F#2"), note: "F#", octaveOffset: 0 },
+            55: { element: getElementByNote("G2"), note: "G", octaveOffset: 0 },
+            56: { element: getElementByNote("G#2"), note: "G#", octaveOffset: 0 },
+            57: { element: getElementByNote("A2"), note: "A", octaveOffset: 1 },
+            58: { element: getElementByNote("A#2"), note: "A#", octaveOffset: 1 },
+            59: { element: getElementByNote("B2"), note: "B", octaveOffset: 1 },
+            60: { element: getElementByNote("C3"), note: "C", octaveOffset: 1 },
+            61: { element: getElementByNote("C#3"), note: "C#", octaveOffset: 1 },
+            62: { element: getElementByNote("D3"), note: "D", octaveOffset: 1 },
+            63: { element: getElementByNote("D#3"), note: "D#", octaveOffset: 1 },
+            64: { element: getElementByNote("E3"), note: "E", octaveOffset: 1 },
+            65: { element: getElementByNote("F3"), note: "F", octaveOffset: 1 },
+            66: { element: getElementByNote("F#3"), note: "F#", octaveOffset: 1 },
+            67: { element: getElementByNote("G3"), note: "G", octaveOffset: 1 },
+            68: { element: getElementByNote("G#3"), note: "G#", octaveOffset: 1 },
+            69: { element: getElementByNote("A3"), note: "A", octaveOffset: 1 },
+            70: { element: getElementByNote("A#3"), note: "A#", octaveOffset: 1 },
+            71: { element: getElementByNote("B3"), note: "B", octaveOffset: 1 },
+            72: { element: getElementByNote("C4"), note: "C", octaveOffset: 1 },
+        };
+
+        const pressedNotes = new Map();
+        let clickedKey = null;
+
+        const playKey = (key) => {
+            if (!keys[key]) {
+                console.log("playKey not found", key);
+                return;
+            }
+
+            keys[key].element.classList.add("pressed");
+            pressedNotes.set(key, true);
+            console.log("playKey", key);
+            sendValue(key, noteParameter);
+            sendValue(1, playParameter);
+        };
+
+        const stopKey = (key) => {
+            if (!keys[key]) {
+                console.log("stopKey not found", key);
+                return;
+            }
+
+            console.log("stopKey", key);
+            keys[key].element.classList.remove("pressed");
+            pressedNotes.delete(key);
+            sendValue(0, playParameter);
+        };
+
+        for (const [key, { element }] of Object.entries(keys)) {
+            element.addEventListener("mousedown", () => {
+                console.log("mousedown", key)
+                playKey(key);
+                clickedKey = key;
+            });
+            element.addEventListener("touchstart", () => {
+                console.log("touchstart", key)
+                playKey(key);
+                clickedKey = key;
+            });
+        }
+
+        document.addEventListener("mouseup", () => {
+            console.log("mouseup", clickedKey)
+            stopKey(clickedKey);
+        });
+
+        document.addEventListener("touchend", () => {
+            console.log("touchend", clickedKey)
+            stopKey(clickedKey);
+        });
+
+        const setParameters = (name, parameters, assignedControls, assignedParams, hideLabel) => {
+            synthParameters = parameters;
+        }
+
+        const sendValue = (value, i) => {
+            synthParameters[i].value = value;
+            socket.emit('message', i, value);
+        }
+
+        socket.on('setParameters', setParameters);
+
+        socket.on('socketId', function (sid) {
+            socketId = sid;
+        });
+
+        socket.on('connect', function () {
+            socket.emit('ready');
+        });
+    </script>
+</body>
+
+</html>
