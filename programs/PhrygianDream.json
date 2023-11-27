@@ -16,7 +16,7 @@
       "sid": null,
       "address": "/uvi/Part 0/EventProcessor0/Duration",
       "name": "Melody note duration",
-      "value": 9,
+      "value": 11,
       "valueMap": {
         "7": "4x",
         "8": "3x",
@@ -181,21 +181,11 @@
     {
       "sid": null,
       "address": "/uvi/Part 4/EventProcessor0/Play",
-      "name": "Bass Seq On/Off",
+      "name": "Bass/Kick Seq On/Off",
       "value": 0,
       "min": 0,
       "max": 1,
       "format": "b"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 4/Program/EventProcessor99/Macro4",
-      "name": "Sub Kick Level",
-      "value": 1,
-      "min": 0,
-      "max": 1,
-      "step": 0.01,
-      "format": "f"
     },
     {
       "sid": null,
@@ -206,6 +196,25 @@
       "max": 0.25,
       "step": 0.01,
       "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 6/EventProcessor0/Play",
+      "name": "Snare/HiHat On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 6/Program/InsertFX4/Freq",
+      "name": "Snare/HiHat Cutoff",
+      "value": 20000,
+      "min": 20,
+      "max": 20000,
+      "step": 1,
+      "format": "i"
     },
     {
       "sid": null,
@@ -244,15 +253,6 @@
       "max": 0.25,
       "step": 0.01,
       "format": "f"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 1/EventProcessor5/Trigger",
-      "name": "Perc 7 On/Off",
-      "value": 0,
-      "min": 0,
-      "max": 1,
-      "format": "b"
     },
     {
       "sid": null,
