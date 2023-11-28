@@ -134,6 +134,11 @@
         }
 
         #status, #patchStatus {
+            margin: 1.25rem;
+            color: azure;
+        }
+
+        #admin-status {
             display: flex;
             margin: 1.25rem;
             color: azure;
@@ -197,6 +202,7 @@
 <div class="outer-wrapper">
     <h1 id="heading"></h1>
     <div id="status" class="hidden"></div>
+    <div id="admin-status" class="hidden"></div>
     <form id="form" action="/"></form>
     <div id="refresh" class="hidden">
         <button onclick="requestUpdate()">Switch parameters</button>
@@ -224,6 +230,7 @@
     const patchWrapper = document.getElementById('patchWrapper');
     const patchForm = document.getElementById('patch');
     const status = document.getElementById('status');
+    const adminStatus = document.getElementById('admin-status');
     const refresh = document.getElementById('refresh');
 
     patchForm.addEventListener('submit', function (e) {
@@ -335,13 +342,13 @@
         }
     }
 
-    const hideFormInputs = (waitMessage) => {
+    const hideFormInputs = (message) => {
         if (isAdmin) {
             return;
         }
         heading.innerText = '' // Clear heading
         form.innerHTML = ''; // Clear form
-        status.innerText = waitMessage;
+        status.innerHTML = message;
         status.classList.remove('hidden');
         refresh.classList.add('hidden');
     }
@@ -426,9 +433,12 @@
         if (isAdmin) {
             return;
         }
-        status.innerText = text;
+        status.innerHTML = text;
         status.classList.remove('hidden');
-        //refresh.classList.remove('hidden');
+    });
+
+    socket.on('isAdmin', function (adminFlag) {
+        isAdmin = adminFlag
     });
 
     socket.on('adminSetup', function (settings) {
@@ -436,7 +446,7 @@
             return;
         }
 
-        status.innerHTML = '<div>Clients: ' + settings.clients + '/' + settings.maxClients + '</div>';
+        adminStatus.innerHTML = '<div>Clients: ' + settings.clients + '/' + settings.maxClients + '</div>';
 
         const messageElement = document.createElement("div");
         messageElement.classList.add('admin-status-message');
@@ -454,9 +464,9 @@
             return socket.emit('requestUpdate', socketId);
         });
         buttonWrapperElement.appendChild(buttonElement);
-        status.appendChild(buttonWrapperElement);
-        status.appendChild(messageElement);
-        status.classList.remove('hidden');
+        adminStatus.appendChild(buttonWrapperElement);
+        adminStatus.appendChild(messageElement);
+        adminStatus.classList.remove('hidden');
     });
 
     socket.on('value', function (parameterIndex, value) {

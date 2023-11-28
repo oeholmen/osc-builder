@@ -34,7 +34,19 @@ const parameters = program.parameters;
 let socketIds = [];
 let adminSocket = null;
 let oscClient;
-let waitMessage = "Please wait...";
+
+let waitMessage = [
+    "<h3>Please wait...</h3>",
+    "<p>We will be ready in just a minute.</p>",
+    "<p>Your assigned parameters will be set on a green background. You may need to scroll down to see them.</p>",
+    "<p>If you are on a small screen, landscape mode is recommended.</p>",
+    "<p>You may choose to switch parameters only once during a session.</p>",
+];
+
+let completedMessage = [
+    "<h3>The session is now closed!</h3>",
+    "<p>Hope you enjoyed it!</p>",
+];
 
 const getLocalIpAddress = () => {
     const networkInterfaces = os.networkInterfaces();
@@ -193,7 +205,7 @@ const distributeParametersBetweenSockets = (assignedSocketIds) => {
     if (paramsActivated) {
         io.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
     } else {
-        io.emit('status', waitMessage);
+        io.emit('status', waitMessage.join("\n"));
     }
 }
 
@@ -224,12 +236,14 @@ io.on('connection', (socket) => {
         socket.emit('socketId', socket.id);
         const adminConnect = isAdmin && typeof adminSocket !== 'string';
         if (adminConnect) {
+            io.emit('isAdmin', true);
             adminSocket = socket.id;
             console.log("admin connected", adminSocket);
         } else {
+            io.emit('isAdmin', false);
             socketIds.push(socket.id);
         }
-        adminSetup()
+        adminSetup();
         console.log("total connected clients", socketIds.length);
         oscClient = new osc.Client(serverHost, serverPort);
         oscClient.send('/status', `${socket.id} connected`);
@@ -255,7 +269,7 @@ io.on('connection', (socket) => {
             if (paramsActivated) {
                 io.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
             } else {
-                io.emit('hideParameters', waitMessage);
+                io.emit('hideParameters', completedMessage.join("\n"));
             }
             adminSetup();
             return;
@@ -288,5 +302,6 @@ io.on('connection', (socket) => {
         if (assigned > 0) {
             distributeParametersBetweenSockets(assignedSocketIds);
         }
+        adminSetup();
     });
 });
