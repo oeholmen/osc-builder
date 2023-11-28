@@ -398,7 +398,7 @@
             argElement.classList.add('arg');
             argElement.setAttribute("id", "arg-" + i);
             if (assignedControls === true && !synthParameterIndex.includes(i)) {
-                argElement.disabled = true;
+                argElement.disabled = isAdmin === false;
             }
             wrapper.appendChild(nameElement);
             wrapper.appendChild(argElement);

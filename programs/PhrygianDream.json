@@ -1,6 +1,6 @@
 {
   "name": "Phrygian Dream",
-  "description": "Meetup (Up to 9 clients) (node index.js programs/PhrygianDream.json 1 3)",
+  "description": "Meetup (30 parameters, Up to 10 clients) (node index.js programs/PhrygianDream.json 1 3)",
   "parameters": [
     {
       "sid": null,
@@ -47,11 +47,21 @@
     {
       "sid": null,
       "address": "/uvi/Part 0/EventProcessor0/Retrigger",
-      "name": "Melody retrigger On/Off",
+      "name": "Melody note repeat On/Off",
       "value": 0,
       "min": 0,
       "max": 1,
       "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Layer 0/Keygroup 0/Amp. Env/SustainLevel",
+      "name": "Melody env sustain",
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
     },
     {
       "sid": null,
@@ -61,6 +71,16 @@
       "min": 75,
       "max": 900,
       "step": 0.1,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/InsertFX1/Drive",
+      "name": "Melody drive",
+      "value": 12,
+      "min": 6,
+      "max": 24,
+      "step": 0.01,
       "format": "f"
     },
     {
@@ -84,11 +104,11 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/Parametric LFO 1/Shape",
-      "name": "Drone motion amount",
-      "value": -0.99,
-      "min": -0.99,
-      "max": -0.01,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/LFO 1/Freq",
+      "name": "Drone filter LFO frequency",
+      "value": 0.12,
+      "min": 0,
+      "max": 20,
       "step": 0.01,
       "format": "f"
     },
@@ -103,11 +123,21 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/LFO 1/Freq",
-      "name": "Drone LFO frequency",
-      "value": 0.12,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/Parametric LFO 1/Shape",
+      "name": "Drone motion amount",
+      "value": -0.99,
+      "min": -0.99,
+      "max": -0.01,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Layer 0/Keygroup 0/Oscillator/WaveIndex",
+      "name": "Drone wave index",
+      "value": 0.5,
       "min": 0,
-      "max": 20,
+      "max": 1,
       "step": 0.01,
       "format": "f"
     },
