@@ -1,6 +1,6 @@
 {
   "name": "Plock",
-  "description": "Meetup",
+  "description": "Meetup (Up to 10 clients) (node index.js programs/Plock.json 1 3)",
   "parameters": [
     {
       "sid": null,

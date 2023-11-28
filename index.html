@@ -134,8 +134,34 @@
         }
 
         #status, #patchStatus {
+            display: flex;
             margin: 1.25rem;
             color: azure;
+        }
+
+        .start-stop-button-wrapper {
+            margin-left: 1rem;
+            margin-top: -2px;
+        }
+
+        .admin-status-message {
+            margin-left: 1rem;
+            margin-top: -2px;
+            border-radius: 1rem;
+            padding: 3px 15px;
+            color: white;
+        }
+
+        .admin-status-message.active {
+            background-color: green;
+        }
+
+        .admin-status-message.inactive {
+            background-color: orange;
+        }
+
+        .start-stop-button {
+            padding: 6px;
         }
 
         #patchStatus {
@@ -191,6 +217,8 @@
     let socketId;
     let refreshHidden;
     const socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = typeof urlParams.get('admin') === 'string';
     const heading = document.getElementById('heading');
     const form = document.getElementById('form');
     const patchWrapper = document.getElementById('patchWrapper');
@@ -215,7 +243,7 @@
     });
 
     const requestUpdate = () => {
-        refreshHidden = true;
+        refreshHidden = isAdmin === false;
         return socket.emit('requestUpdate', socketId);
     }
 
@@ -307,6 +335,17 @@
         }
     }
 
+    const hideFormInputs = (waitMessage) => {
+        if (isAdmin) {
+            return;
+        }
+        heading.innerText = '' // Clear heading
+        form.innerHTML = ''; // Clear form
+        status.innerText = waitMessage;
+        status.classList.remove('hidden');
+        refresh.classList.add('hidden');
+    }
+
     const setFormInputs = (name, parameters, assignedControls, assignedParams, hideLabel) => {
         heading.innerText = name; // Set heading
         form.innerHTML = ''; // Clear form
@@ -318,7 +357,8 @@
                 synthParameterIndex.push(i);
             }
         }
-        if (synthParameterIndex.length > 0 || assignedControls === false) {
+        if (!isAdmin && (synthParameterIndex.length > 0 || assignedControls === false)) {
+            status.innerText = '';
             status.classList.add('hidden');
         }
         for (let i = 0; i < synthParameters.length; i++) {
@@ -376,15 +416,47 @@
     }
 
     socket.on('setParameters', setFormInputs);
+    socket.on('hideParameters', hideFormInputs);
 
     socket.on('socketId', function (sid) {
         socketId = sid;
     });
 
-    socket.on('status', function (error) {
-        status.innerText = error;
+    socket.on('status', function (text) {
+        if (isAdmin) {
+            return;
+        }
+        status.innerText = text;
         status.classList.remove('hidden');
-        refresh.classList.remove('hidden');
+        //refresh.classList.remove('hidden');
+    });
+
+    socket.on('adminSetup', function (settings) {
+        if (isAdmin === false) {
+            return;
+        }
+
+        status.innerHTML = '<div>Clients: ' + settings.clients + '/' + settings.maxClients + '</div>';
+
+        const messageElement = document.createElement("div");
+        messageElement.classList.add('admin-status-message');
+        messageElement.classList.add((settings.paramsActivated ? 'active' : 'inactive'));
+        messageElement.innerText = settings.paramsActivated ? "Running" : "Stopped";
+        const buttonWrapperElement = document.createElement("div");
+        buttonWrapperElement.classList.add('start-stop-button-wrapper');
+        const buttonElement = document.createElement("button");
+        buttonElement.innerText = settings.paramsActivated ? "Stop" : "Start";
+        buttonElement.classList.add('start-stop-button');
+        buttonElement.value = settings.paramsActivated ? 0 : 1;
+        buttonElement.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return socket.emit('requestUpdate', socketId);
+        });
+        buttonWrapperElement.appendChild(buttonElement);
+        status.appendChild(buttonWrapperElement);
+        status.appendChild(messageElement);
+        status.classList.remove('hidden');
     });
 
     socket.on('value', function (parameterIndex, value) {
@@ -398,7 +470,7 @@
     });
 
     socket.on('connect', function () {
-        socket.emit('ready');
+        socket.emit('ready', isAdmin);
     });
 </script>
 </body>

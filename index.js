@@ -32,7 +32,9 @@ const name = program.name;
 const parameters = program.parameters;
 
 let socketIds = [];
+let adminSocket = null;
 let oscClient;
+let waitMessage = "Please wait...";
 
 const getLocalIpAddress = () => {
     const networkInterfaces = os.networkInterfaces();
@@ -52,6 +54,8 @@ const serverPort = parseInt(process.argv[6]) || 3334;
 const assignedControls = level > 0; // Client gets assigned controls
 const assignedParams = level > 1; // Client only sees assigned controls
 const hideLabel = level > 2; // Client does not see control labels
+
+let paramsActivated = level === 0;
 
 const handleMessage = (parameterIndex, value) => {
     let address = parameters[parameterIndex].address;
@@ -134,7 +138,7 @@ const getAssignedSocketIds = () => {
 
 const requestAccess = (socketId) => {
     const assignedSocketIds = getAssignedSocketIds();
-    if (!assignedSocketIds.find(id => id === socketId)) {
+    if (socketId !== adminSocket && !assignedSocketIds.find(id => id === socketId)) {
         if (assignedSocketIds.length < Math.ceil(parameters.length / minParams)) {
             assignedSocketIds.push(socketId);
         } else {
@@ -157,6 +161,19 @@ const removeSocket = (socketId) => {
     }
 }
 
+const adminSetup = () => {
+    io.emit('adminSetup', {
+        'level': level,
+        'clients': socketIds.length,
+        'minParamsPerClient': minParams,
+        'maxClients': Math.ceil(parameters.length / minParams),
+        'assignedControls': assignedControls,
+        'showAssignedParamsOnly': assignedParams,
+        'hideLabel': hideLabel,
+        'paramsActivated': paramsActivated,
+    });
+}
+
 const distributeParametersBetweenSockets = (assignedSocketIds) => {
     assignedSocketIds.sort(() => Math.random() - 0.5);
     const numSockets = assignedSocketIds.length;
@@ -173,7 +190,11 @@ const distributeParametersBetweenSockets = (assignedSocketIds) => {
         return index;
     }, 0);
 
-    io.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
+    if (paramsActivated) {
+        io.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
+    } else {
+        io.emit('status', waitMessage);
+    }
 }
 
 app.get('/', (req, res) => {
@@ -183,25 +204,6 @@ app.get('/', (req, res) => {
 app.get('/keyboard', (req, res) => {
     res.sendFile(new URL('./keyboard.html', import.meta.url).pathname);
 });
-
-/* app.post('/api', (req, res) => {
-    const receivedData = req.body;
-    console.log('Received JSON data:', receivedData);
-
-    // Process the received data or send an appropriate response
-    try {
-        const patchData = JSON.parse(receivedData);
-        console.log('patchData', patchData);
-        for (let i = 0; i < parameters.length; i++) {
-            handleMessage(i, patchData.parameters[i].value);
-        }
-    } catch (error) {
-        console.error('Error reading JSON file:', error);
-    }
-
-    // Send a response back to the client
-    res.json({ message: 'JSON received successfully!' });
-}); */
 
 server.listen(3000, () => {
     console.log(`${name} running at http://${localIpAddress}:3000`);
@@ -218,23 +220,46 @@ server.listen(3000, () => {
 });
 
 io.on('connection', (socket) => {
-    socket.on('ready', () => {
-        socketIds.push(socket.id);
+    socket.on('ready', (isAdmin) => {
         socket.emit('socketId', socket.id);
+        const adminConnect = isAdmin && typeof adminSocket !== 'string';
+        if (adminConnect) {
+            adminSocket = socket.id;
+            console.log("admin connected", adminSocket);
+        } else {
+            socketIds.push(socket.id);
+        }
+        adminSetup()
+        console.log("total connected clients", socketIds.length);
         oscClient = new osc.Client(serverHost, serverPort);
         oscClient.send('/status', `${socket.id} connected`);
-        const assignedSocketIds = requestAccess(socket.id);
-        if (assignedSocketIds.includes(socket.id)) {
-            distributeParametersBetweenSockets(assignedSocketIds);
+        if (adminConnect) {
+            socket.emit('setParameters', name, parameters, false, false, false);
         } else {
-            socket.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
-            socket.emit('status', 'No available parameters left. Try again in a minute.');
+            const assignedSocketIds = requestAccess(socket.id);
+            if (assignedSocketIds.includes(socket.id)) {
+                distributeParametersBetweenSockets(assignedSocketIds);
+            } else {
+                if (paramsActivated) {
+                    socket.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
+                }
+                socket.emit('status', 'No available parameters left. Try again in a minute.');
+            }
+            console.log("total assigned clients", assignedSocketIds.length);
+            console.log('connected', socket.id);
         }
-        console.log("total connected clients", socketIds.length);
-        console.log("total assigned clients", assignedSocketIds.length);
-        console.log('connected', socket.id);
     });
     socket.on('requestUpdate', (socketId) => {
+        if (socketId === adminSocket) {
+            paramsActivated = !paramsActivated;
+            if (paramsActivated) {
+                io.emit('setParameters', name, parameters, assignedControls, assignedParams, hideLabel);
+            } else {
+                io.emit('hideParameters', waitMessage);
+            }
+            adminSetup();
+            return;
+        }
         const assignedSocketIds = requestAccess(socketId);
         if (assignedSocketIds.includes(socketId)) {
             distributeParametersBetweenSockets(assignedSocketIds);
@@ -246,6 +271,11 @@ io.on('connection', (socket) => {
     socket.on('message', handleMessage);
     socket.on("disconnect", () => {
         console.log('disconnect', socket.id);
+        if (socket.id === adminSocket) {
+            adminSocket = null;
+            console.log('admin disconnected');
+            return;
+        }
         removeSocket(socket.id);
         console.log('socketIds after disconnect', socketIds);
         const assignedSocketIds = getAssignedSocketIds();
