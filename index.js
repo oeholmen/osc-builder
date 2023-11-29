@@ -45,7 +45,7 @@ let waitMessage = [
 
 let completedMessage = [
     "<h3>The session is now closed!</h3>",
-    "<p>Hope you enjoyed it!</p>",
+    "<p>Hope you enjoyed it ♫♬</p>",
 ];
 
 const getLocalIpAddress = () => {

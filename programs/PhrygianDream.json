@@ -286,7 +286,7 @@
     },
     {
       "sid": null,
-      "address": ["/uvi/Part 5/EventProcessor0/Play", "/uvi/Part 5/EventProcessor1/Play"],
+      "address": "/uvi/Part 5/Program/Layer 0/EventProcessor4/Play",
       "name": "Arp A On/Off",
       "value": 0,
       "min": 0,
@@ -295,12 +295,31 @@
     },
     {
       "sid": null,
-      "address": ["/uvi/Part 5/EventProcessor2/Play", "/uvi/Part 5/EventProcessor3/Play"],
+      "address": "/uvi/Part 5/Program/Layer 1/EventProcessor5/Play",
       "name": "Arp B On/Off",
       "value": 0,
       "min": 0,
       "max": 1,
       "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 5/Program/Layer 2/EventProcessor4/Play",
+      "name": "Arp C On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 5/Program/EventProcessor1/Macro1",
+      "name": "Arp Texture",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
     },
     {
       "sid": null,
