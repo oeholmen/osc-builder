@@ -1,10 +1,10 @@
 {
   "name": "Phrygian Dream",
-  "description": "Meetup (30 parameters, Up to 10 clients) (node index.js programs/PhrygianDream.json 1 3)",
+  "description": "Meetup (35 parameters, Up to 7 clients) (node index.js programs/PhrygianDream.json 1 5)",
   "parameters": [
     {
       "sid": null,
-      "address": "/uvi/Part 0/EventProcessor0/Note",
+      "address": "/uvi/Part 0/EventProcessor3/Note",
       "name": "Melody",
       "value": 60,
       "min": 24,
@@ -14,7 +14,7 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 0/EventProcessor0/Duration",
+      "address": "/uvi/Part 0/EventProcessor3/Duration",
       "name": "Melody note duration",
       "value": 11,
       "valueMap": {
@@ -46,7 +46,7 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 0/EventProcessor0/Retrigger",
+      "address": "/uvi/Part 0/EventProcessor3/Retrigger",
       "name": "Melody note repeat On/Off",
       "value": 0,
       "min": 0,
@@ -230,8 +230,17 @@
     {
       "sid": null,
       "address": "/uvi/Part 6/EventProcessor0/Play",
-      "name": "Snare/HiHat On/Off",
+      "name": "Snare/HiHat/Kick On/Off",
       "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 6/Program/EventProcessor0/Mute_Kick",
+      "name": "Kick Mute",
+      "value": 1,
       "min": 0,
       "max": 1,
       "format": "b"
@@ -263,6 +272,25 @@
       "min": 0,
       "max": 1,
       "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor7/Trigger",
+      "name": "Perc 7 On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/GlobalNumStepDivider",
+      "name": "Perc Rythm",
+      "value": 1,
+      "min": 0.3,
+      "max": 1,
+      "step": 0.1,
+      "format": "f"
     },
     {
       "sid": null,
