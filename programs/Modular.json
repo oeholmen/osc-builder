@@ -1,0 +1,174 @@
+{
+  "name": "Modular meets prepared piano",
+  "description": "Meetup (node index.js programs/Modular.json 1 5)",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Play",
+      "name": "Modular On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor1/Macro_1",
+      "name": "Modular Cutoff",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor1/Macro_2",
+      "name": "Modular Env",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor1/Macro_3",
+      "name": "Modular Grains",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/EventProcessor1/Macro_4",
+      "name": "Modular FX/Chain",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Play",
+      "name": "Piano On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor2/PulseDuration",
+      "name": "Piano note duration",
+      "value": 23,
+      "valueMap": {
+        "7": "4x",
+        "8": "3x",
+        "9": "2x",
+        "10": "1/1 dot",
+        "11": "1/1",
+        "12": "1/2 dot",
+        "13": "1/1 tri",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "16": "1/2 tri",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "19": "1/4 tri",
+        "20": "1/8",
+        "21": "1/16 dot",
+        "22": "1/8 tri",
+        "23": "1/16",
+        "24": "1/32 dot",
+        "25": "1/16 tri",
+        "26": "1/32"
+      },
+      "min": 7,
+      "max": 33,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor4/Velocity",
+      "name": "Piano dynamic",
+      "value": 64,
+      "min": 1,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor3/GridSize1",
+      "name": "Piano grid X",
+      "value": 12,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor3/GridSize2",
+      "name": "Piano grid Y",
+      "value": 9,
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor0/Play",
+      "name": "Noise On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/Macro_1",
+      "name": "Noise Cutoff",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/Macro_2",
+      "name": "Noise LFO/Hz",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/Macro_3",
+      "name": "Noise Shape",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/Macro_4",
+      "name": "Noise FX/Chain",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}
