@@ -69,21 +69,24 @@ const hideLabel = level > 2; // Client does not see control labels
 
 let paramsActivated = level === 0;
 
-const handleMessage = (parameterIndex, value) => {
-    let address = parameters[parameterIndex].address;
-    let format = parameters[parameterIndex].format;
+const handleMessage = (parameter, parameterIndex) => {
+    let value = parameter.value;
+    let address = parameter.address;
+    let format = parameter.format || "i";
     if (format === "f") {
         value = parseFloat(value)
     } else if (format === "i" || format === "b") {
         value = parseInt(value)
     }
-    const min = parameters[parameterIndex].min;
-    const max = parameters[parameterIndex].max ?? parameters[parameterIndex].valueMap.length;
-    if (value < min) {
-        value = min;
-    }
-    if (value > max) {
-        value = max;
+    if (typeof parameter.min === "number") {
+        const min = parameter.min;
+        const max = parameter.max ?? parameter.valueMap.length;
+        if (value < min) {
+            value = min;
+        }
+        if (value > max) {
+            value = max;
+        }
     }
     if (typeof address === 'string') {
         address = [address];
@@ -92,8 +95,10 @@ const handleMessage = (parameterIndex, value) => {
         oscClient.send(addr, value);
         console.log('Sent OSC message to', addr, value);
     });
-    parameters[parameterIndex].value = value;
-    io.emit('value', parameterIndex, value);
+    if (typeof parameterIndex === "number") {
+        parameters[parameterIndex].value = value;
+        io.emit('value', parameterIndex, value);
+    }
 }
 
 const createPatch = async (prompt) => {

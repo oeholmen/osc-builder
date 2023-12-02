@@ -4,7 +4,7 @@
   "parameters": [
     {
       "sid": null,
-      "address": "/uvi/Part 0/EventProcessor0/Play",
+      "address": ["/uvi/Part 0/Program/Layer 0/EventProcessor2/Play", "/uvi/Part 0/Program/Layer 1/EventProcessor3/Play", "/uvi/Part 0/Program/Layer 2/EventProcessor2/Play", "/uvi/Part 0/Program/Layer 4/EventProcessor3/Play"],
       "name": "Modular On/Off",
       "value": 0,
       "min": 0,
@@ -15,7 +15,7 @@
       "sid": null,
       "address": "/uvi/Part 0/Program/EventProcessor1/Macro_1",
       "name": "Modular Cutoff",
-      "value": 0.5,
+      "value": 0.25,
       "min": 0,
       "max": 1,
       "step": 0.01,

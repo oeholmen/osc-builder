@@ -10,6 +10,7 @@
 
         * {
             font-family: Courier, monospace;
+            font-size: 1rem;
         }
 
         .wrapper, #patch {
@@ -61,6 +62,129 @@
 
         .hidden {
             display: none;
+        }
+
+        /********** Push Button Styles **********/
+        .btn-push {
+            position: relative;
+            top: 0px;
+            /* font-family: "Open Sans"; */
+            text-decoration: none;
+            /* font-size: 25px; */
+            background: #f7f7f7;
+            /* padding: 0px; */
+            /* margin: 0; */
+            border: 1px solid #c4c4c4;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #c4c4c4;
+            -moz-box-shadow: 0px 5px 0px #c4c4c4;
+            -ms-box-shadow: 0px 5px 0px #c4c4c4;
+            -o-box-shadow: 0px 5px 0px #c4c4c4;
+            box-shadow: 0px 5px 0px #c4c4c4;
+            color: #222;
+            text-shadow: 1px 1px 1px #fff;
+            -webkit-transition: All 250ms ease;
+            -moz-transition: All 250ms ease;
+            -o-transition: All 250ms ease;
+            -ms-transition: All 250ms ease;
+            transition: All 250ms ease;
+            -webkit-touch-callout: none; /* Safari */
+            -webkit-user-select: none; /* Chrome */     
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+        }
+        /*==========  Active State  ==========*/
+        .btn-push:active, .btn-push.active {
+            position: relative;
+            top: 5px;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            -ms-box-shadow: none !important;
+            -o-box-shadow: none !important;
+            box-shadow: none !important;
+            -webkit-transition: All 250ms ease;
+            -moz-transition: All 250ms ease;
+            -o-transition: All 250ms ease;
+            -ms-transition: All 250ms ease;
+            transition: All 250ms ease;
+        }
+        /*==========  Navy  ==========*/
+        .btn-push.navy {
+            background: #1b486d;
+            border: 1px solid #07121b;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #07121b;
+            -moz-box-shadow: 0px 5px 0px #07121b;
+            -ms-box-shadow: 0px 5px 0px #07121b;
+            -o-box-shadow: 0px 5px 0px #07121b;
+            box-shadow: 0px 5px 0px #07121b;
+            color: #fff;
+            text-shadow: 1px 1px 1px #07121b;
+        }
+        /*==========  Green  ==========*/
+        .btn-push.green {
+            background: #7cc576;
+            color: #fff;
+            border: 1px solid #46963f;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #46963f;
+            -moz-box-shadow: 0px 5px 0px #46963f;
+            -ms-box-shadow: 0px 5px 0px #46963f;
+            -o-box-shadow: 0px 5px 0px #46963f;
+            box-shadow: 0px 5px 0px #46963f;
+            text-shadow: 1px 1px 1px #46963f;
+        }
+        /*==========  Red  ==========*/
+        .btn-push.red {
+            background: #df4242;
+            color: #fff;
+            border: 1px solid #a01b1b;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #a01b1b;
+            -moz-box-shadow: 0px 5px 0px #a01b1b;
+            -ms-box-shadow: 0px 5px 0px #a01b1b;
+            -o-box-shadow: 0px 5px 0px #a01b1b;
+            box-shadow: 0px 5px 0px #a01b1b;
+            text-shadow: 1px 1px 1px #a01b1b;
+        }
+        /*==========  Blue  ==========*/
+        .btn-push.blue {
+            background: #2ec2dd;
+            color: #fff;
+            border: 1px solid #177c8e;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #177c8e;
+            -moz-box-shadow: 0px 5px 0px #177c8e;
+            -ms-box-shadow: 0px 5px 0px #177c8e;
+            -o-box-shadow: 0px 5px 0px #177c8e;
+            box-shadow: 0px 5px 0px #177c8e;
+            text-shadow: 1px 1px 1px #177c8e;
+        }
+        /*==========  Orange  ==========*/
+        .btn-push.orange {
+            background: #f57936;
+            color: #fff;
+            border: 1px solid #bc4809;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 5px 0px #bc4809;
+            -moz-box-shadow: 0px 5px 0px #bc4809;
+            -ms-box-shadow: 0px 5px 0px #bc4809;
+            -o-box-shadow: 0px 5px 0px #bc4809;
+            box-shadow: 0px 5px 0px #bc4809;
+            text-shadow: 1px 1px 1px #bc4809;
         }
 
         /********** Range Input Styles **********/
@@ -224,7 +348,6 @@
     let refreshHidden;
     const socket = io();
     const urlParams = new URLSearchParams(window.location.search);
-    const isAdmin = typeof urlParams.get('admin') === 'string';
     const heading = document.getElementById('heading');
     const form = document.getElementById('form');
     const patchWrapper = document.getElementById('patchWrapper');
@@ -232,6 +355,7 @@
     const status = document.getElementById('status');
     const adminStatus = document.getElementById('admin-status');
     const refresh = document.getElementById('refresh');
+    let isAdmin = typeof urlParams.get('admin') === 'string';
 
     patchForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -271,7 +395,42 @@
         return inputElement;
     }
 
+    const createPushButtonWidget = (program, i) => {
+        const buttonElement = document.createElement("button");
+        buttonElement.innerText = program.push;
+        buttonElement.value = program.value;
+        buttonElement.classList.add('btn-push');
+        buttonElement.classList.add('navy');
+        buttonElement.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        const listenEvents = ["touchstart", "touchend", "mousedown", "mouseup"];
+        listenEvents.forEach(listenEvent => {
+            buttonElement.addEventListener(listenEvent, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                let value;
+                let isOn;
+                if (listenEvent === "touchstart" || listenEvent === "mousedown") {
+                    buttonElement.classList.add('active');
+                    value = program.max;
+                    isOn = true;
+                } else {
+                    buttonElement.classList.remove('active');
+                    value = program.min;
+                    isOn = false;
+                }
+                setAndSendValue(value, i, isOn);
+            });
+        })
+        return buttonElement;
+    }
+
     const createButtonWidget = (program, i) => {
+        if (typeof program.push === "string") {
+            return createPushButtonWidget(program, i);
+        }
         const buttonElement = document.createElement("button");
         buttonElement.innerText = program.value === program.max ? "On" : "Off";
         buttonElement.value = program.value;
@@ -284,7 +443,8 @@
             e.stopPropagation();
             const value = parseInt(e.target.value) === program.max ? program.min : program.max;
             updateButtonToReflectState(e.target, program, value);
-            setAndSendValue(value, i);
+            const isOn = value === program.max;
+            setAndSendValue(value, i, isOn);
         });
         return buttonElement;
     }
@@ -326,10 +486,16 @@
         return synthParameters[i].valueMap[index] || value;
     }
 
-    const setAndSendValue = (value, i) => {
+    const setAndSendValue = (value, i, isOn) => {
         synthParameters[i].value = value;
         getElm('value', i).innerText = value;
-        socket.emit('message', i, value);
+        if (typeof synthParameters[i].setBefore === "object" && (isOn === true || typeof isOn === "undefined")) {
+            synthParameters[i].setBefore.forEach(parameter => socket.emit('message', parameter));
+        }
+        socket.emit('message', synthParameters[i], i);
+        if (typeof synthParameters[i].setAfter === "object" && (isOn === false || typeof isOn === "undefined")) {
+            synthParameters[i].setAfter.forEach(parameter => socket.emit('message', parameter));
+        }
     }
 
     const updateButtonToReflectState = (elm, program, value) => {
@@ -338,6 +504,16 @@
             elm.classList.add('active');
         } else {
             elm.innerText = "Off";
+            elm.classList.remove('active');
+        }
+    }
+
+    const updatePushButtonToReflectState = (elm, program, value) => {
+        if (value === program.max) {
+            //elm.innerText = "On";
+            elm.classList.add('active');
+        } else {
+            //elm.innerText = "Off";
             elm.classList.remove('active');
         }
     }
@@ -475,6 +651,8 @@
         arg.value = value;
         if (arg.classList.contains("on-off-button")) {
             updateButtonToReflectState(arg, synthParameters[parameterIndex], value);
+        } else if (synthParameters[parameterIndex].push === true) {
+            updatePushButtonToReflectState(arg, synthParameters[parameterIndex], value);
         }
         getElm('value', parameterIndex).innerText = value;
     });

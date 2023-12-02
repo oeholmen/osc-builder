@@ -1,0 +1,88 @@
+{
+  "name": "Example program",
+  "description": "Program template. Format can be f (float), i (integer) or b (boolean). Address can be string or array.",
+  "parameters": [
+    {
+      "sid": null,
+      "address": ["/path/to/parameter1", "/path/to/parameter2"],
+      "name": "Slider parameter",
+      "description": "An optional description of the parameter",
+      "setBefore": [
+        {
+          "address": "/path/to/parameter/before",
+          "value": 48
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/path/to/parameter/after",
+          "value": 62
+        }
+      ],
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/path/to/parameter",
+      "name": "Select menu parameter",
+      "description": "If value is int, you can use a valueMap for labels. Min value is used as offset for indexes in the valueMap.",
+      "value": 1,
+      "valueMap": [
+        "Label for value 1",
+        "Label for value 2",
+        "Label for value 3"
+      ],
+      "min": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/path/to/onOffParameter",
+      "name": "On/Off parameter",
+      "description": "If format is boolean, the parameter is displayed as on/off. The min value is used for false, max for true.",
+      "setBefore": [
+        {
+          "address": "/path/to/parameter/on",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/path/to/parameter/off",
+          "value": 1
+        }
+      ],
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/path/to/pushOnOffParameter",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "Push X",
+      "setBefore": [
+        {
+          "address": "/path/to/parameter/on",
+          "value": 48
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/path/to/parameter/off",
+          "value": 62
+        }
+      ],
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    }
+  ]
+}
