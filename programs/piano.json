@@ -1,0 +1,94 @@
+{
+    "name": "Piano",
+    "description": "Multi in templates folder",
+    "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "C",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "D",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor2/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "D#",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "F",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor4/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "G",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor5/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "A#",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor6/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "B#",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor7/Play",
+      "name": "Push parameter",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "push": "C",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    }
+  ]
+}

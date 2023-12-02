@@ -1,0 +1,210 @@
+{
+  "name": "Demo",
+  "description": "A program demonstrating different techniques (Meetup/demo)",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor0/Play",
+      "name": "Kick",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor0/Quantize",
+      "name": "Kick Speed",
+      "value": 14,
+      "valueMap": {
+        "11": "1/1",
+        "12": "1/2 dot",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "20": "1/8",
+        "23": "1/16",
+        "26": "1/32"
+      },
+      "min": 11,
+      "max": 26,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Play",
+      "name": "Sequence",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor99/Macro2",
+      "name": "Sequence HPF",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor99/Macro1",
+      "name": "Sequence Delay Time",
+      "value": 0.2,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor99/Macro3",
+      "name": "Sequence Diffusion",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor99/Macro4",
+      "name": "Sequence Feedback",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/EventProcessor0/Play",
+      "name": "Bass Sequence",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/EventProcessor99/Macro2",
+      "name": "Bass Sequence Width FM",
+      "value": 0.4,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/EventProcessor99/Macro1",
+      "name": "Bass Sequence Cutoff",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/Program/EventProcessor99/Macro3",
+      "name": "Bass Sequence Env Decay",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Play",
+      "name": "Beat",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Layer 0/InsertFX1/DriveAmount",
+      "name": "Beat Drive",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/Retrigger",
+      "name": "Snare retrigger",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor4/Bypass",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor4/Bypass",
+          "value": 1
+        }
+      ],
+      "value": 1,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/Quantize",
+      "name": "Snare retrigger speed",
+      "value": 23,
+      "valueMap": {
+        "11": "1/1",
+        "12": "1/2 dot",
+        "13": "1/1 tri",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "16": "1/2 tri",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "19": "1/4 tri",
+        "20": "1/8",
+        "21": "1/16 dot",
+        "22": "1/8 tri",
+        "23": "1/16",
+        "24": "1/32 dot",
+        "25": "1/16 tri",
+        "26": "1/32"
+      },
+      "min": 11,
+      "max": 26,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor1/Probability",
+      "name": "Snare probability",
+      "value": 90,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor3/Play",
+      "name": "Snare",
+      "push": "Fill",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    }
+  ]
+}
