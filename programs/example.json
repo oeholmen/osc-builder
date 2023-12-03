@@ -7,18 +7,6 @@
       "address": ["/path/to/parameter1", "/path/to/parameter2"],
       "name": "Slider parameter",
       "description": "An optional description of the parameter",
-      "setBefore": [
-        {
-          "address": "/path/to/parameter/before",
-          "value": 48
-        }
-      ],
-      "setAfter": [
-        {
-          "address": "/path/to/parameter/after",
-          "value": 62
-        }
-      ],
       "value": 1,
       "min": 0,
       "max": 1,
@@ -44,18 +32,6 @@
       "address": "/path/to/onOffParameter",
       "name": "On/Off parameter",
       "description": "If format is boolean, the parameter is displayed as on/off. The min value is used for false, max for true.",
-      "setBefore": [
-        {
-          "address": "/path/to/parameter/on",
-          "value": 0
-        }
-      ],
-      "setAfter": [
-        {
-          "address": "/path/to/parameter/off",
-          "value": 1
-        }
-      ],
       "value": 0,
       "min": 0,
       "max": 1,
