@@ -229,8 +229,8 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 6/EventProcessor0/Play",
-      "name": "Snare/HiHat/Kick On/Off",
+      "address": "/uvi/Part 6/EventProcessor3/Play",
+      "name": "Drumbeat On/Off",
       "value": 0,
       "min": 0,
       "max": 1,
@@ -238,17 +238,37 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 6/Program/EventProcessor0/Mute_Kick",
-      "name": "Kick Mute",
-      "value": 1,
+      "address": "/uvi/Part 6/EventProcessor1/Play",
+      "name": "Snare",
+      "push": "Fill",
+      "value": 0,
       "min": 0,
       "max": 1,
       "format": "b"
     },
     {
       "sid": null,
+      "address": "/uvi/Part 6/EventProcessor1/Quantize",
+      "name": "Snare fill speed",
+      "value": 23,
+      "valueMap": {
+        "18": "1/8 dot",
+        "20": "1/8",
+        "21": "1/16 dot",
+        "22": "1/8 tri",
+        "23": "1/16",
+        "24": "1/32 dot",
+        "25": "1/16 tri",
+        "26": "1/32"
+      },
+      "min": 18,
+      "max": 26,
+      "format": "i"
+    },
+    {
+      "sid": null,
       "address": "/uvi/Part 6/Program/InsertFX4/Freq",
-      "name": "Snare/HiHat Cutoff",
+      "name": "Drumbeat Cutoff",
       "value": 20000,
       "min": 20,
       "max": 20000,
@@ -338,16 +358,6 @@
       "min": 0,
       "max": 1,
       "format": "b"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 5/Program/EventProcessor1/Macro1",
-      "name": "Arp Texture",
-      "value": 0,
-      "min": 0,
-      "max": 1,
-      "step": 0.01,
-      "format": "f"
     },
     {
       "sid": null,
