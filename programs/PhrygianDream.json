@@ -106,7 +106,7 @@
       "sid": null,
       "address": "/uvi/Part 7/EventProcessor1/value1",
       "name": "Sequence Cutoff",
-      "value": 30,
+      "value": 50,
       "min": 0,
       "max": 100,
       "step": 1,
