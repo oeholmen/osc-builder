@@ -1,6 +1,6 @@
 {
   "name": "Phrygian Dream",
-  "description": "Meetup (35 parameters, Up to 7 clients) (node index.js programs/PhrygianDream.json 1 5)",
+  "description": "Meetup (40 parameters, Up to 8 clients) (node index.js programs/PhrygianDream.json 1 5)",
   "parameters": [
     {
       "sid": null,
@@ -92,6 +92,60 @@
       "max": 1,
       "step": 0.01,
       "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor2/Play",
+      "name": "Sequence On/Off",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/value1",
+      "name": "Sequence Cutoff",
+      "value": 30,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/value2",
+      "name": "Sequence Resonance",
+      "value": 0,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/value5",
+      "name": "Sequence Noise Level",
+      "value": 30,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/value8",
+      "name": "Sequence Waveform",
+      "valueMap": {
+        "0": "Square",
+        "50": "Triangle",
+        "100": "Saw"
+      },
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "format": "i"
     },
     {
       "sid": null,
