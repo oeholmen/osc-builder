@@ -10,7 +10,7 @@ import OpenAI from "openai";
 dotenv.config();
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 const readFile = (filePath, parseJson = true) => {
@@ -41,11 +41,13 @@ let waitMessage = [
     "<p>Your assigned parameters will be set on a green background. You may need to scroll down to see them.</p>",
     "<p>If you are on a small screen, landscape mode is recommended.</p>",
     "<p>You may choose to switch parameters only once during a session.</p>",
+    "<p>Artwork by Sebastian Schepis</p>",
 ];
 
 let completedMessage = [
     "<h3>The session is now closed!</h3>",
     "<p>Hope you enjoyed it ♫♬</p>",
+    "<p>Artwork by Sebastian Schepis</p>",
 ];
 
 const getLocalIpAddress = () => {
@@ -159,7 +161,7 @@ const requestAccess = (socketId) => {
         if (assignedSocketIds.length < Math.ceil(parameters.length / minParams)) {
             assignedSocketIds.push(socketId);
         } else {
-            console.log('No available parameters left');            
+            console.log('No available parameters left');
         }
     }
     return assignedSocketIds;
@@ -222,9 +224,21 @@ app.get('/keyboard', (req, res) => {
     res.sendFile(new URL('./keyboard.html', import.meta.url).pathname);
 });
 
+app.get('/client.css', (req, res) => {
+    res.sendFile(new URL('./client.css', import.meta.url).pathname);
+});
+
+app.get('/client.js', (req, res) => {
+    res.sendFile(new URL('./client.js', import.meta.url).pathname);
+});
+
+app.get('/tripoles.js', (req, res) => {
+    res.sendFile(new URL('./tripoles.js', import.meta.url).pathname);
+});
+
 server.listen(3000, () => {
     console.log(`${name} running at http://${localIpAddress}:3000`);
-    console.log('Server', {'host': serverHost, 'port': serverPort});
+    console.log('Server', { 'host': serverHost, 'port': serverPort });
     console.log('Settings', {
         'level': level,
         'numParameters': parameters.length,
@@ -241,13 +255,12 @@ io.on('connection', (socket) => {
         socket.emit('socketId', socket.id);
         const adminConnect = isAdmin && typeof adminSocket !== 'string';
         if (adminConnect) {
-            io.emit('isAdmin', true);
             adminSocket = socket.id;
             console.log("admin connected", adminSocket);
         } else {
-            io.emit('isAdmin', false);
             socketIds.push(socket.id);
         }
+        socket.emit('isAdmin', adminConnect);
         adminSetup();
         console.log("total connected clients", socketIds.length);
         oscClient = new osc.Client(serverHost, serverPort);

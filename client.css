@@ -1,0 +1,351 @@
+body {
+    background-color: steelblue;
+}
+
+* {
+    font-family: Courier, monospace;
+    font-size: 1rem;
+}
+
+#canvas {
+    position: absolute;
+    z-index: -1;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+}
+
+.wrapper,
+#patch {
+    display: flex;
+    flex: auto;
+}
+
+.wrapper.selected {
+    background-color: lightgreen;
+}
+
+.arg,
+.name,
+.desc,
+#prompt,
+#promptSubmit {
+    border-radius: 1rem;
+    margin: .6rem;
+    padding: .6rem;
+    border: none;
+    width: 100%;
+}
+
+#prompt,
+#promptSubmit {
+    font-size: 1rem;
+}
+
+#promptSubmit {
+    width: 10%;
+    cursor: pointer;
+}
+
+.arg.on-off-button {
+    cursor: pointer;
+}
+
+.arg.on-off-button.active {
+    background-color: green;
+    color: white;
+}
+
+.name,
+.desc {
+    border: 1px solid darkslategrey;
+    background-color: white;
+    color: #053a5f;
+}
+
+.value {
+    float: right;
+    color: grey;
+    margin-right: .5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/********** Push Button Styles **********/
+.btn-push {
+    position: relative;
+    top: 0px;
+    /* font-family: "Open Sans"; */
+    text-decoration: none;
+    /* font-size: 25px; */
+    background: #f7f7f7;
+    /* padding: 0px; */
+    /* margin: 0; */
+    border: 1px solid #c4c4c4;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #c4c4c4;
+    -moz-box-shadow: 0px 5px 0px #c4c4c4;
+    -ms-box-shadow: 0px 5px 0px #c4c4c4;
+    -o-box-shadow: 0px 5px 0px #c4c4c4;
+    box-shadow: 0px 5px 0px #c4c4c4;
+    color: #222;
+    text-shadow: 1px 1px 1px #fff;
+    -webkit-transition: All 250ms ease;
+    -moz-transition: All 250ms ease;
+    -o-transition: All 250ms ease;
+    -ms-transition: All 250ms ease;
+    transition: All 250ms ease;
+    -webkit-touch-callout: none;
+    /* Safari */
+    -webkit-user-select: none;
+    /* Chrome */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+/*==========  Active State  ==========*/
+.btn-push:active,
+.btn-push.active {
+    position: relative;
+    top: 5px;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -ms-box-shadow: none !important;
+    -o-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-transition: All 250ms ease;
+    -moz-transition: All 250ms ease;
+    -o-transition: All 250ms ease;
+    -ms-transition: All 250ms ease;
+    transition: All 250ms ease;
+}
+
+/*==========  Navy  ==========*/
+.btn-push.navy {
+    background: #1b486d;
+    border: 1px solid #07121b;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #07121b;
+    -moz-box-shadow: 0px 5px 0px #07121b;
+    -ms-box-shadow: 0px 5px 0px #07121b;
+    -o-box-shadow: 0px 5px 0px #07121b;
+    box-shadow: 0px 5px 0px #07121b;
+    color: #fff;
+    text-shadow: 1px 1px 1px #07121b;
+}
+
+/*==========  Green  ==========*/
+.btn-push.green {
+    background: #7cc576;
+    color: #fff;
+    border: 1px solid #46963f;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #46963f;
+    -moz-box-shadow: 0px 5px 0px #46963f;
+    -ms-box-shadow: 0px 5px 0px #46963f;
+    -o-box-shadow: 0px 5px 0px #46963f;
+    box-shadow: 0px 5px 0px #46963f;
+    text-shadow: 1px 1px 1px #46963f;
+}
+
+/*==========  Red  ==========*/
+.btn-push.red {
+    background: #df4242;
+    color: #fff;
+    border: 1px solid #a01b1b;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #a01b1b;
+    -moz-box-shadow: 0px 5px 0px #a01b1b;
+    -ms-box-shadow: 0px 5px 0px #a01b1b;
+    -o-box-shadow: 0px 5px 0px #a01b1b;
+    box-shadow: 0px 5px 0px #a01b1b;
+    text-shadow: 1px 1px 1px #a01b1b;
+}
+
+/*==========  Blue  ==========*/
+.btn-push.blue {
+    background: #2ec2dd;
+    color: #fff;
+    border: 1px solid #177c8e;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #177c8e;
+    -moz-box-shadow: 0px 5px 0px #177c8e;
+    -ms-box-shadow: 0px 5px 0px #177c8e;
+    -o-box-shadow: 0px 5px 0px #177c8e;
+    box-shadow: 0px 5px 0px #177c8e;
+    text-shadow: 1px 1px 1px #177c8e;
+}
+
+/*==========  Orange  ==========*/
+.btn-push.orange {
+    background: #f57936;
+    color: #fff;
+    border: 1px solid #bc4809;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 5px 0px #bc4809;
+    -moz-box-shadow: 0px 5px 0px #bc4809;
+    -ms-box-shadow: 0px 5px 0px #bc4809;
+    -o-box-shadow: 0px 5px 0px #bc4809;
+    box-shadow: 0px 5px 0px #bc4809;
+    text-shadow: 1px 1px 1px #bc4809;
+}
+
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Default cursor when disabled */
+input[type="range"]:disabled {
+    cursor: inherit;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #053a5f;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    margin-top: -12px;
+    /* Centers thumb on the track */
+
+    /*custom styles*/
+    background-color: #5cd5eb;
+    height: 2rem;
+    width: 1rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+    border: 1px solid #053a5f;
+    outline: 3px solid #053a5f;
+    outline-offset: 0.125rem;
+}
+
+/******** Firefox styles ********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+    background-color: #053a5f;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+    border: none;
+    /*Removes extra border that FF applies*/
+    border-radius: 0;
+    /*Removes default border-radius that FF applies*/
+
+    /*custom styles*/
+    background-color: #5cd5eb;
+    height: 2rem;
+    width: 1rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+    border: 1px solid #053a5f;
+    outline: 3px solid #053a5f;
+    outline-offset: 0.125rem;
+}
+
+#status,
+#patchStatus {
+    margin: 1.25rem;
+    background-color: rgba(0, 50, 50, 0.85);
+    padding: 0.3rem 0.6rem;
+    color: azure;
+}
+
+#admin-status {
+    display: flex;
+    margin: 1.25rem;
+    color: azure;
+}
+
+.start-stop-button-wrapper {
+    margin-left: 1rem;
+    margin-top: -2px;
+}
+
+.admin-status-message {
+    margin-left: 1rem;
+    margin-top: -2px;
+    border-radius: 1rem;
+    padding: 3px 15px;
+    color: white;
+}
+
+.admin-status-message.active {
+    background-color: green;
+}
+
+.admin-status-message.inactive {
+    background-color: orange;
+}
+
+.start-stop-button {
+    padding: 6px;
+}
+
+#patchStatus {
+    margin-bottom: .25rem;
+    color: azure;
+}
+
+#refresh {
+    margin: 1.25rem .75rem;
+}
+
+#refresh button {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    width: 100%;
+}
+
+#refresh button:hover {
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+#heading {
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+}
