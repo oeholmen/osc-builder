@@ -285,8 +285,9 @@ input[type="range"]:focus::-moz-range-thumb {
 #status,
 #patchStatus {
     margin: 1.25rem;
+    border-radius: .3rem;
     background-color: rgba(0, 50, 50, 0.85);
-    padding: 0.3rem 0.6rem;
+    padding: 0.3rem 1.5rem;
     color: azure;
 }
 

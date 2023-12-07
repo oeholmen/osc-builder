@@ -20,6 +20,7 @@ console.log('Start isAdmin', isAdmin);
 patchForm.addEventListener('submit', function (e) {
     e.preventDefault();
     e.stopPropagation();
+    patchStatus.classList.remove('hidden');
     const prompt = document.getElementById('prompt');
     createPatch(prompt.value);
 });

@@ -1,4 +1,4 @@
-const canvas = document.getElementsByTagName('canvas')[0];
+const canvas = document.getElementById('canvas');
 let ctx = undefined
 let __scale = 2
 try {
