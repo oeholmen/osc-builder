@@ -72,6 +72,7 @@ const hideLabel = level > 2; // Client does not see control labels
 let paramsActivated = level === 0;
 
 const handleMessage = (parameter, parameterIndex) => {
+    const values = [];
     let value = parameter.value;
     let address = parameter.address;
     let format = parameter.format || "i";
@@ -90,12 +91,30 @@ const handleMessage = (parameter, parameterIndex) => {
             value = max;
         }
     }
+
     if (typeof address === 'string') {
         address = [address];
     }
-    address.forEach((addr) => {
-        oscClient.send(addr, value);
-        console.log('Sent OSC message to', addr, value);
+
+    if (typeof parameter.valueOn === "number" && typeof parameter.valueMap === "object" && parameter.valueMap.length >= address.length) {
+        const valueOn = parameter.valueOn;
+        const valueOff = parameter.valueOff ?? 0;
+        for (let i = 1; i < (parameter.valueMap.length+1); i++) {
+            if (value === i) {
+                values.push(valueOn)
+            } else {
+                values.push(valueOff)
+            }
+        };
+    } else {
+        address.forEach(() => {
+            values.push(value)
+        });
+    }
+
+    address.forEach((addr, i) => {
+        oscClient.send(addr, values[i]);
+        console.log('Sent OSC message to', addr, values[i]);
     });
     if (typeof parameterIndex === "number") {
         parameters[parameterIndex].value = value;

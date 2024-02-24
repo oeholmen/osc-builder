@@ -1,0 +1,293 @@
+{
+  "name": "Fragmented Beats",
+  "description": "Drum machine programmed in UVI Falcon - use with the 'Drums/Fragmented Beats.uvip' program",
+  "parameters": [
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/EventProcessor0/FragmentActive1",
+          "/uvi/Part 0/EventProcessor0/FragmentActive2",
+          "/uvi/Part 0/EventProcessor0/FragmentActive3",
+          "/uvi/Part 0/EventProcessor0/FragmentActive4"
+      ],
+      "name": "Kick pattern",
+      "description": "Set the kick pattern",
+      "valueMap": [
+        "Kick pattern 1",
+        "Kick pattern 2",
+        "Kick pattern 3",
+        "Kick pattern 4",
+        "Kick off"
+      ],
+      "valueOn": 1,
+      "value": 1,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor2/FragmentActive1",
+        "/uvi/Part 0/EventProcessor2/FragmentActive2",
+        "/uvi/Part 0/EventProcessor2/FragmentActive3",
+        "/uvi/Part 0/EventProcessor2/FragmentActive4"
+      ],
+      "name": "Snare pattern",
+      "description": "Set the snare pattern",
+      "valueMap": [
+        "Snare pattern 1",
+        "Snare pattern 2",
+        "Snare pattern 3",
+        "Snare pattern 4",
+        "Snare off"
+      ],
+      "valueOn": 1,
+      "value": 1,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor4/FragmentActive1",
+        "/uvi/Part 0/EventProcessor4/FragmentActive2",
+        "/uvi/Part 0/EventProcessor4/FragmentActive3",
+        "/uvi/Part 0/EventProcessor4/FragmentActive4"
+      ],
+      "name": "Hihat pattern",
+      "description": "Set the hihat pattern",
+      "valueMap": [
+        "Hihat pattern 1",
+        "Hihat pattern 2",
+        "Hihat pattern 3",
+        "Hihat pattern 4",
+        "Hihat off"
+      ],
+      "valueOn": 1,
+      "value": 1,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive1",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive2",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive3",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive4"
+      ],
+      "name": "Clap pattern",
+      "description": "Play the clap pattern",
+      "push": "Clap",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/EvolveActive",
+        "/uvi/Part 0/EventProcessor2/EvolveActive",
+        "/uvi/Part 0/EventProcessor4/EvolveActive"
+      ],
+      "name": "Play fill",
+      "description": "Play fill",
+      "push": "Fill",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/FragmentActions1",
+        "/uvi/Part 0/EventProcessor0/FragmentActions2",
+        "/uvi/Part 0/EventProcessor0/FragmentActions3",
+        "/uvi/Part 0/EventProcessor0/FragmentActions4",
+        "/uvi/Part 0/EventProcessor2/FragmentActions1",
+        "/uvi/Part 0/EventProcessor2/FragmentActions2",
+        "/uvi/Part 0/EventProcessor2/FragmentActions3",
+        "/uvi/Part 0/EventProcessor2/FragmentActions4",
+        "/uvi/Part 0/EventProcessor4/FragmentActions1",
+        "/uvi/Part 0/EventProcessor4/FragmentActions2",
+        "/uvi/Part 0/EventProcessor4/FragmentActions3",
+        "/uvi/Part 0/EventProcessor4/FragmentActions4"
+      ],
+      "name": "Variation",
+      "description": "Play a temporary variation",
+      "push": "Play",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 1,
+      "min": 1,
+      "max": 2,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 4/Bypass"
+      ],
+      "name": "Kick sound",
+      "description": "Set the kick sound",
+      "valueMap": [
+        "Kick 1",
+        "Kick 2",
+        "Kick 3",
+        "Kick 4"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 4/Bypass"
+      ],
+      "name": "Snare sound",
+      "description": "Set the snare sound",
+      "valueMap": [
+        "Snare 1",
+        "Snare 2",
+        "Snare 3",
+        "Snare 4"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 4/Bypass"
+      ],
+      "name": "Hihat sound",
+      "description": "Set the hihat sound",
+      "valueMap": [
+        "Hihat 1",
+        "Hihat 2",
+        "Hihat 3",
+        "Hihat 4"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 5/Value",
+      "name": "Filter Cutoff",
+      "description": "Move left for low pass, right for high pass",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 2/Value",
+      "name": "Drive",
+      "description": "Drive for the whole kit",
+      "value": 0.25,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 1/Value",
+      "name": "Delay",
+      "description": "Kit delay",
+      "value": 0.01,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 4/Value",
+      "name": "Reverb",
+      "description": "Kit reverb",
+      "value": 0.03,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}

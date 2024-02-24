@@ -29,6 +29,27 @@
     },
     {
       "sid": null,
+      "address": [
+          "/path/to/parameter1",
+          "/path/to/parameter2",
+          "/path/to/parameter3"
+      ],
+      "name": "Select item menu",
+      "description": "A menu that enables the selected item, and disables the others, sending valueOn to the address that corresponds to the selected menu item, and valueOff to the other items. If valueMap has more values than address, off value will be sent to all.",
+      "valueMap": [
+        "Kick 1",
+        "Kick 2",
+        "Kick 3",
+        "All off"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 1,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
       "address": "/path/to/onOffParameter",
       "name": "On/Off parameter",
       "description": "If format is boolean, the parameter is displayed as on/off. The min value is used for false, max for true.",
