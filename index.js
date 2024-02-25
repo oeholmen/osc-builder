@@ -63,8 +63,9 @@ const getLocalIpAddress = () => {
 const localIpAddress = getLocalIpAddress();
 const level = parseInt(process.argv[3]) || 0;
 const minParams = parseInt(process.argv[4]) || 1;
-const serverHost = process.argv[5] || localIpAddress;
-const serverPort = parseInt(process.argv[6]) || 3334;
+const clientPort = parseInt(process.argv[5]) || 3000;
+const serverHost = process.argv[6] || localIpAddress;
+const serverPort = parseInt(process.argv[7]) || 3334;
 const assignedControls = level > 0; // Client gets assigned controls
 const assignedParams = level > 1; // Client only sees assigned controls
 const hideLabel = level > 2; // Client does not see control labels
@@ -255,8 +256,8 @@ app.get('/tripoles.js', (req, res) => {
     res.sendFile(new URL('./tripoles.js', import.meta.url).pathname);
 });
 
-server.listen(3000, () => {
-    console.log(`${name} running at http://${localIpAddress}:3000 - admin mode: ?admin`);
+server.listen(clientPort, () => {
+    console.log(`${name} running at http://${localIpAddress}:${clientPort} - admin mode: ?admin`);
     console.log('Server', { 'host': serverHost, 'port': serverPort });
     console.log('Settings', {
         'level': level,

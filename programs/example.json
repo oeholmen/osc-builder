@@ -17,7 +17,7 @@
       "sid": null,
       "address": "/path/to/parameter",
       "name": "Select menu parameter",
-      "description": "If value is int, you can use a valueMap for labels. Min value is used as offset for indexes in the valueMap.",
+      "description": "If format is int, you can use a valueMap for labels. Min value is used as offset for indexes in the valueMap.",
       "value": 1,
       "valueMap": [
         "Label for value 1",

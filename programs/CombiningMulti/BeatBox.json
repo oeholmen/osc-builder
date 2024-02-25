@@ -1,6 +1,6 @@
 {
   "name": "Fragmented Beats",
-  "description": "Drum machine programmed in UVI Falcon - use with the 'Drums/Fragmented Beats.uvip' program",
+  "description": "Drum machine programmed in UVI Falcon - use with the 'Drums/Fragmented Beats.uvip' program or the Combining multi",
   "parameters": [
     {
       "sid": null,
@@ -20,7 +20,7 @@
         "Kick off"
       ],
       "valueOn": 1,
-      "value": 1,
+      "value": 5,
       "min": 1,
       "format": "b"
     },
@@ -42,7 +42,7 @@
         "Snare off"
       ],
       "valueOn": 1,
-      "value": 1,
+      "value": 5,
       "min": 1,
       "format": "b"
     },
@@ -64,7 +64,7 @@
         "Hihat off"
       ],
       "valueOn": 1,
-      "value": 1,
+      "value": 5,
       "min": 1,
       "format": "b"
     },

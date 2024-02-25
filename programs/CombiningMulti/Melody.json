@@ -1,0 +1,132 @@
+{
+  "name": "Melody",
+  "description": "Use with Test Combining multi",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Play",
+      "name": "Play",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor1/GenerateScale",
+      "name": "Scale",
+      "value": 16,
+      "valueMap": [
+        "Major (Ionian)",
+        "Minor (Aeolian)",
+        "Dorian",
+        "Phrygian",
+        "Lydian",
+        "Mixolydian",
+        "Locrian",
+        "Acoustic",
+        "Blues",
+        "Alterated",
+        "Maqam Saba",
+        "Persian",
+        "Arabic",
+        "Hungarian",
+        "Major Pentatonic",
+        "Minor Pentatonic",
+        "Hirajoshi",
+        "Miyako-Bushi",
+        "Iwato",
+        "Ritsu",
+        "Kumoi",
+        "Maqam Hijaz",
+        "Maqam Bayati",
+        "Diminished",
+        "Whole tone",
+        "Chomatic"
+      ],
+      "min": 1,
+      "max": 26,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor2/PulseDuration",
+      "name": "Note Speed",
+      "value": 15,
+      "valueMap": {
+        "11": "1/1",
+        "12": "1/2 dot",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "20": "1/8",
+        "23": "1/16",
+        "26": "1/32"
+      },
+      "min": 11,
+      "max": 26,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor4/Probability",
+      "name": "Pitch variation probability",
+      "description": "Set the probability that notes outside the scale will be selected",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor5/Probability",
+      "name": "Note probability",
+      "value": 75,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_1",
+      "name": "Cutoff",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_2",
+      "name": "Divot",
+      "value": 0.75,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_3",
+      "name": "Texture",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_4",
+      "name": "FX|Chain",
+      "value": 0.4,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}
