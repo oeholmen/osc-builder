@@ -1,0 +1,16 @@
+{
+  "name": "Melody player",
+  "description": "For playing meldodies",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/EventProcessor0/Note",
+      "name": "Melody",
+      "value": 60,
+      "min": 24,
+      "max": 84,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}

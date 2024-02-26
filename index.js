@@ -257,7 +257,7 @@ app.get('/tripoles.js', (req, res) => {
 });
 
 server.listen(clientPort, () => {
-    console.log(`${name} running at http://${localIpAddress}:${clientPort} - admin mode: ?admin`);
+    console.log(`${name} running at http://${localIpAddress}:${clientPort}?admin`);
     console.log('Server', { 'host': serverHost, 'port': serverPort });
     console.log('Settings', {
         'level': level,
