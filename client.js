@@ -102,7 +102,7 @@ const createButtonWidget = (program, i) => {
         e.preventDefault();
         e.stopPropagation();
         const value = parseInt(e.target.value) === program.max ? program.min : program.max;
-        updateButtonToReflectState(e.target, program, value);
+        //updateButtonToReflectState(e.target, program, value);
         const isOn = value === program.max;
         setAndSendValue(value, i, isOn);
     });
@@ -134,6 +134,50 @@ const createSelectWidget = (program, i) => {
     return selectElement;
 }
 
+const createButtonsWidget = (program, i) => {
+    const wrapperElement = document.createElement("div");
+    const innerWrapperElement = document.createElement("div");
+    wrapperElement.classList.add("button-wrapper");
+    innerWrapperElement.classList.add("button-inner-wrapper");
+    if (Array.isArray(program.valueMap)) {
+        for (let j = program.min; j < program.valueMap.length + program.min; j++) {
+            const buttonElement = document.createElement("button");
+            buttonElement.classList.add("toggle-button");
+            buttonElement.innerHTML = getDisplayValue(j, i);
+            buttonElement.value = j;
+            if (parseInt(program.value) === j) {
+                buttonElement.classList.add("active");
+            }
+            buttonElement.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                //updateButtonsToReflectState(wrapperElement, e.target.value);
+                setAndSendValue(e.target.value, i);
+            });
+            innerWrapperElement.appendChild(buttonElement);
+        }
+    } else {
+        for (const key in program.valueMap) {
+            const buttonElement = document.createElement("button");
+            buttonElement.classList.add("toggle-button");
+            buttonElement.innerHTML = program.valueMap[key];
+            buttonElement.value = key;
+            if (program.value === key || parseInt(program.value) === parseInt(key)) {
+                buttonElement.classList.add("active");
+            }
+            buttonElement.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                //updateButtonsToReflectState(wrapperElement, e.target.value);
+                setAndSendValue(e.target.value, i);
+            });
+            innerWrapperElement.appendChild(buttonElement);
+        }
+    }
+    wrapperElement.appendChild(innerWrapperElement);
+    return wrapperElement;
+}
+
 const getElm = (elmType, i) => {
     return document.getElementById(elmType + '-' + i);
 }
@@ -150,12 +194,22 @@ const setAndSendValue = (value, i, isOn) => {
     synthParameters[i].value = value;
     getElm('value', i).innerText = value;
     if (typeof synthParameters[i].setBefore === "object" && (isOn === true || typeof isOn === "undefined")) {
-        synthParameters[i].setBefore.forEach(parameter => socket.emit('message', parameter));
+        synthParameters[i].setBefore.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
     }
     socket.emit('message', synthParameters[i], i);
     if (typeof synthParameters[i].setAfter === "object" && (isOn === false || typeof isOn === "undefined")) {
-        synthParameters[i].setAfter.forEach(parameter => socket.emit('message', parameter));
+        synthParameters[i].setAfter.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
     }
+}
+
+const updateButtonsToReflectState = (elm, value) => {
+    elm.querySelectorAll('.toggle-button').forEach(function(btn) {
+        if (value === parseInt(btn.value)) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 }
 
 const updateButtonToReflectState = (elm, program, value) => {
@@ -225,7 +279,11 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
         }
         let argElement;
         if (typeof program.valueMap === "object") {
-            argElement = createSelectWidget(program, i);
+            if (program.type === "buttons") {
+                argElement = createButtonsWidget(program, i);
+            } else {
+                argElement = createSelectWidget(program, i);
+            }
         } else if (program.format === "b") {
             argElement = createButtonWidget(program, i);
         } else {
@@ -251,11 +309,11 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
     } else {
         refresh.classList.add('hidden');
     }
-    if (assignedControls === true) {
+    /* if (assignedControls === true) {
         patchWrapper.classList.add('hidden');
     } else {
         patchWrapper.classList.remove('hidden');
-    }
+    } */
 }
 
 socket.on('setParameters', setFormInputs);
@@ -314,6 +372,8 @@ socket.on('value', function (parameterIndex, value) {
     arg.value = value;
     if (arg.classList.contains("on-off-button")) {
         updateButtonToReflectState(arg, synthParameters[parameterIndex], value);
+    } else if (arg.classList.contains("button-wrapper")) {
+        updateButtonsToReflectState(arg, value);
     } else if (synthParameters[parameterIndex].push === true) {
         updatePushButtonToReflectState(arg, synthParameters[parameterIndex], value);
     }

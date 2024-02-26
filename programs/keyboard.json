@@ -6,6 +6,13 @@
       "sid": null,
       "address": "/uvi/Part 0/EventProcessor0/Note",
       "name": "Note",
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/Play",
+          "value": 1,
+          "delay": 15
+        }
+      ],
       "value": 48,
       "min": 48,
       "max": 72,

@@ -62,7 +62,7 @@
       "sid": null,
       "address": "/path/to/pushOnOffParameter",
       "name": "Push parameter",
-      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label",
+      "description": "Use push=<label> on a boolean parameter to show as a push button with provided label. setBefore/After accepts a delay in ms.",
       "push": "Push X",
       "setBefore": [
         {
@@ -73,7 +73,8 @@
       "setAfter": [
         {
           "address": "/path/to/parameter/off",
-          "value": 62
+          "value": 62,
+          "delay": 15
         }
       ],
       "value": 0,

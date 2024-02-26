@@ -204,8 +204,7 @@
             keys[key].element.classList.add("pressed");
             pressedNotes.set(key, true);
             console.log("playKey", key);
-            sendValue(key, noteParameter);
-            sendValue(1, playParameter);
+            setAndSendValue(key, noteParameter);
         };
 
         const stopKey = (key) => {
@@ -217,7 +216,7 @@
             console.log("stopKey", key);
             keys[key].element.classList.remove("pressed");
             pressedNotes.delete(key);
-            sendValue(0, playParameter);
+            setAndSendValue(0, playParameter);
         };
 
         for (const [key, { element }] of Object.entries(keys)) {
@@ -247,9 +246,15 @@
             synthParameters = parameters;
         }
 
-        const sendValue = (value, i) => {
+        const setAndSendValue = (value, i) => {
             synthParameters[i].value = value;
-            socket.emit('message', i, value);
+            if (typeof synthParameters[i].setBefore === "object") {
+                synthParameters[i].setBefore.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
+            }
+            socket.emit('message', synthParameters[i], i);
+            if (typeof synthParameters[i].setAfter === "object") {
+                synthParameters[i].setAfter.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
+            }
         }
 
         socket.on('setParameters', setParameters);

@@ -7,6 +7,40 @@ body {
     font-size: 1rem;
 }
 
+.button-wrapper.arg {
+    padding: 0 0.6rem;
+}
+
+.button-inner-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.toggle-button {
+    flex: 1;
+    margin: 0.3rem 0.3rem 0 0;
+    min-width: min-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.toggle-button.active {
+    background-color: #10b981;
+}
+
 #canvas {
     position: absolute;
     z-index: -1;

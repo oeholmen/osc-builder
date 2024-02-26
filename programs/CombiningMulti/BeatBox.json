@@ -12,12 +12,13 @@
       ],
       "name": "Kick pattern",
       "description": "Set the kick pattern",
+      "type": "buttons",
       "valueMap": [
-        "Kick pattern 1",
-        "Kick pattern 2",
-        "Kick pattern 3",
-        "Kick pattern 4",
-        "Kick off"
+        "1",
+        "2",
+        "3",
+        "4",
+        "Off"
       ],
       "valueOn": 1,
       "value": 5,
@@ -34,12 +35,13 @@
       ],
       "name": "Snare pattern",
       "description": "Set the snare pattern",
+      "type": "buttons",
       "valueMap": [
-        "Snare pattern 1",
-        "Snare pattern 2",
-        "Snare pattern 3",
-        "Snare pattern 4",
-        "Snare off"
+        "1",
+        "2",
+        "3",
+        "4",
+        "off"
       ],
       "valueOn": 1,
       "value": 5,
@@ -56,12 +58,13 @@
       ],
       "name": "Hihat pattern",
       "description": "Set the hihat pattern",
+      "type": "buttons",
       "valueMap": [
-        "Hihat pattern 1",
-        "Hihat pattern 2",
-        "Hihat pattern 3",
-        "Hihat pattern 4",
-        "Hihat off"
+        "1",
+        "2",
+        "3",
+        "4",
+        "Off"
       ],
       "valueOn": 1,
       "value": 5,
@@ -189,11 +192,12 @@
       ],
       "name": "Kick sound",
       "description": "Set the kick sound",
+      "type": "buttons",
       "valueMap": [
-        "Kick 1",
-        "Kick 2",
-        "Kick 3",
-        "Kick 4"
+        "Kck 1",
+        "Kck 2",
+        "Kck 3",
+        "Kck 4"
       ],
       "valueOn": 0,
       "valueOff": 1,
@@ -211,11 +215,12 @@
       ],
       "name": "Snare sound",
       "description": "Set the snare sound",
+      "type": "buttons",
       "valueMap": [
-        "Snare 1",
-        "Snare 2",
-        "Snare 3",
-        "Snare 4"
+        "Sn 1",
+        "Sn 2",
+        "Sn 3",
+        "Sn 4"
       ],
       "valueOn": 0,
       "valueOff": 1,
@@ -233,11 +238,12 @@
       ],
       "name": "Hihat sound",
       "description": "Set the hihat sound",
+      "type": "buttons",
       "valueMap": [
-        "Hihat 1",
-        "Hihat 2",
-        "Hihat 3",
-        "Hihat 4"
+        "HH 1",
+        "HH 2",
+        "HH 3",
+        "HH 4"
       ],
       "valueOn": 0,
       "valueOff": 1,
@@ -248,7 +254,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 0/Program/Macro 5/Value",
-      "name": "Filter Cutoff",
+      "name": "<- Lowpass | Highpass ->",
       "description": "Move left for low pass, right for high pass",
       "value": 0.5,
       "min": 0,
@@ -263,7 +269,7 @@
       "description": "Drive for the whole kit",
       "value": 0.25,
       "min": 0,
-      "max": 1,
+      "max": 0.6,
       "step": 0.01,
       "format": "f"
     },

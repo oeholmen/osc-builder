@@ -1,0 +1,81 @@
+{
+  "name": "Bass",
+  "description": "Use with Test Combining multi",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor0/Play",
+      "name": "Play",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor2/RootNote",
+      "name": "Seq root note",
+      "value": 40,
+      "type": "buttons",
+      "valueMap": {
+        "35": "B1",
+        "38": "D2",
+        "40": "E2",
+        "45": "A2",
+        "47": "B2",
+        "52": "E3"
+      },
+      "min": 24,
+      "max": 84,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor1/PulseDuration",
+      "name": "Seq Speed",
+      "value": 23,
+      "type": "buttons",
+      "valueMap": {
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "20": "1/8",
+        "23": "1/16",
+        "26": "1/32"
+      },
+      "min": 14,
+      "max": 26,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor5/value1",
+      "name": "Filter",
+      "value": 50,
+      "min": 0,
+      "max": 100,
+      "step": 0.1,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor4/Probability",
+      "name": "Pitch variation probability",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor7/Probability",
+      "name": "Note probability",
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    }
+  ]
+}

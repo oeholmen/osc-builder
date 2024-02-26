@@ -4,88 +4,70 @@
   "parameters": [
     {
       "sid": null,
-      "address": "/uvi/Part 1/EventProcessor0/Play",
-      "name": "Play",
-      "value": 0,
-      "min": 0,
-      "max": 1,
-      "format": "b"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 1/EventProcessor1/GenerateScale",
-      "name": "Scale",
-      "value": 16,
-      "valueMap": [
-        "Major (Ionian)",
-        "Minor (Aeolian)",
-        "Dorian",
-        "Phrygian",
-        "Lydian",
-        "Mixolydian",
-        "Locrian",
-        "Acoustic",
-        "Blues",
-        "Alterated",
-        "Maqam Saba",
-        "Persian",
-        "Arabic",
-        "Hungarian",
-        "Major Pentatonic",
-        "Minor Pentatonic",
-        "Hirajoshi",
-        "Miyako-Bushi",
-        "Iwato",
-        "Ritsu",
-        "Kumoi",
-        "Maqam Hijaz",
-        "Maqam Bayati",
-        "Diminished",
-        "Whole tone",
-        "Chomatic"
+      "address": "/uvi/Part 1/EventProcessor1/RootNote",
+      "name": "Melody",
+      "value": 40,
+      "type": "buttons",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 1/EventProcessor0/Play",
+          "value": 0,
+          "delay": 0
+        }
       ],
-      "min": 1,
-      "max": 26,
+      "setAfter": [
+        {
+          "address": "/uvi/Part 1/EventProcessor0/Play",
+          "value": 1,
+          "delay": 15
+        }
+      ],
+      "valueMap": {
+        "28": "E1",
+        "35": "B1",
+        "38": "D2",
+        "40": "E2",
+        "45": "A2",
+        "47": "B2",
+        "49": "C#3",
+        "50": "D3",
+        "52": "E3",
+        "55": "G3",
+        "57": "A3",
+        "59": "B3",
+        "62": "D4",
+        "64": "E4"
+      },
+      "min": 24,
+      "max": 84,
       "step": 1,
       "format": "i"
     },
     {
       "sid": null,
-      "address": "/uvi/Part 1/EventProcessor2/PulseDuration",
-      "name": "Note Speed",
-      "value": 15,
+      "address": "/uvi/Part 1/EventProcessor0/Duration",
+      "name": "Note length",
+      "value": 11,
+      "type": "buttons",
       "valueMap": {
+        "7": "4x",
+        "8": "3x",
+        "9": "2x",
         "11": "1/1",
-        "12": "1/2 dot",
         "14": "1/2",
-        "15": "1/4 dot",
-        "17": "1/4",
-        "18": "1/8 dot",
-        "20": "1/8",
-        "23": "1/16",
-        "26": "1/32"
+        "17": "1/4"
       },
-      "min": 11,
-      "max": 26,
+      "min": 7,
+      "max": 17,
       "format": "i"
     },
     {
       "sid": null,
-      "address": "/uvi/Part 1/EventProcessor4/Probability",
-      "name": "Pitch variation probability",
-      "description": "Set the probability that notes outside the scale will be selected",
-      "value": 0,
-      "min": 0,
-      "max": 100,
-      "format": "i"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 1/EventProcessor5/Probability",
-      "name": "Note probability",
-      "value": 75,
-      "min": 0,
-      "max": 100,
+      "address": "/uvi/Part 1/EventProcessor3/Velocity",
+      "name": "Note strength",
+      "value": 30,
+      "min": 1,
+      "max": 127,
       "format": "i"
     },
     {
