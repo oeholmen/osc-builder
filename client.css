@@ -108,10 +108,18 @@ body {
     display: none;
 }
 
+.flex1 {
+    flex: 1;
+}
+
 /********** Push Button Styles **********/
 .btn-push {
     position: relative;
-    top: 0px;
+    top: 0.1rem;
+    padding: 0.3rem;
+    margin-right: 0.3rem;
+    margin-bottom: 0.6rem;
+    min-width: 3rem;
     /* font-family: "Open Sans"; */
     text-decoration: none;
     /* font-size: 25px; */
@@ -149,7 +157,7 @@ body {
 .btn-push:active,
 .btn-push.active {
     position: relative;
-    top: 5px;
+    top: 0.3rem;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     -ms-box-shadow: none !important;

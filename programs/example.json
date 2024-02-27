@@ -1,6 +1,6 @@
 {
   "name": "Example program",
-  "description": "Program template. Format can be f (float), i (integer) or b (boolean). Address can be string or array.",
+  "description": "Program template. Format can be f (float), i (integer) b (boolean) or s (string). Address can be string or array.",
   "parameters": [
     {
       "sid": null,

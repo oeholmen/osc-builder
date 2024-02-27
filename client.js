@@ -15,7 +15,7 @@ const refresh = document.getElementById('refresh');
 const patchStatus = document.getElementById('patchStatus');
 let isAdmin = typeof urlParams.get('admin') === 'string';
 
-console.log('Start isAdmin', isAdmin);
+//console.log('Start isAdmin', isAdmin);
 
 patchForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -81,16 +81,71 @@ const createPushButtonWidget = (program, i) => {
                 value = program.min;
                 isOn = false;
             }
-            setAndSendValue(value, i, isOn);
+            setAndSendValue(value, i, isOn, e.target.value);
         });
     })
     return buttonElement;
 }
 
-const createButtonWidget = (program, i) => {
-    if (typeof program.push === "string") {
-        return createPushButtonWidget(program, i);
+const addEvents = (buttonElement, program, i) => {
+    const listenEvents = ["touchstart", "touchend", "mousedown", "mouseup"];
+    listenEvents.forEach(listenEvent => {
+        buttonElement.addEventListener(listenEvent, function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let value;
+            let isOn;
+            if (listenEvent === "touchstart" || listenEvent === "mousedown") {
+                buttonElement.classList.add('active');
+                value = program.max;
+                isOn = true;
+            } else {
+                buttonElement.classList.remove('active');
+                value = program.min;
+                isOn = false;
+            }
+            setAndSendValue(value, i, isOn, e.target.value);
+        });
+    })
+}
+
+const createPushButtonElement = (program, i) => {
+    const buttonElement = document.createElement("button");
+    buttonElement.classList.add('btn-push');
+    buttonElement.classList.add('navy');
+    buttonElement.classList.add('flex1');
+    buttonElement.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    addEvents(buttonElement, program, i);
+    return buttonElement;
+}
+const createPushButtonsWidget = (program, i) => {
+    const wrapperElement = document.createElement("div");
+    const innerWrapperElement = document.createElement("div");
+    wrapperElement.classList.add("button-wrapper");
+    innerWrapperElement.classList.add("button-inner-wrapper");
+    if (Array.isArray(program.valueMap)) {
+        for (let j = program.min; j < program.valueMap.length + program.min; j++) {
+            const buttonElement = createPushButtonElement(program, i);
+            buttonElement.innerHTML = getDisplayValue(j, i);
+            buttonElement.value = j;
+            innerWrapperElement.appendChild(buttonElement);
+        }
+    } else {
+        for (const key in program.valueMap) {
+            const buttonElement = createPushButtonElement(program, i);
+            buttonElement.innerHTML = program.valueMap[key];
+            buttonElement.value = key;
+            innerWrapperElement.appendChild(buttonElement);
+        }
     }
+    wrapperElement.appendChild(innerWrapperElement);
+    return wrapperElement;
+};
+
+const createButtonWidget = (program, i) => {
     const buttonElement = document.createElement("button");
     buttonElement.innerText = program.value === program.max ? "On" : "Off";
     buttonElement.value = program.value;
@@ -102,11 +157,52 @@ const createButtonWidget = (program, i) => {
         e.preventDefault();
         e.stopPropagation();
         const value = parseInt(e.target.value) === program.max ? program.min : program.max;
-        //updateButtonToReflectState(e.target, program, value);
         const isOn = value === program.max;
         setAndSendValue(value, i, isOn);
     });
     return buttonElement;
+}
+
+const createButtonsWidget = (program, i) => {
+    const wrapperElement = document.createElement("div");
+    const innerWrapperElement = document.createElement("div");
+    wrapperElement.classList.add("button-wrapper");
+    innerWrapperElement.classList.add("button-inner-wrapper");
+    if (Array.isArray(program.valueMap)) {
+        for (let j = program.min; j < program.valueMap.length + program.min; j++) {
+            const buttonElement = document.createElement("button");
+            buttonElement.classList.add("toggle-button");
+            buttonElement.innerHTML = getDisplayValue(j, i);
+            buttonElement.value = j;
+            if (parseInt(program.value) === j) {
+                buttonElement.classList.add("active");
+            }
+            buttonElement.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                setAndSendValue(e.target.value, i);
+            });
+            innerWrapperElement.appendChild(buttonElement);
+        }
+    } else {
+        for (const key in program.valueMap) {
+            const buttonElement = document.createElement("button");
+            buttonElement.classList.add("toggle-button");
+            buttonElement.innerHTML = program.valueMap[key];
+            buttonElement.value = key;
+            if (program.value === key || parseInt(program.value) === parseInt(key)) {
+                buttonElement.classList.add("active");
+            }
+            buttonElement.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                setAndSendValue(e.target.value, i);
+            });
+            innerWrapperElement.appendChild(buttonElement);
+        }
+    }
+    wrapperElement.appendChild(innerWrapperElement);
+    return wrapperElement;
 }
 
 const createSelectWidget = (program, i) => {
@@ -134,50 +230,6 @@ const createSelectWidget = (program, i) => {
     return selectElement;
 }
 
-const createButtonsWidget = (program, i) => {
-    const wrapperElement = document.createElement("div");
-    const innerWrapperElement = document.createElement("div");
-    wrapperElement.classList.add("button-wrapper");
-    innerWrapperElement.classList.add("button-inner-wrapper");
-    if (Array.isArray(program.valueMap)) {
-        for (let j = program.min; j < program.valueMap.length + program.min; j++) {
-            const buttonElement = document.createElement("button");
-            buttonElement.classList.add("toggle-button");
-            buttonElement.innerHTML = getDisplayValue(j, i);
-            buttonElement.value = j;
-            if (parseInt(program.value) === j) {
-                buttonElement.classList.add("active");
-            }
-            buttonElement.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                //updateButtonsToReflectState(wrapperElement, e.target.value);
-                setAndSendValue(e.target.value, i);
-            });
-            innerWrapperElement.appendChild(buttonElement);
-        }
-    } else {
-        for (const key in program.valueMap) {
-            const buttonElement = document.createElement("button");
-            buttonElement.classList.add("toggle-button");
-            buttonElement.innerHTML = program.valueMap[key];
-            buttonElement.value = key;
-            if (program.value === key || parseInt(program.value) === parseInt(key)) {
-                buttonElement.classList.add("active");
-            }
-            buttonElement.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                //updateButtonsToReflectState(wrapperElement, e.target.value);
-                setAndSendValue(e.target.value, i);
-            });
-            innerWrapperElement.appendChild(buttonElement);
-        }
-    }
-    wrapperElement.appendChild(innerWrapperElement);
-    return wrapperElement;
-}
-
 const getElm = (elmType, i) => {
     return document.getElementById(elmType + '-' + i);
 }
@@ -190,15 +242,33 @@ const getDisplayValue = (value, i) => {
     return synthParameters[i].valueMap[index] || value;
 }
 
-const setAndSendValue = (value, i, isOn) => {
+const setAndSendValue = (value, i, isOn, mapValue) => {
     synthParameters[i].value = value;
     getElm('value', i).innerText = value;
     if (typeof synthParameters[i].setBefore === "object" && (isOn === true || typeof isOn === "undefined")) {
-        synthParameters[i].setBefore.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
+        synthParameters[i].setBefore.forEach(function (parameter) {
+            if (parameter.valueMap === true && typeof mapValue !== "undefined") {
+                parameter.value = mapValue
+            }
+            if (parameter.delay) {
+                setTimeout(() => { socket.emit('message', parameter) }, parameter.delay);
+            } else {
+                socket.emit('message', parameter);
+            }
+        });
     }
     socket.emit('message', synthParameters[i], i);
     if (typeof synthParameters[i].setAfter === "object" && (isOn === false || typeof isOn === "undefined")) {
-        synthParameters[i].setAfter.forEach(parameter => setTimeout(() => { socket.emit('message', parameter); }, (parameter.delay || 0)));
+        synthParameters[i].setAfter.forEach(function (parameter) {
+            if (parameter.valueMap === true && typeof mapValue !== "undefined") {
+                parameter.value = mapValue
+            }
+            if (parameter.delay) {
+                setTimeout(() => { socket.emit('message', parameter) }, parameter.delay);
+            } else {
+                socket.emit('message', parameter);
+            }
+        });
     }
 }
 
@@ -281,11 +351,17 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
         if (typeof program.valueMap === "object") {
             if (program.type === "buttons") {
                 argElement = createButtonsWidget(program, i);
+            } else if (program.type === "push-buttons") {
+                argElement = createPushButtonsWidget(program, i);
             } else {
                 argElement = createSelectWidget(program, i);
             }
         } else if (program.format === "b") {
-            argElement = createButtonWidget(program, i);
+            if (typeof program.push === "string") {
+                argElement = createPushButtonWidget(program, i);
+            } else {
+                argElement = createButtonWidget(program, i);
+            }
         } else {
             argElement = createSliderWidget(program, i);
         }
@@ -324,7 +400,7 @@ socket.on('socketId', function (sid) {
 });
 
 socket.on('status', function (text) {
-    console.log('status isAdmin', isAdmin);
+    //console.log('status isAdmin', isAdmin);
     if (isAdmin) {
         return;
     }
@@ -334,11 +410,11 @@ socket.on('status', function (text) {
 
 socket.on('isAdmin', function (adminFlag) {
     isAdmin = !!adminFlag;
-    console.log('adminFlag', isAdmin);
+    //console.log('adminFlag', isAdmin);
 });
 
 socket.on('adminSetup', function (settings) {
-    console.log('adminSetup isAdmin', isAdmin);
+    //console.log('adminSetup isAdmin', isAdmin);
     if (isAdmin === false) {
         return;
     }

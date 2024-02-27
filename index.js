@@ -72,41 +72,59 @@ const hideLabel = level > 2; // Client does not see control labels
 
 let paramsActivated = level === 0;
 
+const isNumber = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+}
+
+const getValueMap = (valueMap) => {
+    if (typeof valueMap === "object") {
+        return Array.isArray(valueMap) ? valueMap : Object.keys(valueMap)
+    }
+    return []
+}
+
 const handleMessage = (parameter, parameterIndex) => {
     const values = [];
     let value = parameter.value;
     let address = parameter.address;
-    let format = parameter.format || "i";
-    if (format === "f") {
-        value = parseFloat(value)
-    } else if (format === "i" || format === "b") {
-        value = parseInt(value)
+    let format = parameter.format;
+    if (format !== "s" && isNumber(value)) {
+        if (format === "f") {
+            value = parseFloat(value)
+        } else {
+            value = parseInt(value)
+        }
     }
-    if (typeof parameter.min === "number") {
-        const min = parameter.min;
-        const max = parameter.max ?? parameter.valueMap.length;
-        if (value < min) {
-            value = min;
-        }
-        if (value > max) {
-            value = max;
-        }
+
+    if (typeof parameter.min === "number" && value < parameter.min) {
+        value = parameter.min;
+    }
+
+    if (typeof parameter.max === "number" && value > parameter.max) {
+        value = parameter.max;
     }
 
     if (typeof address === 'string') {
         address = [address];
     }
 
-    if (typeof parameter.valueOn === "number" && typeof parameter.valueMap === "object" && parameter.valueMap.length >= address.length) {
+    const valueMap = getValueMap(parameter.valueMap);
+
+    if (typeof parameter.valueOn === "number" && valueMap.length >= address.length) {
         const valueOn = parameter.valueOn;
         const valueOff = parameter.valueOff ?? 0;
-        for (let i = 1; i < (parameter.valueMap.length+1); i++) {
+        for (let i = 1; i < (valueMap.length+1); i++) {
             if (value === i) {
                 values.push(valueOn)
             } else {
                 values.push(valueOff)
             }
         };
+    } else if (parameter.type === "push-buttons" && valueMap.length === address.length) {
+        // Use the address that is on the same index as the selected value
+        const index = valueMap.findIndex(val => parseInt(val) === value)
+        address = [address[index]]
+        values.push(value)
     } else {
         address.forEach(() => {
             values.push(value)

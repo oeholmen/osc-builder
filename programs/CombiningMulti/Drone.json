@@ -1,16 +1,32 @@
 {
-  "name": "Melody",
+  "name": "Drone",
   "description": "Use with Test Combining multi",
   "parameters": [
     {
       "sid": null,
       "address": "/uvi/Part 1/EventProcessor0/Play",
-      "name": "Melody",
-      "type": "push-buttons",
+      "name": "Active",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor1/RootNote",
+      "name": "Tone",
+      "type": "buttons",
       "setBefore": [
         {
-          "address": "/uvi/Part 1/EventProcessor1/RootNote",
-          "valueMap": true
+          "address": "/uvi/Part 1/EventProcessor0/Play",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 1/EventProcessor0/Play",
+          "value": 1,
+          "delay": 15
         }
       ],
       "valueMap": {
@@ -29,10 +45,10 @@
         "62": "D4",
         "64": "E4"
       },
-      "value": 0,
-      "min": 0,
-      "max": 1,
-      "format": "b"
+      "value": 28,
+      "min": 28,
+      "max": 64,
+      "format": "i"
     },
     {
       "sid": null,

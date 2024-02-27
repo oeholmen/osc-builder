@@ -5,7 +5,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 2/EventProcessor0/Play",
-      "name": "Play",
+      "name": "Sequencer",
       "value": 0,
       "min": 0,
       "max": 1,
@@ -21,6 +21,7 @@
         "35": "B1",
         "38": "D2",
         "40": "E2",
+        "43": "G2",
         "45": "A2",
         "47": "B2",
         "52": "E3"
@@ -37,16 +38,17 @@
       "value": 23,
       "type": "buttons",
       "valueMap": {
+        "11": "1/1",
+        "12": "1/2 dot",
         "14": "1/2",
         "15": "1/4 dot",
         "17": "1/4",
         "18": "1/8 dot",
         "20": "1/8",
-        "23": "1/16",
-        "26": "1/32"
+        "23": "1/16"
       },
-      "min": 14,
-      "max": 26,
+      "min": 11,
+      "max": 23,
       "format": "i"
     },
     {
@@ -58,6 +60,15 @@
       "max": 100,
       "step": 0.1,
       "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor8/Probability",
+      "name": "Octave probability",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "format": "i"
     },
     {
       "sid": null,
