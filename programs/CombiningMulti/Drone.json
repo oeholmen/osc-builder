@@ -5,7 +5,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 1/EventProcessor0/Play",
-      "name": "Active",
+      "name": "Drone",
       "value": 0,
       "min": 0,
       "max": 1,
@@ -16,53 +16,51 @@
       "address": "/uvi/Part 1/EventProcessor1/RootNote",
       "name": "Tone",
       "type": "buttons",
-      "setBefore": [
-        {
-          "address": "/uvi/Part 1/EventProcessor0/Play",
-          "value": 0
-        }
-      ],
-      "setAfter": [
-        {
-          "address": "/uvi/Part 1/EventProcessor0/Play",
-          "value": 1,
-          "delay": 15
-        }
-      ],
       "valueMap": {
         "28": "E1",
+        "31": "G1",
+        "33": "A1",
         "35": "B1",
         "38": "D2",
         "40": "E2",
+        "43": "G2",
         "45": "A2",
         "47": "B2",
         "49": "C#3",
         "50": "D3",
-        "52": "E3",
-        "55": "G3",
-        "57": "A3",
-        "59": "B3",
-        "62": "D4",
-        "64": "E4"
+        "52": "E3"
       },
       "value": 28,
       "min": 28,
-      "max": 64,
+      "max": 52,
       "format": "i"
     },
     {
       "sid": null,
-      "address": "/uvi/Part 1/EventProcessor3/Velocity",
-      "name": "Note strength",
-      "value": 30,
+      "address": "/uvi/Part 1/EventProcessor0/Duration",
+      "name": "Duration between notes",
+      "value": 9,
+      "valueMap": {
+        "5": "6x",
+        "6": "5x",
+        "7": "4x",
+        "8": "3x",
+        "9": "2x",
+        "10": "1/1 dot",
+        "11": "1/1",
+        "12": "1/2 dot",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4"
+      },
       "min": 1,
-      "max": 127,
+      "max": 32,
       "format": "i"
     },
     {
       "sid": null,
-      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_1",
-      "name": "Cutoff",
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/Oscillator/WaveIndex",
+      "name": "Waveform",
       "value": 0,
       "min": 0,
       "max": 1,
@@ -71,9 +69,49 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_2",
-      "name": "Divot",
-      "value": 0.75,
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/Oscillator/FMDepth",
+      "name": "FM Amount",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 5/Value",
+      "name": "Pitch",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_1",
+      "name": "Cutoff",
+      "value": 0.1,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/InsertFX2/Depth",
+      "name": "Phaser",
+      "value": 0.08,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/InsertFX1/Mix",
+      "name": "Flanger",
+      "value": 0.08,
       "min": 0,
       "max": 1,
       "step": 0.01,
@@ -93,7 +131,7 @@
       "sid": null,
       "address": "/uvi/Part 1/Program/EventProcessor0/Macro_4",
       "name": "FX|Chain",
-      "value": 0.4,
+      "value": 0.3,
       "min": 0,
       "max": 1,
       "step": 0.01,

@@ -88,7 +88,7 @@ const handleMessage = (parameter, parameterIndex) => {
     let value = parameter.value;
     let address = parameter.address;
     let format = parameter.format;
-    if (format !== "s" && isNumber(value)) {
+    if (isNumber(value)) {
         if (format === "f") {
             value = parseFloat(value)
         } else {

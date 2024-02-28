@@ -42,6 +42,17 @@ const createPatch = (prompt) => {
     return socket.emit('createPatch', prompt);
 }
 
+const createInputWidget = (program, i) => {
+    const inputElement = document.createElement("input");
+    inputElement.value = program.value;
+    inputElement.addEventListener('change', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAndSendValue(e.target.value, i);
+    });
+    return inputElement;
+}
+
 const createSliderWidget = (program, i) => {
     const inputElement = document.createElement("input");
     inputElement.setAttribute("type", "range");
@@ -87,7 +98,7 @@ const createPushButtonWidget = (program, i) => {
     return buttonElement;
 }
 
-const addEvents = (buttonElement, program, i) => {
+const addPushButtonEvents = (buttonElement, program, i) => {
     const listenEvents = ["touchstart", "touchend", "mousedown", "mouseup"];
     listenEvents.forEach(listenEvent => {
         buttonElement.addEventListener(listenEvent, function (e) {
@@ -118,9 +129,10 @@ const createPushButtonElement = (program, i) => {
         e.preventDefault();
         e.stopPropagation();
     });
-    addEvents(buttonElement, program, i);
+    addPushButtonEvents(buttonElement, program, i);
     return buttonElement;
 }
+
 const createPushButtonsWidget = (program, i) => {
     const wrapperElement = document.createElement("div");
     const innerWrapperElement = document.createElement("div");
@@ -163,6 +175,17 @@ const createButtonWidget = (program, i) => {
     return buttonElement;
 }
 
+const createButtonElement = (i) => {
+    const buttonElement = document.createElement("button");
+    buttonElement.classList.add("toggle-button");
+    buttonElement.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setAndSendValue(e.target.value, i);
+    });
+    return buttonElement;
+}
+
 const createButtonsWidget = (program, i) => {
     const wrapperElement = document.createElement("div");
     const innerWrapperElement = document.createElement("div");
@@ -170,34 +193,22 @@ const createButtonsWidget = (program, i) => {
     innerWrapperElement.classList.add("button-inner-wrapper");
     if (Array.isArray(program.valueMap)) {
         for (let j = program.min; j < program.valueMap.length + program.min; j++) {
-            const buttonElement = document.createElement("button");
-            buttonElement.classList.add("toggle-button");
+            const buttonElement = createButtonElement(i);
             buttonElement.innerHTML = getDisplayValue(j, i);
             buttonElement.value = j;
             if (parseInt(program.value) === j) {
                 buttonElement.classList.add("active");
             }
-            buttonElement.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                setAndSendValue(e.target.value, i);
-            });
             innerWrapperElement.appendChild(buttonElement);
         }
     } else {
         for (const key in program.valueMap) {
-            const buttonElement = document.createElement("button");
-            buttonElement.classList.add("toggle-button");
+            const buttonElement = createButtonElement(i);
             buttonElement.innerHTML = program.valueMap[key];
             buttonElement.value = key;
             if (program.value === key || parseInt(program.value) === parseInt(key)) {
                 buttonElement.classList.add("active");
             }
-            buttonElement.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                setAndSendValue(e.target.value, i);
-            });
             innerWrapperElement.appendChild(buttonElement);
         }
     }
@@ -362,6 +373,8 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
             } else {
                 argElement = createButtonWidget(program, i);
             }
+        } else if (program.format === "s") {
+            argElement = createInputWidget(program, i);
         } else {
             argElement = createSliderWidget(program, i);
         }
