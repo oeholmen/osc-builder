@@ -74,12 +74,33 @@
     {
       "sid": null,
       "address": [
+        "/uvi/Part 0/EventProcessor9/Play",
+        "/uvi/Part 0/EventProcessor10/Play",
+        "/uvi/Part 0/EventProcessor11/Play"
+      ],
+      "addressIndex": 0,
+      "valueMap": [
+        "Kick",
+        "Snare",
+        "Hihat"
+      ],
+      "name": "Triggers",
+      "description": "Trigger single hits",
+      "type": "push-buttons",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
         "/uvi/Part 0/Program/EventProcessor0/FragmentActive1",
         "/uvi/Part 0/Program/EventProcessor0/FragmentActive2",
         "/uvi/Part 0/Program/EventProcessor0/FragmentActive3",
         "/uvi/Part 0/Program/EventProcessor0/FragmentActive4"
       ],
-      "name": "Clap pattern",
+      "name": "Play clap pattern",
       "description": "Play the clap pattern",
       "push": "Clap",
       "value": 0,
@@ -148,7 +169,7 @@
       ],
       "name": "Variation",
       "description": "Play a temporary variation",
-      "push": "Play",
+      "push": "Variation 1",
       "setBefore": [
         {
           "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
@@ -180,6 +201,58 @@
       "value": 1,
       "min": 1,
       "max": 2,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/FragmentActions1",
+        "/uvi/Part 0/EventProcessor0/FragmentActions2",
+        "/uvi/Part 0/EventProcessor0/FragmentActions3",
+        "/uvi/Part 0/EventProcessor0/FragmentActions4",
+        "/uvi/Part 0/EventProcessor2/FragmentActions1",
+        "/uvi/Part 0/EventProcessor2/FragmentActions2",
+        "/uvi/Part 0/EventProcessor2/FragmentActions3",
+        "/uvi/Part 0/EventProcessor2/FragmentActions4",
+        "/uvi/Part 0/EventProcessor4/FragmentActions1",
+        "/uvi/Part 0/EventProcessor4/FragmentActions2",
+        "/uvi/Part 0/EventProcessor4/FragmentActions3",
+        "/uvi/Part 0/EventProcessor4/FragmentActions4"
+      ],
+      "name": "Variation Slow",
+      "description": "Play a temporary slow variation",
+      "push": "Variation 2",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 1,
+      "min": 1,
+      "max": 5,
       "format": "b"
     },
     {
@@ -293,6 +366,17 @@
       "min": 0,
       "max": 1,
       "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/InsertFX3/Bits",
+      "name": "Hifi",
+      "description": "Kit hifi amount",
+      "value": 32,
+      "min": 3,
+      "max": 32,
+      "step": 0.1,
       "format": "f"
     }
   ]

@@ -115,6 +115,9 @@ const addPushButtonEvents = (buttonElement, program, i) => {
                 value = program.min;
                 isOn = false;
             }
+            if (typeof program.addressIndex !== "undefined") {
+                program.addressIndex = buttonElement.value
+            }
             setAndSendValue(value, i, isOn, e.target.value);
         });
     })

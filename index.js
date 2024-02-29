@@ -78,7 +78,10 @@ const isNumber = (value) => {
 
 const getValueMap = (valueMap) => {
     if (typeof valueMap === "object") {
-        return Array.isArray(valueMap) ? valueMap : Object.keys(valueMap)
+        if (Array.isArray(valueMap) && isNumber(valueMap[0])) {
+            return valueMap
+        }
+        return Object.keys(valueMap)
     }
     return []
 }
@@ -110,7 +113,7 @@ const handleMessage = (parameter, parameterIndex) => {
 
     const valueMap = getValueMap(parameter.valueMap);
 
-    if (typeof parameter.valueOn === "number" && valueMap.length >= address.length) {
+    if (isNumber(parameter.valueOn) && valueMap.length >= address.length) {
         const valueOn = parameter.valueOn;
         const valueOff = parameter.valueOff ?? 0;
         for (let i = 1; i < (valueMap.length+1); i++) {
@@ -121,8 +124,8 @@ const handleMessage = (parameter, parameterIndex) => {
             }
         };
     } else if (parameter.type === "push-buttons" && valueMap.length === address.length) {
-        // Use the address that is on the same index as the selected value
-        const index = valueMap.findIndex(val => parseInt(val) === value)
+        // Use the address that is on the same index as the selected value, unless an address index is specified
+        const index = isNumber(parameter.addressIndex) ? parameter.addressIndex : valueMap.findIndex(val => parseInt(val) === value)
         address = [address[index]]
         values.push(value)
     } else {
@@ -132,8 +135,8 @@ const handleMessage = (parameter, parameterIndex) => {
     }
 
     address.forEach((addr, i) => {
+        console.log('Sending OSC message to', addr, values[i]);
         oscClient.send(addr, values[i]);
-        console.log('Sent OSC message to', addr, values[i]);
     });
     if (typeof parameterIndex === "number") {
         parameters[parameterIndex].value = value;
