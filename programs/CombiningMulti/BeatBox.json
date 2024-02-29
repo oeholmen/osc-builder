@@ -261,7 +261,9 @@
           "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 2/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 3/Bypass",
-          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 4/Bypass"
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 6/Bypass"
       ],
       "name": "Kick sound",
       "description": "Set the kick sound",
@@ -270,7 +272,9 @@
         "Kck 1",
         "Kck 2",
         "Kck 3",
-        "Kck 4"
+        "Kck 4",
+        "Kck 5",
+        "Kck 6"
       ],
       "valueOn": 0,
       "valueOff": 1,
@@ -284,7 +288,9 @@
           "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 2/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 3/Bypass",
-          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 4/Bypass"
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 6/Bypass"
       ],
       "name": "Snare sound",
       "description": "Set the snare sound",
@@ -293,7 +299,9 @@
         "Sn 1",
         "Sn 2",
         "Sn 3",
-        "Sn 4"
+        "Sn 4",
+        "Sn 5",
+        "Sn 6"
       ],
       "valueOn": 0,
       "valueOff": 1,
@@ -307,7 +315,9 @@
           "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 2/Bypass",
           "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 3/Bypass",
-          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 4/Bypass"
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 6/Bypass"
       ],
       "name": "Hihat sound",
       "description": "Set the hihat sound",
@@ -316,7 +326,9 @@
         "HH 1",
         "HH 2",
         "HH 3",
-        "HH 4"
+        "HH 4",
+        "HH 5",
+        "HH 6"
       ],
       "valueOn": 0,
       "valueOff": 1,

@@ -39,6 +39,7 @@
       "sid": null,
       "address": "/uvi/Part 1/EventProcessor0/Duration",
       "name": "Duration between notes",
+      "type": "buttons",
       "value": 9,
       "valueMap": {
         "5": "6x",
