@@ -84,6 +84,27 @@
     },
     {
       "sid": null,
+      "name": "Triggers",
+      "description": "Trigger single hits - addressIndex will be assigned from the value map (button) that corresponds to the address index",
+      "type": "push-buttons",
+      "addressIndex": 0,
+      "address": [
+        "/uvi/Part 0/EventProcessor9/Play",
+        "/uvi/Part 0/EventProcessor10/Play",
+        "/uvi/Part 0/EventProcessor11/Play"
+      ],
+      "valueMap": [
+        "Kick",
+        "Snare",
+        "Hihat"
+      ],
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
       "address": "/uvi/Part 0/EventProcessor0/Duration",
       "name": "Duration between notes",
       "value": 17,
