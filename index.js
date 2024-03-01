@@ -38,7 +38,7 @@ let oscClient;
 let waitMessage = [
     "<h3>Please wait...</h3>",
     "<p>We will be ready in just a minute.</p>",
-    "<p>Your assigned parameters will be set on a green background. You may need to scroll down to see them.</p>",
+    //"<p>Your assigned parameters will be set on a green background. You may need to scroll down to see them.</p>",
     "<p>If you are on a small screen, landscape mode is recommended.</p>",
     "<p>You may choose to switch parameters only once during a session.</p>",
     "<p>Artwork by Sebastian Schepis</p>",
@@ -275,6 +275,10 @@ app.get('/client.js', (req, res) => {
 
 app.get('/tripoles.js', (req, res) => {
     res.sendFile(new URL('./tripoles.js', import.meta.url).pathname);
+});
+
+app.get('/torusEmitter.js', (req, res) => {
+    res.sendFile(new URL('./torusEmitter.js', import.meta.url).pathname);
 });
 
 server.listen(clientPort, () => {

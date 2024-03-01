@@ -61,11 +61,11 @@ body {
 }
 
 .wrapper:nth-child(2n+1) {
-    background-color: #00000030;
+    background-color: #00000075;
 }
 
 .wrapper.selected:nth-child(2n+1) {
-    background-color: #2b191945;
+    background-color: #2b191975;
 }
 
 .arg,
