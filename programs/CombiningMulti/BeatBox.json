@@ -110,6 +110,28 @@
     },
     {
       "sid": null,
+      "address": "/uvi/Part 3/EventProcessor0/Play",
+      "name": "Play perc pattern",
+      "description": "Play the percussion pattern",
+      "push": "Percussion 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/Play",
+      "name": "Play perc sequence",
+      "description": "Play the percussion sequence",
+      "push": "Percussion 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
       "address": [
         "/uvi/Part 0/EventProcessor0/EvolveActive",
         "/uvi/Part 0/EventProcessor2/EvolveActive",
@@ -352,7 +374,7 @@
       "address": "/uvi/Part 0/Program/Macro 2/Value",
       "name": "Drive",
       "description": "Drive for the whole kit",
-      "value": 0.25,
+      "value": 0.15,
       "min": 0,
       "max": 0.6,
       "step": 0.01,
@@ -382,13 +404,13 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 0/Program/InsertFX3/Bits",
-      "name": "Hifi",
-      "description": "Kit hifi amount",
-      "value": 32,
-      "min": 3,
-      "max": 32,
-      "step": 0.1,
+      "address": "/uvi/Part 0/Program/InsertFX3/Mix",
+      "name": "Lofi",
+      "description": "Kit lofi amount",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
       "format": "f"
     }
   ]

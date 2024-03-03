@@ -35,7 +35,7 @@
       "sid": null,
       "address": "/uvi/Part 2/EventProcessor1/PulseDuration",
       "name": "Seq Speed",
-      "value": 23,
+      "value": 11,
       "type": "buttons",
       "valueMap": {
         "9": "2x",
@@ -55,22 +55,84 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/EventProcessor5/value1",
-      "name": "Filter",
-      "value": 50,
+      "address": [
+        "/uvi/Part 5/EventProcessor1/Play",
+        "/uvi/Part 5/EventProcessor2/Play",
+        "/uvi/Part 5/EventProcessor3/Play",
+        "/uvi/Part 5/EventProcessor7/Play"
+      ],
+      "name": "Play arp",
+      "description": "Play arpeggio",
+      "push": "Arp",
+      "value": 0,
       "min": 0,
-      "max": 100,
-      "step": 0.1,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 8/EventProcessor0/Play",
+      "name": "Play seq",
+      "description": "Play sequence",
+      "push": "Seq",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/WaveIndex_1",
+        "/uvi/Part 2/Program/EventProcessor0/WaveIndex_2"
+      ],
+      "name": "Waveform",
+      "value": 2,
+      "min": 1,
+      "max": 5,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPFreq_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPFreq_2",
+        "/uvi/Part 5/Program/Layer 0/Keygroup 0/InsertFX0/Freq",
+        "/uvi/Part 5/Program/Layer 1/Keygroup 0/InsertFX0/Freq",
+        "/uvi/Part 5/Program/Layer 2/Keygroup 0/InsertFX0/Freq"
+      ],
+      "name": "Filter Cutoff",
+      "description": "Low pass filter cutoff freq",
+      "value": 200,
+      "min": 100,
+      "max": 6000,
+      "step": 0.01,
       "format": "f"
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/Program/EventProcessor0/FilterLPEnvDepth_1",
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPEnvDepth_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPEnvDepth_2"
+      ],
       "name": "Env Depth",
-      "value": 0.36,
+      "value": 0.25,
       "min": 0,
       "max": 0.6,
       "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterHPFreq_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterHPFreq_2"
+      ],
+      "name": "High Pass Filter",
+      "value": 20,
+      "min": 20,
+      "max": 2500,
+      "step": 0.1,
       "format": "f"
     },
     {
@@ -85,7 +147,7 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/Program/Macro 1/Value",
+      "address": ["/uvi/Part 2/Program/Macro 1/Value","/uvi/Part 5/Program/EventProcessor0/NoiseMix"],
       "name": "Noise Amount",
       "value": 0,
       "min": 0,
@@ -115,7 +177,7 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 2/Program/EventProcessor0/DriveAmount",
+      "address": ["/uvi/Part 2/Program/EventProcessor0/DriveAmount","/uvi/Part 5/Program/EventProcessor0/Drive"],
       "name": "Drive",
       "value": 0,
       "min": 0,
@@ -127,16 +189,6 @@
       "sid": null,
       "address": "/uvi/Part 2/Program/EventProcessor0/ThorusMix",
       "name": "Chorus",
-      "value": 0,
-      "min": 0,
-      "max": 1,
-      "step": 0.01,
-      "format": "f"
-    },
-    {
-      "sid": null,
-      "address": "/uvi/Part 2/Program/EventProcessor0/FlangerMix",
-      "name": "Flanger",
       "value": 0,
       "min": 0,
       "max": 1,
