@@ -1,0 +1,853 @@
+{
+  "name": "Meetup",
+  "description": "Program for Test Combining multi",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor0/Play",
+      "name": "Bass Sequencer",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor2/RootNote",
+      "name": "Seq root note",
+      "value": 40,
+      "type": "buttons",
+      "valueMap": {
+        "35": "B1",
+        "38": "D2",
+        "40": "E2",
+        "43": "G2",
+        "45": "A2",
+        "47": "B2",
+        "52": "E3"
+      },
+      "min": 24,
+      "max": 84,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor1/PulseDuration",
+      "name": "Seq Speed",
+      "value": 11,
+      "type": "buttons",
+      "valueMap": {
+        "9": "2x",
+        "10": "1/1 dot",
+        "11": "1/1",
+        "12": "1/2 dot",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "20": "1/8",
+        "23": "1/16"
+      },
+      "min": 1,
+      "max": 32,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 5/EventProcessor1/Play",
+        "/uvi/Part 5/EventProcessor2/Play",
+        "/uvi/Part 5/EventProcessor3/Play",
+        "/uvi/Part 5/EventProcessor7/Play"
+      ],
+      "name": "Play arp",
+      "description": "Play arpeggio",
+      "push": "Arp",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 8/EventProcessor0/Play",
+      "name": "Play seq",
+      "description": "Play sequence",
+      "push": "Seq",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/WaveIndex_1",
+        "/uvi/Part 2/Program/EventProcessor0/WaveIndex_2"
+      ],
+      "name": "Waveform",
+      "value": 2,
+      "min": 1,
+      "max": 5,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPFreq_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPFreq_2",
+        "/uvi/Part 5/Program/Layer 0/Keygroup 0/InsertFX0/Freq",
+        "/uvi/Part 5/Program/Layer 1/Keygroup 0/InsertFX0/Freq",
+        "/uvi/Part 5/Program/Layer 2/Keygroup 0/InsertFX0/Freq"
+      ],
+      "name": "Filter Cutoff",
+      "description": "Low pass filter cutoff freq",
+      "value": 200,
+      "min": 100,
+      "max": 6000,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPEnvDepth_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterLPEnvDepth_2"
+      ],
+      "name": "Env Depth",
+      "value": 0.25,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 2/Program/EventProcessor0/FilterHPFreq_1",
+        "/uvi/Part 2/Program/EventProcessor0/FilterHPFreq_2"
+      ],
+      "name": "High Pass Filter",
+      "value": 20,
+      "min": 20,
+      "max": 2500,
+      "step": 0.1,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/Macro 2/Value",
+      "name": "Decay Time",
+      "value": 0.3,
+      "min": 0.1,
+      "max": 0.75,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 2/Program/Macro 1/Value","/uvi/Part 5/Program/EventProcessor0/NoiseMix"],
+      "name": "Noise Amount",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/ReverbMix",
+      "name": "Reverb",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/DelayMix",
+      "name": "Delay",
+      "value": 0.05,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": ["/uvi/Part 2/Program/EventProcessor0/DriveAmount","/uvi/Part 5/Program/EventProcessor0/Drive"],
+      "name": "Drive",
+      "value": 0,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/Program/EventProcessor0/ThorusMix",
+      "name": "Chorus",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor8/Probability",
+      "name": "Octave probability",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor4/Probability",
+      "name": "Pitch variation probability",
+      "value": 0,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 2/EventProcessor7/Probability",
+      "name": "Note probability",
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/EventProcessor0/FragmentActive1",
+          "/uvi/Part 0/EventProcessor0/FragmentActive2",
+          "/uvi/Part 0/EventProcessor0/FragmentActive3",
+          "/uvi/Part 0/EventProcessor0/FragmentActive4"
+      ],
+      "name": "Kick pattern",
+      "description": "Set the kick pattern",
+      "type": "buttons",
+      "valueMap": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Off"
+      ],
+      "valueOn": 1,
+      "value": 5,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor2/FragmentActive1",
+        "/uvi/Part 0/EventProcessor2/FragmentActive2",
+        "/uvi/Part 0/EventProcessor2/FragmentActive3",
+        "/uvi/Part 0/EventProcessor2/FragmentActive4"
+      ],
+      "name": "Snare pattern",
+      "description": "Set the snare pattern",
+      "type": "buttons",
+      "valueMap": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Off"
+      ],
+      "valueOn": 1,
+      "value": 5,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor4/FragmentActive1",
+        "/uvi/Part 0/EventProcessor4/FragmentActive2",
+        "/uvi/Part 0/EventProcessor4/FragmentActive3",
+        "/uvi/Part 0/EventProcessor4/FragmentActive4"
+      ],
+      "name": "Hihat pattern",
+      "description": "Set the hihat pattern",
+      "type": "buttons",
+      "valueMap": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "Off"
+      ],
+      "valueOn": 1,
+      "value": 5,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor9/Play",
+        "/uvi/Part 0/EventProcessor10/Play",
+        "/uvi/Part 0/EventProcessor11/Play"
+      ],
+      "addressIndex": 0,
+      "valueMap": [
+        "Kick",
+        "Snare",
+        "Hihat"
+      ],
+      "name": "Triggers",
+      "description": "Trigger single hits",
+      "type": "push-buttons",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive1",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive2",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive3",
+        "/uvi/Part 0/Program/EventProcessor0/FragmentActive4"
+      ],
+      "name": "Play clap pattern",
+      "description": "Play the clap pattern",
+      "push": "Clap",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 3/EventProcessor0/Play",
+      "name": "Play perc pattern",
+      "description": "Play the percussion pattern",
+      "push": "Percussion 1",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 7/EventProcessor1/Play",
+      "name": "Play perc sequence",
+      "description": "Play the percussion sequence",
+      "push": "Percussion 2",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/EvolveActive",
+        "/uvi/Part 0/EventProcessor2/EvolveActive",
+        "/uvi/Part 0/EventProcessor4/EvolveActive"
+      ],
+      "name": "Play fill",
+      "description": "Play fill",
+      "push": "Fill",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/FragmentActions1",
+        "/uvi/Part 0/EventProcessor0/FragmentActions2",
+        "/uvi/Part 0/EventProcessor0/FragmentActions3",
+        "/uvi/Part 0/EventProcessor0/FragmentActions4",
+        "/uvi/Part 0/EventProcessor2/FragmentActions1",
+        "/uvi/Part 0/EventProcessor2/FragmentActions2",
+        "/uvi/Part 0/EventProcessor2/FragmentActions3",
+        "/uvi/Part 0/EventProcessor2/FragmentActions4",
+        "/uvi/Part 0/EventProcessor4/FragmentActions1",
+        "/uvi/Part 0/EventProcessor4/FragmentActions2",
+        "/uvi/Part 0/EventProcessor4/FragmentActions3",
+        "/uvi/Part 0/EventProcessor4/FragmentActions4"
+      ],
+      "name": "Variation",
+      "description": "Play a temporary variation",
+      "push": "Variation 1",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 1,
+      "min": 1,
+      "max": 2,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 0/EventProcessor0/FragmentActions1",
+        "/uvi/Part 0/EventProcessor0/FragmentActions2",
+        "/uvi/Part 0/EventProcessor0/FragmentActions3",
+        "/uvi/Part 0/EventProcessor0/FragmentActions4",
+        "/uvi/Part 0/EventProcessor2/FragmentActions1",
+        "/uvi/Part 0/EventProcessor2/FragmentActions2",
+        "/uvi/Part 0/EventProcessor2/FragmentActions3",
+        "/uvi/Part 0/EventProcessor2/FragmentActions4",
+        "/uvi/Part 0/EventProcessor4/FragmentActions1",
+        "/uvi/Part 0/EventProcessor4/FragmentActions2",
+        "/uvi/Part 0/EventProcessor4/FragmentActions3",
+        "/uvi/Part 0/EventProcessor4/FragmentActions4"
+      ],
+      "name": "Variation Slow",
+      "description": "Play a temporary slow variation",
+      "push": "Variation 2",
+      "setBefore": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 0
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 0
+        }
+      ],
+      "setAfter": [
+        {
+          "address": "/uvi/Part 0/EventProcessor0/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor2/StoreFragmentSlot1",
+          "value": 1
+        },
+        {
+          "address": "/uvi/Part 0/EventProcessor4/StoreFragmentSlot1",
+          "value": 1
+        }
+      ],
+      "value": 1,
+      "min": 1,
+      "max": 5,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 0/Oscillator 6/Bypass"
+      ],
+      "name": "Kick sound",
+      "description": "Set the kick sound",
+      "type": "buttons",
+      "valueMap": [
+        "Kck 1",
+        "Kck 2",
+        "Kck 3",
+        "Kck 4",
+        "Kck 5",
+        "Kck 6"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 1/Oscillator 6/Bypass"
+      ],
+      "name": "Snare sound",
+      "description": "Set the snare sound",
+      "type": "buttons",
+      "valueMap": [
+        "Sn 1",
+        "Sn 2",
+        "Sn 3",
+        "Sn 4",
+        "Sn 5",
+        "Sn 6"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": [
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 2/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 3/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 4/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 5/Bypass",
+          "/uvi/Part 0/Program/Layer 0/Keygroup 3/Oscillator 6/Bypass"
+      ],
+      "name": "Hihat sound",
+      "description": "Set the hihat sound",
+      "type": "buttons",
+      "valueMap": [
+        "HH 1",
+        "HH 2",
+        "HH 3",
+        "HH 4",
+        "HH 5",
+        "HH 6"
+      ],
+      "valueOn": 0,
+      "valueOff": 1,
+      "value": 2,
+      "min": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 5/Value",
+      "name": "<- Lowpass | Highpass ->",
+      "description": "Move left for low pass, right for high pass",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 2/Value",
+      "name": "Drive",
+      "description": "Drive for the whole kit",
+      "value": 0.15,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 1/Value",
+      "name": "Delay",
+      "description": "Kit delay",
+      "value": 0.01,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/Macro 4/Value",
+      "name": "Reverb",
+      "description": "Kit reverb",
+      "value": 0.03,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 0/Program/InsertFX3/Mix",
+      "name": "Lofi",
+      "description": "Kit lofi amount",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Play",
+      "name": "Drone",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor1/RootNote",
+      "name": "Tone",
+      "type": "buttons",
+      "valueMap": {
+        "28": "E1",
+        "31": "G1",
+        "33": "A1",
+        "35": "B1",
+        "38": "D2",
+        "40": "E2",
+        "43": "G2",
+        "45": "A2",
+        "47": "B2",
+        "49": "C#3",
+        "50": "D3",
+        "52": "E3"
+      },
+      "value": 28,
+      "min": 28,
+      "max": 52,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/EventProcessor0/Duration",
+      "name": "Duration between notes",
+      "type": "buttons",
+      "value": 9,
+      "valueMap": {
+        "5": "6x",
+        "6": "5x",
+        "7": "4x",
+        "8": "3x",
+        "9": "2x",
+        "10": "1/1 dot",
+        "11": "1/1",
+        "12": "1/2 dot",
+        "14": "1/2",
+        "15": "1/4 dot",
+        "17": "1/4",
+        "18": "1/8 dot",
+        "20": "1/8",
+        "23": "1/16"
+      },
+      "min": 1,
+      "max": 32,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": [
+        "/uvi/Part 4/EventProcessor0/Play",
+        "/uvi/Part 4/EventProcessor1/Play",
+        "/uvi/Part 4/EventProcessor2/Play",
+        "/uvi/Part 4/EventProcessor7/Play"
+      ],
+      "name": "Play string chord",
+      "description": "Play a chord whith strings",
+      "push": "Chord",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 6/EventProcessor0/Play",
+      "name": "Play pulse",
+      "description": "Play pulse",
+      "push": "Pulse",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "format": "b"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/Oscillator/WaveIndex",
+      "name": "Waveform",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/Oscillator/FMDepth",
+      "name": "FM Amount",
+      "value": 0,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/LFO 1/Depth",
+      "name": "Motion Amount",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Layer 0/Keygroup 0/LFO 1/Freq",
+      "name": "Motion Speed",
+      "value": 0.5,
+      "min": 0,
+      "max": 20,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 5/Value",
+      "name": "Pitch",
+      "value": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_1",
+      "name": "Cutoff",
+      "value": 0.1,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 6/Value",
+      "name": "Drive",
+      "value": 0,
+      "min": 0,
+      "max": 0.3,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/InsertFX2/Depth",
+      "name": "Phaser",
+      "value": 0.08,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/InsertFX1/Mix",
+      "name": "Flanger",
+      "value": 0.08,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_3",
+      "name": "Texture",
+      "value": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/EventProcessor0/Macro_4",
+      "name": "FX|Chain",
+      "value": 0.3,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/InsertFX5/Mix",
+      "name": "Delay",
+      "value": 0.1,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    },
+    {
+      "sid": null,
+      "address": "/uvi/Part 1/Program/Macro 7/Value",
+      "name": "Attack time",
+      "value": 1,
+      "min": 0.1,
+      "max": 1,
+      "step": 0.01,
+      "format": "f"
+    }
+  ]
+}

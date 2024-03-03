@@ -1,7 +1,7 @@
 let synthParameters;
 let synthParameterIndex;
 let socketId;
-let refreshHidden;
+let refreshHidden = true;
 const socket = io();
 const urlParams = new URLSearchParams(window.location.search);
 const heading = document.getElementById('heading');
@@ -396,10 +396,10 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
         }
         form.appendChild(wrapper);
     }
-    if (refreshHidden !== true && (assignedControls === true || assignedParams === true)) {
-        refresh.classList.remove('hidden');
-    } else {
+    if (refreshHidden === true || assignedParams === true) {
         refresh.classList.add('hidden');
+    } else {
+        refresh.classList.remove('hidden');
     }
     /* if (assignedControls === true) {
         patchWrapper.classList.add('hidden');
