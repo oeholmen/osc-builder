@@ -710,10 +710,9 @@
     },
     {
       "sid": null,
-      "address": "/uvi/Part 6/EventProcessor0/Play",
-      "name": "Play pulse",
-      "description": "Play pulse",
-      "push": "Pulse",
+      "address": "/uvi/Part 9/EventProcessor0/Play",
+      "name": "Melodic sequence",
+      "push": "Play",
       "value": 0,
       "min": 0,
       "max": 1,
