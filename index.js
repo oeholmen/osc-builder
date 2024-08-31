@@ -149,7 +149,7 @@ const createPatch = async (prompt) => {
     prompt = prompt || readFile("openai/defaultPrompt.txt", false);
     io.emit('startCreating', prompt);
     console.log(prompt);
-    prompt += "\n" + JSON.stringify(program.parameters.map(p => {
+    prompt += "\n" + JSON.stringify(parameters.map(p => {
         return {
             "name": p.name,
             "description": p.description,
@@ -161,7 +161,7 @@ const createPatch = async (prompt) => {
         };
     }));
     const request = {
-        model: process.env.OPENAI_MODEL || "gpt-4o-2024-08-06",
+        model: process.env.OPENAI_MODEL || "gpt-4o-mini",
         messages: [
             {
                 "role": "system",
@@ -172,6 +172,7 @@ const createPatch = async (prompt) => {
                 "content": prompt
             }
         ],
+        response_format: {"type": "json_object"},
         temperature: 0.9,
     };
     try {
@@ -179,7 +180,8 @@ const createPatch = async (prompt) => {
         const patchData = JSON.parse(response.choices[0].message.content);
         console.log(patchData)
         for (let i = 0; i < patchData.parameters.length; i++) {
-            handleMessage(i, patchData.parameters[i].value);
+            const parameter = {...parameters[i], ...patchData.parameters[i]};
+            handleMessage(parameter, i);
         }
         io.emit('patchCreated', `Patch created! ${patchData.name}: ${patchData.description}`);
     } catch (error) {
