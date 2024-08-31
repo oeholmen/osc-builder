@@ -57,7 +57,7 @@ Example input:
 Example output:
 {
   "name": "A soft pad",
-  "A pad with medium cutoff",
+  "description": "A pad with medium cutoff",
   "parameters": [
     {
       "name": "Cutoff",

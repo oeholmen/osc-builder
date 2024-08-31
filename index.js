@@ -161,7 +161,7 @@ const createPatch = async (prompt) => {
         };
     }));
     const request = {
-        model: process.env.OPENAI_MODEL || "gpt-3.5-turbo",
+        model: process.env.OPENAI_MODEL || "gpt-4o-2024-08-06",
         messages: [
             {
                 "role": "system",

@@ -283,7 +283,7 @@
     {
       "sid": null,
       "address": "/uvi/Part 0/Program/EventProcessor0/WaveFormTypeMenu",
-      "name": "Modulation Waveform.",
+      "name": "Modulation Waveform",
       "description": "The waveform of the low frequency oscillator.",
       "value": 1,
       "valueMap": [
