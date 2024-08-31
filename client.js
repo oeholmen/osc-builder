@@ -401,13 +401,11 @@ const setFormInputs = (name, parameters, assignedControls, assignedParams, hideL
     } else {
         refresh.classList.remove('hidden');
     }
-    patchWrapper.classList.remove('hidden');
-    console.log('Show patch creator');
-    /* if (assignedControls === true) {
+    if (assignedControls === true) {
         patchWrapper.classList.add('hidden');
     } else {
         patchWrapper.classList.remove('hidden');
-    } */
+    }
 }
 
 socket.on('setParameters', setFormInputs);
