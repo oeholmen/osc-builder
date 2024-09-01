@@ -148,8 +148,7 @@ const createPatch = async (prompt) => {
     const instructions = readFile("openai/instructions.txt", false);
     prompt = prompt || readFile("openai/defaultPrompt.txt", false);
     io.emit('startCreating', prompt);
-    console.log(prompt);
-    prompt += "\n" + JSON.stringify(parameters.map(p => {
+    prompt += "\n\n```json\n" + JSON.stringify(parameters.map(p => {
         return {
             "name": p.name,
             "description": p.description,
@@ -159,7 +158,7 @@ const createPatch = async (prompt) => {
             "max": p.max || p.valueMap.length,
             "f": p.f
         };
-    }));
+    })) + "\n```";
     const request = {
         model: process.env.OPENAI_MODEL || "gpt-4o-mini",
         messages: [
@@ -175,6 +174,7 @@ const createPatch = async (prompt) => {
         response_format: {"type": "json_object"},
         temperature: 0.9,
     };
+    console.log(request);
     try {
         const response = await openai.chat.completions.create(request);
         const patchData = JSON.parse(response.choices[0].message.content);

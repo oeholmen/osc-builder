@@ -1,6 +1,6 @@
 {
   "name": "Tweak Synth Analog",
-  "description": "Analog synth programmed in UVI Falcon",
+  "description": "A virtual analog subractive synth programmed in UVI Falcon",
   "parameters": [
     {
       "sid": null,
