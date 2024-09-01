@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 import os from "os";
 import OpenAI from "openai";
 
+// TODO Create a program to control the minilogue through Falcon using midi out.
+
 dotenv.config();
 
 const openai = new OpenAI({
