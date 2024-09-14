@@ -1,0 +1,190 @@
+{
+  "name": "Korg Minilogue",
+  "description": "Korg Minilogue",
+  "parameters": [
+    {
+      "sid": null,
+      "address": "/minilogue/Osc1Level",
+      "name": "Osc 1 Level",
+      "description": "The mixer level for oscillator 1.",
+      "value": 100,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/Osc2Level",
+      "name": "Osc 2 Level",
+      "description": "The mixer level for oscillator 2.",
+      "value": 0,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/NoiseLevel",
+      "name": "Noise Level",
+      "description": "The mixer level for the noise oscillator.",
+      "value": 0,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/Osc1Wave",
+      "name": "Waveform Osc 1",
+      "description": "The waveform for oscillator 1",
+      "value": 127,
+      "valueMap": {
+        "0": "Square",
+        "64": "Triangle",
+        "127": "Saw"
+      },
+      "min": 0,
+      "max": 127,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/Osc2Wave",
+      "name": "Waveform Osc 2",
+      "description": "The waveform for oscillator 2",
+      "value": 127,
+      "valueMap": {
+        "0": "Square",
+        "64": "Triangle",
+        "127": "Saw"
+      },
+      "min": 0,
+      "max": 127,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/a",
+      "name": "Amplitude Envelope Attack Time",
+      "description": "Attack time for the amplitude envelope.",
+      "value": 0,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/d",
+      "name": "Amplitude Envelope Decay Time",
+      "description": "Decay time for the amplitude envelope.",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/s",
+      "name": "Amplitude Envelope Sustain Level",
+      "description": "Sustain level for the amplitude envelope.",
+      "value": 127,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/r",
+      "name": "Amplitude Envelope Release Time",
+      "description": "Release time for the amplitude envelope.",
+      "value": 10,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/lpfCutoff",
+      "name": "Filter Cutoff",
+      "description": "The cutoff of the lowpass filter",
+      "value": 127,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/lpfRes",
+      "name": "Resonance",
+      "description": "This is the resonance for the low pass filter. It should never be to high. Somewhere between 0 and 90 is recommended.",
+      "value": 0,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/filterEnvAmt",
+      "name": "Filter Envelope Amount",
+      "description": "Controls the degree to which the low pass filter cutoff frequency is modulated by the filter envelope. 64 is zero amount. <64 gives a negative envelope. >64 gives a positive envelope.",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/f/a",
+      "name": "Filter Envelope Attack Time",
+      "description": "Attack time for the filter envelope.",
+      "value": 0,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/f/d",
+      "name": "Filter Envelope Decay Time",
+      "description": "Decay time for the filter envelope.",
+      "value": 64,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/f/s",
+      "name": "Filter Envelope Sustain Level",
+      "description": "Sustain level for the filter envelope.",
+      "value": 127,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    },
+    {
+      "sid": null,
+      "address": "/minilogue/f/r",
+      "name": "Filter Envelope Release Time",
+      "description": "Release time for the filter envelope.",
+      "value": 10,
+      "min": 0,
+      "max": 127,
+      "step": 1,
+      "format": "i"
+    }
+  ]
+}

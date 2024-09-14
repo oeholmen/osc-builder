@@ -28,7 +28,7 @@
       "sid": null,
       "address": "/uvi/Part 0/Program/EventProcessor0/NoiseMix",
       "name": "Noise Level",
-      "description": "The mixer level for the noise oscillator.  Should normally be between 0.3 and 0.8.",
+      "description": "The mixer level for the noise oscillator. Should normally be between 0.3 and 0.8.",
       "value": 0,
       "min": 0,
       "max": 1,
