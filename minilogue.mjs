@@ -6,8 +6,11 @@ import { readFileSync } from 'node:fs';
 import dotenv from 'dotenv';
 import os from "os";
 import OpenAI from "openai";
+import * as maxApi from 'max-api';
 
 dotenv.config();
+const currentDirectory = process.cwd();
+console.log(currentDirectory);
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -26,7 +29,7 @@ const readFile = (filePath, parseJson = true) => {
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-const programPath = process.argv[2] || "programs/tweaksynthAnalog.json";
+const programPath = process.argv[2] || currentDirectory + "/programs/minilogue.json";
 const program = readFile(programPath);
 const name = program.name;
 const parameters = program.parameters;
@@ -38,7 +41,6 @@ let oscClient;
 let waitMessage = [
     "<h3>Please wait...</h3>",
     "<p>We will be ready in just a minute.</p>",
-    //"<p>Your assigned parameters will be set on a green background. You may need to scroll down to see them.</p>",
     "<p>If you are on a small screen, landscape mode is recommended.</p>",
     "<p>You may choose to switch parameters only once during a session.</p>",
     "<p>Artwork by Sebastian Schepis</p>",
@@ -145,8 +147,8 @@ const handleMessage = (parameter, parameterIndex) => {
 }
 
 const createPatch = async (prompt) => {
-    const instructions = readFile("openai/instructions.txt", false);
-    prompt = prompt || readFile("openai/defaultPrompt.txt", false);
+    const instructions = readFile(currentDirectory + "/openai/minilogue.txt", false);
+    prompt = prompt || readFile(currentDirectory + "/openai/defaultPrompt.txt", false);
     io.emit('startCreating', prompt);
     prompt += "\n\n```json\n" + JSON.stringify(parameters.map(p => {
         return {
@@ -160,8 +162,7 @@ const createPatch = async (prompt) => {
         };
     })) + "\n```";
     const request = {
-        //model: process.env.OPENAI_MODEL || "gpt-4o-mini",
-        model: process.env.OPENAI_MODEL || "gpt-4o-2024-08-06",
+        model: process.env.OPENAI_MODEL || "gpt-4o-mini",
         messages: [
             {
                 "role": "system",
@@ -285,17 +286,8 @@ app.get('/torusEmitter.js', (req, res) => {
 });
 
 server.listen(clientPort, () => {
-    console.log(`${name} running at http://${localIpAddress}:${clientPort}?admin`);
+    maxApi.outlet(`http://${localIpAddress}:${clientPort}?admin`);
     console.log('Server', { 'host': serverHost, 'port': serverPort });
-    console.log('Settings', {
-        'level': level,
-        'numParameters': parameters.length,
-        'minParamsPerClient': minParams,
-        'maxClients': Math.ceil(parameters.length / minParams),
-        'assignedControls': assignedControls,
-        'showAssignedParamsOnly': assignedParams,
-        'hideLabel': hideLabel,
-    });
 });
 
 io.on('connection', (socket) => {
